@@ -5,7 +5,7 @@
           [formGroup]="logInForm.formGroup"
           novalidate >
       <div class="form-group">
-        <label for="email">Email</label>
+        <label class="form-label">Email</label>
         <input type="text"
                class="form-control"
                formControlName="email" />
@@ -13,11 +13,14 @@
           class="alert alert-danger"
           role="alert"
           *ngIf="email.errors && f.submitted" >
-          Email is required!
+          
         </div> -->
+        <div class="invalid-feedback">
+          Email is required!
+        </div>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label class="form-label">Password</label>
         <input type="password"
                class="form-control"
                formControlName="password" />
@@ -30,6 +33,9 @@
             Password must be at least 6 characters
           </div>
         </div> -->
+        <div class="invalid-feedback">
+          Password must be at least 6 characters
+        </div>
       </div>
       <div class="form-group">
         <button class="btn btn-primary btn-block">

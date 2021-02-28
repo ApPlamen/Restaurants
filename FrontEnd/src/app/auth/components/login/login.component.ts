@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LogInForm } from '../forms/login.form';
-import { AuthService } from '../services/auth.service';
-import { TokenStorageService } from '../services/token-storage.service';
+import { LogInForm } from '../../forms/login.form';
+import { AuthService } from '../../services/auth.service';
+import { TokenStorageService } from '../../services/token-storage.service';
 
 @Component({
   templateUrl: './login.component.html',

@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { authInterceptorProviders } from './interceptors/auth.interceptor';
-import { LogInComponent } from './login/login.component';
+import { LogInComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
