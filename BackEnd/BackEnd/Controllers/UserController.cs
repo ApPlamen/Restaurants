@@ -22,7 +22,7 @@ namespace Domain.Controllers
             return this.Ok(result);
         }
 
-        [Route("/profile")]
+        [Route("profile")]
         [HttpGet]
         public IActionResult Get()
         {
@@ -35,6 +35,8 @@ namespace Domain.Controllers
         [HttpPost]
         public IActionResult Save(UserInputModel model)
         {
+            model.Id = User.GerAuthUserId();
+
             this.service.Save(model);
             return this.Ok();
         }

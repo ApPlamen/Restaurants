@@ -5,12 +5,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { authInterceptorProviders } from './interceptors/auth.interceptor';
 import { LogInComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
     LogInComponent,
     RegisterComponent,
-    // ProfileComponent,
+    ProfileComponent,
     // BoardUsersComponent,
   ],
   exports: [

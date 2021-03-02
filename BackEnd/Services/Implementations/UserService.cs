@@ -41,7 +41,7 @@ namespace Services
 
             user.UserName = model.UserName;
             user.Fullname = model.Fullname;
-            user.PasswordHash = new PasswordHasher<User>().HashPassword(user, model.PasswordHash);
+            //user.PasswordHash = new PasswordHasher<User>().HashPassword(user, model.PasswordHash);
 
             user.NormalizedUserName = user.UserName.ToUpper();
 

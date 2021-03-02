@@ -8,9 +8,7 @@
 
         public string Fullname { get; set; }
 
-        public string PasswordHash { get; set; }
-
-        public string RoleId { get; set; }
+        //public string PasswordHash { get; set; }
 
         public override bool IsIdEmpty()
         {

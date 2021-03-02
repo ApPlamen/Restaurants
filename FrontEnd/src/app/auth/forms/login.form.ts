@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Validators } from "@angular/forms";
 import { BaseFormModel } from "src/custom-elements/controls/base-form-model/base-form-model";
 import { LogInModel } from "../models/login.model";
@@ -9,8 +9,8 @@ export class LogInForm extends BaseFormModel<LogInModel> {
     super();
 
     this.formGroup = this.formBuilder.group({
-        email: ['', Validators.required],
-        password: ['', [Validators.required, Validators.minLength(6)]],
+      email: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 }
