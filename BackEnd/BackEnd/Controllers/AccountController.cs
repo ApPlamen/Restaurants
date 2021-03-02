@@ -22,6 +22,15 @@ namespace Domain.Controllers
         }
 
         [HttpPost]
+        [Route("register")]
+        public async Task<IActionResult> RegisterAsync(RegisterUserInputModel model)
+        {
+            await this.service.RegisterAsync(model);
+
+            return this.Ok();
+        }
+
+        [HttpPost]
         [Route("refresh")]
         public async Task<IActionResult> RefreshAsync(RefreshTokensInputModel model)
         {

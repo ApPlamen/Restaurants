@@ -4,11 +4,12 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { authInterceptorProviders } from './interceptors/auth.interceptor';
 import { LogInComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
     LogInComponent,
-    // RegisterComponent,
+    RegisterComponent,
     // ProfileComponent,
     // BoardUsersComponent,
   ],

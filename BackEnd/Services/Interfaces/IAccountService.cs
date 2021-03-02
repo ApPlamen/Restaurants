@@ -8,6 +8,8 @@ namespace Services
     {
         Task<UserTokensViewModel> LoginAsync(LoginUserInputModel model);
 
+        Task RegisterAsync(RegisterUserInputModel model);
+
         Task<UserTokensViewModel> RefreshTokensAsync(string refreshToken);
     }
 }

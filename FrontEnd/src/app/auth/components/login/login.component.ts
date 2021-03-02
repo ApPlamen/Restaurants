@@ -26,29 +26,8 @@ export class LogInComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // this.authService.login(email, password).subscribe(
-    //   data => {
-    //     this.tokenStorage.saveToken(data.accessToken);
-    //     this.tokenStorage.saveUser(data);
-
-    //     this.isLoginFailed = false;
-    //     this.isLoggedIn = true;
-    //     this.roles = this.tokenStorage.getUser().roles;
-    //     this.reloadPage();
-    //   },
-    //   err => {
-    //     this.errorMessage = err.error.message;
-    //     this.isLoginFailed = true;
-    //   }
-    // );
-
-    var test = this.logInForm.formGroup;
-
-    if (test.valid) {
-      var email = test.get('email').value;
-      var password = test.get('password').value;;
-
-      this.authService.login(email, password).subscribe(
+    if (this.logInForm.formGroup.valid) {
+      this.authService.login(this.logInForm.model).subscribe(
         data => {
           this.tokenStorage.saveToken(data.accessToken);
           this.tokenStorage.saveUser(data);

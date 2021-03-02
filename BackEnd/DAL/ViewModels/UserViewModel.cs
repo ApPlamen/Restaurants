@@ -9,7 +9,5 @@ namespace DAL.ViewModels
         public string Email { get; set; }
 
         public string Fullname { get; set; }
-
-        public List<string> Roles { get; set; }
     }
 }

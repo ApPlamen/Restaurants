@@ -13,6 +13,7 @@ using DAL.Repository;
 using DAL.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Exceptions;
+using System;
 
 namespace Services
 {
@@ -51,6 +52,37 @@ namespace Services
             }
 
             throw new WrongCredentialsException();
+        }
+
+        public async Task RegisterAsync(RegisterUserInputModel model)
+        {
+            var userExists = await this.userManager.FindByEmailAsync(model.Email) != null;
+
+            if(userExists)
+            {
+                throw new UserExistsException();
+            }
+
+            var newUser = new User
+            {
+                Id = Guid.NewGuid().ToString(),
+                Email = model.Email,
+                UserName = model.Username,
+
+                NormalizedEmail = model.Email.ToUpper(),
+                NormalizedUserName = model.Username.ToUpper(),
+
+                Roles = new List<UserRole>
+                {
+                    new() { RoleId = RoleIds.Client }
+                }
+            };
+
+            newUser.PasswordHash = new PasswordHasher<User>().HashPassword(newUser, model.Password);
+
+            this.repo.Add(newUser);
+
+            this.repo.Save();
         }
 
         public async Task<UserTokensViewModel> RefreshTokensAsync(string refreshToken)
@@ -101,8 +133,8 @@ namespace Services
             // You can add other claims here, if you want:
             claims.AddRange(new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimNames.Email, user.Email),
             });
 
