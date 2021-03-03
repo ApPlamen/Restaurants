@@ -8,11 +8,9 @@
 
         public string Fullname { get; set; }
 
-        //public string PasswordHash { get; set; }
-
         public override bool IsIdEmpty()
         {
-            return string.IsNullOrEmpty(Id);
+            return string.IsNullOrWhiteSpace(Id);
         }
     }
 }

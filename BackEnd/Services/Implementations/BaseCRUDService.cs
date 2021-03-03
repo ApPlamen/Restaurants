@@ -5,6 +5,7 @@ using DAL.Models;
 using DAL.InputModels;
 using DAL.Repository;
 using DAL.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace Services
 {
@@ -15,8 +16,9 @@ namespace Services
         where InputModel : BaseInputModel<IdType>
     {
         public BaseCRUDService(IMapper mapper,
-            IRepository<DALModel> DALModel)
-            : base(mapper, DALModel)
+            IRepository<DALModel> DALModel,
+            UserManager<User> userManager)
+            : base(mapper, DALModel, userManager)
         { }
 
         public virtual IEnumerable<ViewModel> GetAll()

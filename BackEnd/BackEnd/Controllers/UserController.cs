@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using DAL.InputModels;
 using Services;
 using Domain.Extensions;
+using System.Threading.Tasks;
 
 namespace Domain.Controllers
 {
@@ -24,29 +25,31 @@ namespace Domain.Controllers
 
         [Route("profile")]
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> GetAsync()
         {
-            var userId = User.GerAuthUserId();
+            var userId = User.GetAuthUserId();
 
-            var result = this.service.Get(userId);
+            var result = await this.service.GetAsync(userId);
             return this.Ok(result);
         }
 
         [HttpPost]
         public IActionResult Save(UserInputModel model)
         {
-            model.Id = User.GerAuthUserId();
+            model.Id = User.GetAuthUserId();
 
-            this.service.Save(model);
+            this.service.SaveAsync(model);
             return this.Ok();
         }
 
-        /*[Route("{id}")]
-        [HttpDelete]
-        public IActionResult Delete(string id)
+        [Route("change-password")]
+        [HttpPut]
+        public async Task<IActionResult> ChangePasswordAsync(ChangePasswordInputModel model)
         {
-            this.service.Delete(id);
+            var userId = User.GetAuthUserId();
+
+            await this.service.ChangePasswordAsync(userId, model);
             return this.Ok();
-        }*/
+        }
     }
 }

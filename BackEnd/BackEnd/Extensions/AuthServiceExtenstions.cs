@@ -5,7 +5,7 @@ namespace Domain.Extensions
 {
     public static class AuthServiceExtenstions
     {
-        public static string GerAuthUserId(this ClaimsPrincipal user)
+        public static string GetAuthUserId(this ClaimsPrincipal user)
         {
             if(user == null)
             {

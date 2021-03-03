@@ -6,12 +6,14 @@ import { authInterceptorProviders } from './interceptors/auth.interceptor';
 import { LogInComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
     LogInComponent,
     RegisterComponent,
     ProfileComponent,
+    ChangePasswordComponent,
     // BoardUsersComponent,
   ],
   exports: [

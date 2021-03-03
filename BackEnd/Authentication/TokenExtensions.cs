@@ -6,7 +6,7 @@ namespace Common.Authentication
     {
         public static string GetClaim(this string token, string claim)
         {
-            if (!string.IsNullOrEmpty(token))
+            if (!string.IsNullOrWhiteSpace(token))
             {
                 var jwt = new JwtSecurityToken(token);
                 object value = null;

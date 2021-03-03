@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -21,18 +20,16 @@ namespace Services
     {
         private ITokenService tokenService;
         private SignInManager<User> signInManager;
-        private UserManager<User> userManager;
 
         public AccountService(IMapper mapper,
             IRepository<User> user,
             ITokenService tokenService,
             SignInManager<User> signInManager,
             UserManager<User> userManager)
-            : base(mapper, user)
+            : base(mapper, user, userManager)
         {
             this.tokenService = tokenService;
             this.signInManager = signInManager;
-            this.userManager = userManager;
         }
 
         public async Task<UserTokensViewModel> LoginAsync(LoginUserInputModel model)
