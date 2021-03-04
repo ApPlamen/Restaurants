@@ -8,18 +8,15 @@ import { TokenStorageService } from '../../services/token-storage.service';
 })
 export class LogInComponent implements OnInit {
   logInForm: LogInForm
-  isLoggedIn = false;
-  isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
 
   constructor(private authService: AuthService,
-              private tokenStorage: TokenStorageService) { }
+              private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
+    if (this.tokenStorageService.getToken()) {
+      this.roles = this.tokenStorageService.getUser().roles;
     } else {
       this.logInForm = new LogInForm();
     }
@@ -29,20 +26,18 @@ export class LogInComponent implements OnInit {
     if (this.logInForm.formGroup.valid) {
       this.authService.login(this.logInForm.model).subscribe(
         data => {
-          this.tokenStorage.saveToken(data.accessToken);
-          this.tokenStorage.saveUser(data);
-
-          this.isLoginFailed = false;
-          this.isLoggedIn = true;
-          this.roles = this.tokenStorage.getUser().roles;
+          this.tokenStorageService.saveToken(data.accessToken);
+          this.tokenStorageService.saveUser(data);
+          
+          this.roles = this.tokenStorageService.getUserRoles();
           this.reloadPage();
         },
-        err => {
-          this.errorMessage = err.error.message;
-          this.isLoginFailed = true;
-        }
       );
     }
+  }
+
+  get isLoggedIn() {
+    return this.tokenStorageService.isUserLoggedIn();
   }
 
   reloadPage(): void {
