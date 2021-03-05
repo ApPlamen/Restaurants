@@ -1,40 +1,55 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <form (ngSubmit)="onSubmit()"
-          [formGroup]="registerForm.formGroup"
-          novalidate >
-      <div class="form-group">
-        <label class="form-label">Username</label>
-        <input type="text"
-                class="form-control"
-                formControlName="username" />
-        <div class="invalid-feedback">
-          Username is required!
+<div class="row justify-content-center">
+  <div class="col col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-2">
+    <div class="card card-container p-3">
+
+      <form class="needs-validation"
+            (ngSubmit)="onSubmit()"
+            [formGroup]="registerForm.formGroup"
+            novalidate >
+
+        <div class="form-floating mb-3">
+          <input type="text"
+                 class="form-control"
+                 formControlName="username"
+                 placeholder="User name" />
+          <label for="username"
+                 class="form-label">Username</label>
+          <div class="invalid-feedback">
+            Username is required!
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Email</label>
-        <input type="text"
-               class="form-control"
-               formControlName="email" />
-        <div class="invalid-feedback">
-          Email is required!
+
+        <div class="form-floating mb-3">
+          <input type="email"
+                 class="form-control"
+                 formControlName="email"
+                 placeholder="name@example.com" />
+          <label for="email"
+                 class="form-label">Email</label>
+          <div class="invalid-feedback">
+            Email is required!
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Password</label>
-        <input type="password"
-               class="form-control"
-               formControlName="password" />
-        <div class="invalid-feedback">
-          Password must be at least 6 characters
+
+        <div class="form-floating mb-3">
+          <input type="password"
+                 class="form-control"
+                 formControlName="password"
+                 placeholder="password" />
+          <label for="password"
+                 class="form-label">Password</label>
+          <div class="invalid-feedback">
+            Password must be at least 6 characters
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary btn-block">
-          Register
-        </button>
-      </div>
-    </form>
+
+        <div class="form-group">
+          <button class="btn btn-primary btn-block">
+            Register
+          </button>
+        </div>
+      </form>
+
+    </div>
   </div>
 </div>
