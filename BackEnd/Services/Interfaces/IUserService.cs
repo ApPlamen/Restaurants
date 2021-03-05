@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 using DAL.InputModels;
+using DAL.Models;
 using DAL.ViewModels;
 
 namespace Services
 {
-    public interface IUserService : IBaseService
+    public interface IUserService : IBaseCRUDService<User, UserViewModel, UserInputModel, string>, IBaseService
     {
-        public IEnumerable<UserViewModel> GetAll();
+        public Task<UserViewModel> GetAsync(string userId);
 
-        public UserViewModel Get(string id);
+        public Task SaveAsync(UserInputModel model);
 
-        public void Save(UserInputModel model);
-
-        public void Delete(string id);
+        public Task ChangePasswordAsync(string userId, ChangePasswordInputModel model);
     }
 }

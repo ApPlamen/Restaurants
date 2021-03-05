@@ -1,16 +1,17 @@
 import { Injectable } from "@angular/core";
 import { Validators } from "@angular/forms";
 import { BaseFormModel } from "src/custom-elements/controls/base-form-model/base-form-model";
-import { LogInModel } from "../models/login.model";
+import { ProfileModel } from "../models/profile.model";
 
 @Injectable()
-export class LogInForm extends BaseFormModel<LogInModel> {
+export class ProfileForm extends BaseFormModel<ProfileModel> {
   constructor() {
     super();
 
     this.formGroup = this.formBuilder.group({
+      userName: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      fullname: ['', Validators.required],
     });
   }
 }

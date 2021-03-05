@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using DAL.InputModels;
 using Services;
+using Domain.Extensions;
+using System.Threading.Tasks;
 
 namespace Domain.Controllers
 {
@@ -14,35 +16,39 @@ namespace Domain.Controllers
         { }
 
         [HttpGet]
+        [Authorize(Policy = "RequireAdminRole")]
         public IActionResult GetAll()
         {
             var result = this.service.GetAll();
             return this.Ok(result);
         }
 
-        [Route("{id}")]
-        [Authorize(Policy = "RequireAdminRole")]
+        [Route("profile")]
         [HttpGet]
-        public IActionResult Get(string id)
+        public async Task<IActionResult> GetAsync()
         {
-            var result = this.service.Get(id);
+            var userId = User.GetAuthUserId();
+
+            var result = await this.service.GetAsync(userId);
             return this.Ok(result);
         }
 
         [HttpPost]
-        [Authorize(Policy = "RequireAdminRole")]
         public IActionResult Save(UserInputModel model)
         {
-            this.service.Save(model);
+            model.Id = User.GetAuthUserId();
+
+            this.service.SaveAsync(model);
             return this.Ok();
         }
 
-        [Route("{id}")]
-        [HttpDelete]
-        [Authorize(Policy = "RequireAdminRole")]
-        public IActionResult Delete(string id)
+        [Route("change-password")]
+        [HttpPut]
+        public async Task<IActionResult> ChangePasswordAsync(ChangePasswordInputModel model)
         {
-            this.service.Delete(id);
+            var userId = User.GetAuthUserId();
+
+            await this.service.ChangePasswordAsync(userId, model);
             return this.Ok();
         }
     }

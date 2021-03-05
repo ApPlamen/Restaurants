@@ -4,6 +4,8 @@ namespace Exceptions
 {
     public class NotAuthorizedException : AuthenticationException
     {
-        public new string Message = "Not Authorized";
+        public new const string Message = "Not Authorized";
+
+        public NotAuthorizedException() : base(message: Message) { }
     }
 }

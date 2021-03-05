@@ -1,57 +1,75 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Linq;
 using DAL.Models;
 using DAL.InputModels;
 using DAL.Repository;
 using DAL.ViewModels;
-using Microsoft.EntityFrameworkCore;
+using Exceptions;
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace Services
 {
     public class UserService : BaseCRUDService<User, UserViewModel, UserInputModel, string>, IUserService
     {
         public UserService(IMapper mapper,
-            IRepository<User> user)
-            : base(mapper, user)
-        { }
-
-        public override UserViewModel Get(string id)
+            IRepository<User> user,
+            UserManager<User> userManager)
+            : base(mapper, user, userManager)
         {
-            var result = this.repo.All()
-                .Include(u => u.Roles)
-                .ThenInclude(r => r.Role)
-                .FirstOrDefault(u => u.Id.Equals(id));
-
-            return mapper.Map<UserViewModel>(result);
         }
 
-        protected override void Create(User model)
+        public async Task<UserViewModel> GetAsync(string userId)
         {
-            model.Id = Guid.NewGuid().ToString();
-            model.PasswordHash = new PasswordHasher<User>().HashPassword(model, model.PasswordHash);
+            var user = await userManager.FindByIdAsync(userId);
 
-            model.NormalizedEmail = model.Email.ToUpper();
-            model.NormalizedUserName = model.UserName.ToUpper();
-
-            this.repo.Add(model);
+            return mapper.Map<UserViewModel>(user);
         }
 
-        protected override void Update(User model)
+        public async Task SaveAsync(UserInputModel model)
         {
-            var user = this.repo.All().FirstOrDefault(u => u.Id.Equals(model.Id));
+            if (model.IsIdEmpty())
+            {
+                throw new ArgumentException();
+            }
+
+            var user = await userManager.FindByIdAsync(model.Id);
+
+            if (user == null)
+            {
+                throw new UserDoesntExistsException();
+            }
 
             user.UserName = model.UserName;
-            user.Email = model.Email;
             user.Fullname = model.Fullname;
-            user.PasswordHash = new PasswordHasher<User>().HashPassword(user, model.PasswordHash);
-            //user.RoleId = model.RoleId;
 
-            user.NormalizedEmail = user.Email.ToUpper();
             user.NormalizedUserName = user.UserName.ToUpper();
 
             this.repo.Save(user);
+        }
+
+        public async Task ChangePasswordAsync(string userId, ChangePasswordInputModel model)
+        {
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                throw new ArgumentException();
+            }
+
+            var user = await userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                throw new UserDoesntExistsException();
+            }
+
+            var validCurrentPassword = await userManager.CheckPasswordAsync(user, model.CurrentPassword);
+
+            if(!validCurrentPassword)
+            {
+                throw new ArgumentException();
+            }
+
+            await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
         }
     }
 }

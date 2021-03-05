@@ -3,6 +3,6 @@
 namespace Domain.Controllers
 {
     [ApiController]
-    public class BaseApiController : Controller
+    public class BaseApiController : ControllerBase
     { }
 }

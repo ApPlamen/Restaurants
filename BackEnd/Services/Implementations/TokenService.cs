@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using Common.Authentication;
 
-namespace Services.Implementations
+namespace Services
 {
     public class TokenService : ITokenService
     {
