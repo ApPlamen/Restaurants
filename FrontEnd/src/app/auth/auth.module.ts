@@ -7,10 +7,12 @@ import { LogInComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { LogOutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
     LogInComponent,
+    LogOutComponent,
     RegisterComponent,
     ProfileComponent,
     ChangePasswordComponent,
