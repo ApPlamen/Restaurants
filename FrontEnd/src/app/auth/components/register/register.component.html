@@ -2,7 +2,8 @@
   <div class="col col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-2">
     <div class="card card-container p-3">
 
-      <form class="needs-validation"
+      <form *ngIf="!isLoggedIn"
+            class="needs-validation"
             (ngSubmit)="onSubmit()"
             [formGroup]="registerForm.formGroup"
             novalidate >
@@ -49,6 +50,10 @@
           </button>
         </div>
       </form>
+
+      <div class="alert alert-success" *ngIf="isLoggedIn">
+        Logged in as {{ roles }}.
+      </div>
 
     </div>
   </div>

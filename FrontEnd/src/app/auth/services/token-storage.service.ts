@@ -43,4 +43,8 @@ export class TokenStorageService {
   public isUserLoggedIn(): boolean {
     return sessionStorage.getItem(TOKEN_KEY) != null && sessionStorage.getItem(USER_KEY) != null;
   }
+
+  public hasAccessRole(accessRoles: string[]): boolean {
+    return accessRoles && accessRoles.filter(value => this.getUserRoles().includes(value)).length > 0;
+  }
 }
