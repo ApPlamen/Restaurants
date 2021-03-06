@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LogInForm } from '../../forms/login.form';
 import { AuthService } from '../../services/auth.service';
 import { TokenStorageService } from '../../services/token-storage.service';
@@ -8,11 +9,11 @@ import { TokenStorageService } from '../../services/token-storage.service';
 })
 export class LogInComponent implements OnInit {
   logInForm: LogInForm
-  errorMessage = '';
   roles: string[] = [];
 
   constructor(private authService: AuthService,
-              private tokenStorageService: TokenStorageService) { }
+              private tokenStorageService: TokenStorageService,
+              private router: Router) { }
 
   ngOnInit(): void {
     if (this.tokenStorageService.getToken()) {
@@ -28,9 +29,8 @@ export class LogInComponent implements OnInit {
         data => {
           this.tokenStorageService.saveToken(data.accessToken);
           this.tokenStorageService.saveUser(data);
-          
-          this.roles = this.tokenStorageService.getUserRoles();
-          this.reloadPage();
+
+          this.router.navigate(['/home']);
         },
       );
     }

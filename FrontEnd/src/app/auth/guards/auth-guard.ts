@@ -7,7 +7,8 @@ import { TokenStorageService } from "../services/token-storage.service";
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
-  constructor(private tokenStorageService: TokenStorageService, private router: Router) { }
+  constructor(private tokenStorageService: TokenStorageService,
+              private router: Router) { }
   
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -35,15 +36,15 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
   
   checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
     if (this.tokenStorageService.isUserLoggedIn()) {
-      const userRoles = this.tokenStorageService.getUserRoles();
-      if (route.data.roles && route.data.roles.filter(value => userRoles.includes(value)).length < 1) {
-        this.router.navigate(['/login']);
+      if (!this.tokenStorageService.hasAccessRole(route.data.accessRoles)) {
+        this.router.navigate(['/error-403']);
         return false;
       }
+
       return true;
     }
   
     this.router.navigate(['/login']);
     return false;
   }
-  }
+}

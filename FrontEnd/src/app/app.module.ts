@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { ToastrModule } from 'ngx-toastr';
 import { NavbarModule } from './navbar/navbar.module';
+import { HomeRoutingModule } from './home/home-routing.module';
 
 @NgModule({
   declarations: [
