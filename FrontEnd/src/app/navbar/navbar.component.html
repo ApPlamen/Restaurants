@@ -20,6 +20,14 @@
           <a class="nav-link active" routerLink="home">Home</a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link active"
+             *ngIf="hasAccessRole([RolesEnum.Admin, RolesEnum.RestaurantAdmin])"
+             routerLink="home">
+            Users
+          </a>
+        </li>
+
       </ul>
 
       <ul class="navbar-nav">

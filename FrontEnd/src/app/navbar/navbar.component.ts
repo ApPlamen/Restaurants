@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RolesEnum } from '../auth/enums/roles.enum';
 import { TokenStorageService } from '../auth/services/token-storage.service';
 
 @Component({
@@ -9,6 +10,14 @@ export class NavbarComponent implements OnInit {
   constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+  }
+
+  public hasAccessRole(accessRoles: string[]): boolean {
+    return this.tokenStorageService.hasAccessRole(accessRoles);
+  }
+
+  get RolesEnum(): typeof RolesEnum {
+    return RolesEnum; 
   }
 
   get isLoggedIn() {
