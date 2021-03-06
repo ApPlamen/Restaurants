@@ -7,19 +7,13 @@ const USER_KEY = 'auth-user';
   providedIn: 'root'
 })
 export class TokenStorageService {
-  private isLoggedIn = false;
-
   constructor() { }
 
   signOut(): void {
-    this.isLoggedIn = false;
-
     sessionStorage.clear();
   }
 
   public saveToken(token: string): void {
-    this.isLoggedIn = true;
-    
     sessionStorage.removeItem(TOKEN_KEY);
     sessionStorage.setItem(TOKEN_KEY, token);
   }
@@ -29,8 +23,6 @@ export class TokenStorageService {
   }
 
   public saveUser(user: any): void {
-    this.isLoggedIn = true;
-
     sessionStorage.removeItem(USER_KEY);
     sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
