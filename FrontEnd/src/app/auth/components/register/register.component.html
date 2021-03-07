@@ -14,7 +14,9 @@
                  formControlName="username"
                  placeholder="User name" />
           <label for="username"
-                 class="form-label">Username</label>
+                 class="form-label">
+            Username
+          </label>
           <div class="invalid-feedback">
             Username is required!
           </div>
@@ -26,7 +28,9 @@
                  formControlName="email"
                  placeholder="name@example.com" />
           <label for="email"
-                 class="form-label">Email</label>
+                 class="form-label">
+            Email
+          </label>
           <div class="invalid-feedback">
             Email is required!
           </div>
@@ -36,9 +40,15 @@
           <input type="password"
                  class="form-control"
                  formControlName="password"
-                 placeholder="password" />
+                 placeholder="password"
+                 aria-describedby="passwordHelpBlock" />
           <label for="password"
-                 class="form-label">Password</label>
+                 class="form-label">
+            Password
+          </label>
+          <small id="passwordHelpInline" class="form-text">
+            Password must be at least 6 characters
+          </small>
           <div class="invalid-feedback">
             Password must be at least 6 characters
           </div>
