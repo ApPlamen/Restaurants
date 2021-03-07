@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ProfileForm } from '../../forms/profile.form';
 import { UserService } from '../../services/user.service';
 
@@ -8,7 +9,8 @@ import { UserService } from '../../services/user.service';
 export class ProfileComponent implements OnInit {
   profileForm: ProfileForm
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.profileForm = new ProfileForm();
@@ -19,7 +21,8 @@ export class ProfileComponent implements OnInit {
 
   onSubmit(): void {
     if (this.profileForm.formGroup.valid) {
-      this.userService.saveUserProfile(this.profileForm.model).subscribe();
+      this.userService.saveUserProfile(this.profileForm.model)
+        .subscribe(_ => this.toastr.success("Success!"));
     }
   }
 }
