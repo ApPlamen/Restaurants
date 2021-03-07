@@ -5,7 +5,7 @@ import { ProfileModel } from '../models/profile.model';
 import { ChangePasswordModel } from '../models/change-password.model';
 import { environment } from 'src/environments/environment';
 
-const CONTROLER_URL = 'User/';
+const CONTROLER_URL = 'User';
 const BASE_URL = environment.apiUrl + CONTROLER_URL;
 
 @Injectable({
@@ -15,7 +15,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUserProfile(): Observable<any> {
-    return this.http.get(BASE_URL + 'profile');
+    return this.http.get(BASE_URL + '/profile');
   }
 
   saveUserProfile(profileModel: ProfileModel): Observable<any> {
@@ -23,7 +23,7 @@ export class UserService {
   }
 
   changePasswordUser(model: ChangePasswordModel): Observable<any> {
-    return this.http.put(BASE_URL + 'change-password', model);
+    return this.http.put(BASE_URL + '/change-password', model);
   }
 
   getUserBoard(): Observable<any> {

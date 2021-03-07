@@ -15,14 +15,22 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.profileForm = new ProfileForm();
 
-    this.userService.getUserProfile()
-      .subscribe(profile => this.profileForm.setModel(profile));
+    this.fillProfileForm();
   }
 
   onSubmit(): void {
     if (this.profileForm.formGroup.valid) {
       this.userService.saveUserProfile(this.profileForm.model)
-        .subscribe(_ => this.toastr.success("Success!"));
+        .subscribe(_ => {
+          this.fillProfileForm();
+
+          this.toastr.success("Success!");
+        });
     }
+  }
+
+  private fillProfileForm() {
+    this.userService.getUserProfile()
+      .subscribe(profile => this.profileForm.setModel(profile));
   }
 }
