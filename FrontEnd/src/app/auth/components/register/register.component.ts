@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { RegisterForm } from '../../forms/register.form';
 import { AuthService } from '../../services/auth.service';
 import { TokenStorageService } from '../../services/token-storage.service';
@@ -11,7 +13,9 @@ export class RegisterComponent implements OnInit {
   roles: string[] = [];
 
   constructor(private authService: AuthService,
-              private tokenStorageService: TokenStorageService) { }
+              private tokenStorageService: TokenStorageService,
+              private router: Router,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     if (this.tokenStorageService.getToken()) {
@@ -23,7 +27,12 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     if (this.registerForm.formGroup.valid) {
-      this.authService.register(this.registerForm.model).subscribe();
+      this.authService.register(this.registerForm.model)
+        .subscribe(_ => {
+          this.toastr.success("Success!");
+
+          this.router.navigate(['/login']);
+        });
     }
   }
 

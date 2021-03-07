@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ChangePasswordForm } from '../../forms/change-password.form';
 import { UserService } from '../../services/user.service';
 
@@ -8,7 +9,8 @@ import { UserService } from '../../services/user.service';
 export class ChangePasswordComponent implements OnInit {
   changePasswordForm: ChangePasswordForm
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.changePasswordForm = new ChangePasswordForm();
@@ -16,7 +18,12 @@ export class ChangePasswordComponent implements OnInit {
 
   onSubmit(): void {
     if (this.changePasswordForm.formGroup.valid) {
-      this.userService.changePasswordUser(this.changePasswordForm.model).subscribe();
+      this.userService.changePasswordUser(this.changePasswordForm.model)
+        .subscribe(_ => {
+          this.changePasswordForm.clear();
+
+          this.toastr.success("Success!");
+        });
     }
   }
 }
