@@ -5,9 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthModule } from './auth/auth.module';
 import { ToastrModule } from 'ngx-toastr';
-import { NavbarModule } from './navbar/navbar.module';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,8 +17,8 @@ import { NavbarModule } from './navbar/navbar.module';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    AuthModule,
-    NavbarModule,
+    CoreModule,
+    SharedModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
