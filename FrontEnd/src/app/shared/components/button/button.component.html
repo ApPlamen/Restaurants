@@ -1,0 +1,9 @@
+<button
+  [type]="type"
+  class="d-flex align-items-center btn btn-{{ design }}"
+  [disabled]="isDisabled"
+  (click)="onButtonClick($event)"
+>
+  <svg-icon *ngIf="iconName" [class.invisible]="isLoading" [name]="iconName" class="btn-icon"></svg-icon>
+  <div *ngIf="label" [class.invisible]="isLoading" class="btn-label">{{ label | uppercase }}</div>
+</button>
