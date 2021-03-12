@@ -8,33 +8,9 @@
             [formGroup]="logInForm.formGroup"
             novalidate >
 
-        <div class="form-floating mb-3">
-          <input type="email"
-                 class="form-control"
-                 formControlName="email"
-                 placeholder="name@example.com" />
-          <label for="email"
-                 class="form-label">
-            Email
-          </label>
-          <div class="invalid-feedback">
-            Email is required
-          </div>
-        </div>
+        <tmc-input type="email" label="Email" placeholder="name@example.com" formControlName="email"></tmc-input>
 
-        <div class="form-floating mb-3">
-          <input type="password"
-                 class="form-control"
-                 formControlName="password"
-                 placeholder="password" />
-          <label for="password"
-                 class="form-label">
-            Password
-          </label>
-          <div class="invalid-feedback">
-            Password must be at least 6 characters
-          </div>
-        </div>
+        <tmc-input type="password" label="Password" placeholder="Password" formControlName="password"></tmc-input>
 
         <div class="form-group">
           <button class="btn btn-primary btn-block">
