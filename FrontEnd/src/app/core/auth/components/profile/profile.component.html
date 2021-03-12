@@ -6,46 +6,12 @@
             (ngSubmit)="onSubmit()"
             [formGroup]="profileForm.formGroup"
             novalidate >
-    
-        <div class="form-floating mb-3">
-          <input type="text"
-                 class="form-control"
-                 formControlName="userName"
-                 placeholder="User name" />
-          <label for="userName"
-                 class="form-label">
-            Username
-          </label>
-          <div class="invalid-feedback">
-            Username is required!
-          </div>
-        </div>
 
-        <div class="form-floating mb-3">
-          <input type="email"
-                 class="form-control"
-                 formControlName="email"
-                 placeholder="name@example.com"
-                 disabled />
-          <label for="email"
-                 class="form-label">
-            Email
-          </label>
-        </div>
+        <tmc-input type="text" label="Username" placeholder="User name" formControlName="userName"></tmc-input>
 
-        <div class="form-floating mb-3">
-          <input type="text"
-                 class="form-control"
-                 formControlName="fullname"
-                 placeholder="Name" />
-          <label for="fullname"
-                 class="form-label">
-            Fullname
-          </label>
-          <div class="invalid-feedback">
-            Fullname is required!
-          </div>
-        </div>
+        <tmc-input type="email" label="Email" placeholder="name@example.com" formControlName="email" disabled></tmc-input>
+
+        <tmc-input type="text" label="Fullname" placeholder="Name" formControlName="fullname"></tmc-input>
 
         <div class="form-group">
           <button class="btn btn-primary btn-block">
