@@ -7,10 +7,9 @@ import { UserService } from '../../services/user.service';
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit {
-  profileForm: ProfileForm
-
   constructor(private userService: UserService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              public profileForm: ProfileForm) { }
 
   ngOnInit(): void {
     this.profileForm = new ProfileForm();

@@ -9,13 +9,13 @@ import { TokenStorageService } from '../../services/token-storage.service';
   templateUrl: './login.component.html',
 })
 export class LogInComponent implements OnInit {
-  logInForm: LogInForm
   roles: string[] = [];
 
   constructor(private authService: AuthService,
               private tokenStorageService: TokenStorageService,
               private router: Router,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              public logInForm: LogInForm) { }
 
   ngOnInit(): void {
     if (this.tokenStorageService.getToken()) {
