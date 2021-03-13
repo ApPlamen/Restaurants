@@ -7,10 +7,9 @@ import { UserService } from '../../services/user.service';
   templateUrl: './change-password.component.html',
 })
 export class ChangePasswordComponent implements OnInit {
-  changePasswordForm: ChangePasswordForm
-
   constructor(private userService: UserService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              public changePasswordForm: ChangePasswordForm) { }
 
   ngOnInit(): void {
     this.changePasswordForm = new ChangePasswordForm();
