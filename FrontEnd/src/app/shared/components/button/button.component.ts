@@ -8,7 +8,7 @@ import { ButtonDesign } from './button-design.model';
 export class ButtonComponent {
   @Input() label = '';
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
-  @Input() design = ButtonDesign.Primary;
+  @Input() design = ButtonDesign.primary;
   @Input() iconName: string;
   @Input() isDisabled = false;
   @Input() isLoading = false;
