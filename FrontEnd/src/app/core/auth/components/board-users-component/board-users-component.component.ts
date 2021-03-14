@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { UserService } from '../../services/user.service';
 
@@ -6,6 +6,8 @@ import { UserService } from '../../services/user.service';
   templateUrl: './board-users-component.component.html',
 })
 export class BoardUsersComponent implements OnInit {
+  @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
+
   public users;
 
   public columns: SimpleTableColumn<{ [key: string]: string }>[] = [
@@ -26,6 +28,14 @@ export class BoardUsersComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.columns = [
+      ...this.columns,
+      {
+        field: 'id',
+        cellTemplate: this.tableActionCellTemplate
+      }
+    ];
+
     this.fillProfileForm();
   }
 
