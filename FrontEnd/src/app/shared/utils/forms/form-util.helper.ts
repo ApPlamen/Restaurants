@@ -19,7 +19,7 @@ export class FormUtil {
     if (ngControl && ngControl.errors) {
       const errorType = Object.keys(ngControl.errors)[0];
       const errorValue = Object.values(ngControl.errors)[0];
-      const getErrorMessage = get(FormError, errorType);
+      const getErrorMessage = get(formError, errorType);
 
       message = get(customErrorMessages, errorType) || (getErrorMessage && getErrorMessage(errorValue));
     }
