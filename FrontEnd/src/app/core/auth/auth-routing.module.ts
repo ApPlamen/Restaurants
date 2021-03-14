@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BoardUsersComponent } from './components/board-users-component/board-users-component.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { LogInComponent } from './components/login/login.component';
 import { LogOutComponent } from './components/logout/logout.component';
@@ -23,6 +24,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { accessRoles: [RolesEnum.admin, RolesEnum.restaurantAdmin, RolesEnum.restaurant, RolesEnum.client] },
     component: ChangePasswordComponent },
+  { path: 'users',
+    canActivate: [AuthGuard],
+    data: { accessRoles: [RolesEnum.admin, RolesEnum.restaurantAdmin, RolesEnum.restaurant, RolesEnum.client] },
+    component: BoardUsersComponent },
 ];
 
 @NgModule({

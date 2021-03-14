@@ -12,8 +12,6 @@ export class ProfileComponent implements OnInit {
               public profileForm: ProfileForm) { }
 
   ngOnInit(): void {
-    this.profileForm = new ProfileForm();
-
     this.fillProfileForm();
   }
 
