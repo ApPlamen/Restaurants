@@ -10,7 +10,7 @@ export class InputComponent extends CustomControlDirective {
   @Input() label = '';
   @Input() placeholder = '';
 
-  public onBlur(event: Event) {
+  public onBlur(event: Event): void {
     this.onTouch(event);
   }
 }
