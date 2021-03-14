@@ -10,7 +10,7 @@ export abstract class CustomControlDirective implements ControlValueAccessor {
   }
 
   @Input() id: string = Math.random().toString();
-  @Input() disabled: boolean = false;
+  @Input() disabled = false;
   @Input() showErrorsOn: 'dirty' | 'touched';
   @Input() customErrorMessages: { [validatorType: string]: string } = {};
   @Input() displayError = true;
@@ -39,17 +39,17 @@ export abstract class CustomControlDirective implements ControlValueAccessor {
     return FormUtil.getErrorMessage(this.ngControl, this.customErrorMessages);
   }
 
-  public writeValue(value: any) {
+  public writeValue(value: any): void {
     if (value !== undefined) {
       this.value = value;
     }
   }
 
-  public registerOnChange(fn: () => void) {
+  public registerOnChange(fn: () => void): void {
     this.onChange = fn;
   }
 
-  public registerOnTouched(fn: () => void) {
+  public registerOnTouched(fn: () => void): void {
     this.onTouch = fn;
   }
 }

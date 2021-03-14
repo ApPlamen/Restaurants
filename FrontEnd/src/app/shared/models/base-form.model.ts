@@ -6,7 +6,7 @@ export abstract class BaseFormModel<T> {
   protected formBuilder: FormBuilder;
 
   public formGroup: FormGroup;
-  
+
   static markControlsAsDirty(form: FormGroup): void {
     for (const key in form.controls) {
       if (form.controls.hasOwnProperty(key)) {

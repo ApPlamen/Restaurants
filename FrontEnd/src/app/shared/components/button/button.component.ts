@@ -15,7 +15,7 @@ export class ButtonComponent {
 
   @Output() clicked = new EventEmitter<MouseEvent>();
 
-  onButtonClick(event: MouseEvent) {
+  onButtonClick(event: MouseEvent): void {
     if (!this.isLoading) {
       this.clicked.emit(event);
     }
