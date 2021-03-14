@@ -32,7 +32,7 @@ export class LogInComponent implements OnInit {
           this.tokenStorageService.saveToken(data.accessToken);
           this.tokenStorageService.saveUser(data);
 
-          this.toastr.success("Success!");
+          this.toastr.success('Success!');
 
           this.router.navigate(['/home']);
         },
@@ -40,7 +40,7 @@ export class LogInComponent implements OnInit {
     }
   }
 
-  get isLoggedIn() {
+  get isLoggedIn(): boolean {
     return this.tokenStorageService.isUserLoggedIn();
   }
 }

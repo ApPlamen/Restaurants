@@ -14,7 +14,7 @@ export class LogOutComponent implements OnInit {
   ngOnInit(): void {
     this.tokenStorageService.signOut();
 
-    this.toastr.success("Success!");
+    this.toastr.success('Success!');
 
     this.router.navigate(['/login']);
   }

@@ -29,14 +29,14 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.formGroup.valid) {
       this.authService.register(this.registerForm.model)
         .subscribe(_ => {
-          this.toastr.success("Success!");
+          this.toastr.success('Success!');
 
           this.router.navigate(['/login']);
         });
     }
   }
 
-  get isLoggedIn() {
+  get isLoggedIn(): boolean {
     return this.tokenStorageService.isUserLoggedIn();
   }
 }

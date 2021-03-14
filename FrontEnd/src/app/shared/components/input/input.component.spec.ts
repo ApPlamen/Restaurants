@@ -58,7 +58,7 @@ describe('InputComponent', () => {
     expect(component.onTouch).toBe(testOnTouch);
   });
 
-  it('should trigger customControl.onTouch, when onBlur is called', () => {
+  it('should trigger CustomControlDirective.onTouch, when onBlur is called', () => {
     const event = new Event('click');
     component.onBlur(event);
 

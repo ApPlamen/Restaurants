@@ -38,7 +38,7 @@ export class FormUtil {
   public static areErrorsShown(
     ngControl: NgControl | AbstractControl,
     showErrorsOn: 'dirty' | 'touched' | 'pristine' = DEFAULT_SHOW_ERRORS_ON
-  ) {
+  ): boolean {
     return (
       ngControl &&
       !ngControl.disabled &&
