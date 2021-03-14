@@ -1,4 +1,4 @@
 export enum ButtonDesign {
-  Primary = 'primary',
-  OutlinePrimary = 'outline-primary'
+  primary = 'primary',
+  outlinePrimary = 'outline-primary'
 }

@@ -5,7 +5,7 @@ type MaxLength = { requiredLength: number; actualLength: number };
 type Required = { required: boolean };
 type Email = { email: boolean };
 
-export const FormError = {
+export const formError = {
   min: (validation: MinValue) =>
     `Requires value to be greater than or equal to ${validation.min} but actual is ${validation.actual}.`,
   max: (validation: MaxValue) =>
