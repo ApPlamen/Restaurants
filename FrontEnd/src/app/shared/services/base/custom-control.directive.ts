@@ -4,13 +4,13 @@ import { FormUtil } from '../../utils/forms/form-util.helper';
 
 @Directive()
 // eslint-disable-next-line
-export abstract class CustomControl implements ControlValueAccessor {
-  @HostBinding('class.control--showErrors') get areErrorsShown() {
+export abstract class CustomControlDirective implements ControlValueAccessor {
+  @HostBinding('class.control--showErrors') get areErrorsShown(): boolean {
     return FormUtil.areErrorsShown(this.ngControl, this.showErrorsOn);
   }
 
   @Input() id: string = Math.random().toString();
-  @Input() disabled: boolean = false
+  @Input() disabled: boolean = false;
   @Input() showErrorsOn: 'dirty' | 'touched';
   @Input() customErrorMessages: { [validatorType: string]: string } = {};
   @Input() displayError = true;

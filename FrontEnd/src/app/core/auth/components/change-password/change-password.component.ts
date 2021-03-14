@@ -21,7 +21,7 @@ export class ChangePasswordComponent implements OnInit {
         .subscribe(_ => {
           this.changePasswordForm.clear();
 
-          this.toastr.success("Success!");
+          this.toastr.success('Success!');
         });
     }
   }

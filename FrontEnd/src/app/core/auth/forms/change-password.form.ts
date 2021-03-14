@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { Validators } from "@angular/forms";
-import { BaseFormModel } from "src/app/shared/models/base-form.model";
-import { ChangePasswordModel } from "../models/change-password.model";
+import { Injectable } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { BaseFormModel } from 'src/app/shared/models/base-form.model';
+import { ChangePasswordModel } from '../models/change-password.model';
 
 @Injectable()
 export class ChangePasswordForm extends BaseFormModel<ChangePasswordModel> {

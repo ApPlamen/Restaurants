@@ -1,64 +1,64 @@
-import { Injector } from "@angular/core"
-import { AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidatorFn } from "@angular/forms"
+import { Injector } from '@angular/core';
+import { AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 
 export abstract class BaseFormModel<T> {
+  private _model: T;
+  protected formBuilder: FormBuilder;
+
+  public formGroup: FormGroup;
+  
   static markControlsAsDirty(form: FormGroup): void {
     for (const key in form.controls) {
       if (form.controls.hasOwnProperty(key)) {
-        const control = form.controls[key]
+        const control = form.controls[key];
 
         if (!(control instanceof FormControl)) {
-          this.markControlsAsDirty(control as FormGroup)
+          this.markControlsAsDirty(control as FormGroup);
         }
 
-        control.markAsDirty()
+        control.markAsDirty();
       }
     }
   }
 
-  private _model: T
-  protected formBuilder: FormBuilder
-
-  public formGroup: FormGroup
-
   constructor() {
     // eslint-disable-next-line
-    const injector = Injector.create([{ provide: FormBuilder, deps: [] }])
-    this.formBuilder = injector.get(FormBuilder)
+    const injector = Injector.create([{ provide: FormBuilder, deps: [] }]);
+    this.formBuilder = injector.get(FormBuilder);
   }
 
   setModel(model: T): void {
-    this._model = model
-    this.formGroup.patchValue(model)
+    this._model = model;
+    this.formGroup.patchValue(model);
   }
 
   // eslint-disable-next-line
   patchModel(property: { [key: string]: any }): void {
     // eslint-disable-next-line
-    this._model = { ...<any> this._model, ...property }
-    this.formGroup.patchValue(property)
+    this._model = { ...<any> this._model, ...property };
+    this.formGroup.patchValue(property);
   }
 
   setValidators(controlName: string, validators: ValidatorFn[]): void {
-    this.formGroup.get(controlName).setValidators(validators)
+    this.formGroup.get(controlName).setValidators(validators);
   }
 
   setAsyncValidators(controlName: string, validators: AsyncValidatorFn[]): void {
-    this.formGroup.get(controlName).setAsyncValidators(validators)
+    this.formGroup.get(controlName).setAsyncValidators(validators);
   }
 
   get model(): T {
-    const formGroupRawValue = this.formGroup.getRawValue()
+    const formGroupRawValue = this.formGroup.getRawValue();
 
     // eslint-disable-next-line
-    return { ...<any> this._model, ...formGroupRawValue }
+    return { ...<any> this._model, ...formGroupRawValue };
   }
 
   isValid(): boolean {
-    return this.formGroup.valid
+    return this.formGroup.valid;
   }
 
   clear(): void {
-    this.formGroup.reset()
+    this.formGroup.reset();
   }
 }

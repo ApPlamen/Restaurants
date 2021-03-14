@@ -23,12 +23,12 @@ export class ProfileComponent implements OnInit {
         .subscribe(_ => {
           this.fillProfileForm();
 
-          this.toastr.success("Success!");
+          this.toastr.success('Success!');
         });
     }
   }
 
-  private fillProfileForm() {
+  private fillProfileForm(): void {
     this.userService.getUserProfile()
       .subscribe(profile => this.profileForm.setModel(profile));
   }

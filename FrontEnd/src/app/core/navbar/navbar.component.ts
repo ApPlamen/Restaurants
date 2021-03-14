@@ -17,10 +17,10 @@ export class NavbarComponent implements OnInit {
   }
 
   get RolesEnum(): typeof RolesEnum {
-    return RolesEnum; 
+    return RolesEnum;
   }
 
-  get isLoggedIn() {
+  get isLoggedIn(): boolean {
     return this.tokenStorageService.isUserLoggedIn();
   }
 }

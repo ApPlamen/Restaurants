@@ -1,6 +1,6 @@
 export class ProfileModel {
-  id: string
-  userName: string
-  email: string
-  fullname: string
+  id: string;
+  userName: string;
+  email: string;
+  fullname: string;
 }
