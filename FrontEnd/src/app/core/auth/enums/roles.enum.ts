@@ -1,7 +1,7 @@
 export enum RolesEnum
 {
-    Admin = 'Admin',
-    Client = 'Client',
-    Restaurant = 'Restaurant',
-    RestaurantAdmin = 'RestaurantAdmin',
+    admin = 'Admin',
+    client = 'Client',
+    restaurant = 'Restaurant',
+    restaurantAdmin = 'RestaurantAdmin',
 }

@@ -13,15 +13,15 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'logout',
     canActivate: [AuthGuard],
-    data: { accessRoles: [RolesEnum.Admin, RolesEnum.RestaurantAdmin, RolesEnum.Restaurant, RolesEnum.Client] },
+    data: { accessRoles: [RolesEnum.admin, RolesEnum.restaurantAdmin, RolesEnum.restaurant, RolesEnum.client] },
     component: LogOutComponent },
   { path: 'profile',
     canActivate: [AuthGuard],
-    data: { accessRoles: [RolesEnum.Admin, RolesEnum.RestaurantAdmin, RolesEnum.Restaurant, RolesEnum.Client] },
+    data: { accessRoles: [RolesEnum.admin, RolesEnum.restaurantAdmin, RolesEnum.restaurant, RolesEnum.client] },
     component: ProfileComponent },
   { path: 'change-password',
     canActivate: [AuthGuard],
-    data: { accessRoles: [RolesEnum.Admin, RolesEnum.RestaurantAdmin, RolesEnum.Restaurant, RolesEnum.Client] },
+    data: { accessRoles: [RolesEnum.admin, RolesEnum.restaurantAdmin, RolesEnum.restaurant, RolesEnum.client] },
     component: ChangePasswordComponent },
 ];
 

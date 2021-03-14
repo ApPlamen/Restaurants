@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
     return this.tokenStorageService.hasAccessRole(accessRoles);
   }
 
-  get RolesEnum(): typeof RolesEnum {
+  get rolesEnum(): typeof RolesEnum {
     return RolesEnum;
   }
 

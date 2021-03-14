@@ -2,10 +2,16 @@ import { Injector } from '@angular/core';
 import { AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 
 export abstract class BaseFormModel<T> {
-  private _model: T;
-  protected formBuilder: FormBuilder;
-
   public formGroup: FormGroup;
+
+  protected formBuilder: FormBuilder;
+  private _model: T;
+
+  constructor() {
+    // eslint-disable-next-line
+    const injector = Injector.create([{ provide: FormBuilder, deps: [] }]);
+    this.formBuilder = injector.get(FormBuilder);
+  }
 
   static markControlsAsDirty(form: FormGroup): void {
     for (const key in form.controls) {
@@ -19,12 +25,6 @@ export abstract class BaseFormModel<T> {
         control.markAsDirty();
       }
     }
-  }
-
-  constructor() {
-    // eslint-disable-next-line
-    const injector = Injector.create([{ provide: FormBuilder, deps: [] }]);
-    this.formBuilder = injector.get(FormBuilder);
   }
 
   setModel(model: T): void {

@@ -1,6 +1,6 @@
 import { AbstractControl, FormBuilder, NgControl } from '@angular/forms';
 import { get } from 'lodash-es';
-import { FormError } from '../../helpers/form-error.helper';
+import { formError } from '../../helpers/form-error.helper';
 
 import { DEFAULT_SHOW_ERRORS_ON } from './form-util.config';
 
