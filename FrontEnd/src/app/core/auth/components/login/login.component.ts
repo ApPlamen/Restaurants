@@ -20,8 +20,6 @@ export class LogInComponent implements OnInit {
   ngOnInit(): void {
     if (this.tokenStorageService.getToken()) {
       this.roles = this.tokenStorageService.getUser().roles;
-    } else {
-      this.logInForm = new LogInForm();
     }
   }
 

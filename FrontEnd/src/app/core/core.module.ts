@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -15,6 +15,7 @@ import { LogInForm } from './auth/forms/login.form';
 import { ChangePasswordForm } from './auth/forms/change-password.form';
 import { ProfileForm } from './auth/forms/profile.form';
 import { RegisterForm } from './auth/forms/register.form';
+import { BoardUsersComponent } from './auth/components/board-users-component/board-users-component.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { RegisterForm } from './auth/forms/register.form';
     RegisterComponent,
     ProfileComponent,
     ChangePasswordComponent,
-    // BoardUsersComponent,
+    BoardUsersComponent,
     NavbarComponent,
   ],
   imports: [
@@ -31,10 +32,10 @@ import { RegisterForm } from './auth/forms/register.form';
     RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
   ],
   providers: [
     authInterceptorProviders,
@@ -43,5 +44,6 @@ import { RegisterForm } from './auth/forms/register.form';
     ProfileForm,
     RegisterForm,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CoreModule {}

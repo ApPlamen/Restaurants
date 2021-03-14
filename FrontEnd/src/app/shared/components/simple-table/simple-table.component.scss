@@ -1,0 +1,50 @@
+@import 'app/abstracts';
+
+.simple-table {
+  // TODO: The layout breaks under IE 11 when using table-layout: fixed.
+  // Investigate how to fix that.
+  // table-layout: fixed;
+  width: 100%;
+
+  &-title {
+    caption-side: top;
+    padding: $spacer;
+    color: $blue;
+    font-weight: bold;
+  }
+
+  &-cell {
+    padding: $spacer;
+    color: $color-gray;
+  }
+
+  &-row,
+  &-header {
+    border-bottom: 1px solid $color-gray-light;
+  }
+
+  &-row {
+    &.clickable:hover {
+      background-color: $color-gray-lighter;
+      cursor: pointer;
+    }
+  }
+
+  &-row:last-child {
+    border: none;
+  }
+
+  &-header-cell {
+    padding: $spacer;
+    vertical-align: top;
+
+    &.header-title {
+      // color: $color-gray-dark;
+      font-weight: bold;
+    }
+
+    &.header-template {
+      font-weight: normal;
+    }
+  }
+}
