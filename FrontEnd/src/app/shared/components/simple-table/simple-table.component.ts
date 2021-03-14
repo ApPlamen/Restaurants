@@ -5,7 +5,7 @@ import { NOT_AVAILABLE } from './simple-table.constants';
 @Component({
   selector: 'tmc-simple-table',
   templateUrl: './simple-table.component.html',
-  //styleUrls: ['./simple-table.component.scss'],
+  styleUrls: ['./simple-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimpleTableComponent {
