@@ -26,7 +26,7 @@ const routes: Routes = [
     component: ChangePasswordComponent },
   { path: 'users',
     canActivate: [AuthGuard],
-    data: { accessRoles: [RolesEnum.admin, RolesEnum.restaurantAdmin, RolesEnum.restaurant, RolesEnum.client] },
+    data: { accessRoles: [RolesEnum.admin, RolesEnum.restaurantAdmin] },
     component: BoardUsersComponent },
 ];
 
