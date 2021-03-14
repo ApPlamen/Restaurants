@@ -34,11 +34,11 @@ namespace Domain.Controllers
         }
 
         [HttpPost]
-        public IActionResult Save(UserInputModel model)
+        public async Task<IActionResult> SaveAsync(UserInputModel model)
         {
             model.Id = User.GetAuthUserId();
 
-            this.service.SaveAsync(model);
+            await this.service.SaveAsync(model);
             return this.Ok();
         }
 
