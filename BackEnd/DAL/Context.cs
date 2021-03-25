@@ -14,7 +14,9 @@ namespace DAL
             : base(options)
         { }
 
-        // public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Restaurant> Restaurants { get; set; }
+
+        public DbSet<Company> Companies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

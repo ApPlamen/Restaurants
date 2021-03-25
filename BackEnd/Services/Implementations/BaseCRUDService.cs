@@ -11,7 +11,7 @@ namespace Services
 {
     public class BaseCRUDService<DALModel, ViewModel, InputModel, IdType>
         : BaseService<DALModel>, IBaseCRUDService<DALModel, ViewModel, InputModel, IdType>
-        where DALModel : class, BaseDALModel<IdType>, new()
+        where DALModel : class, IBaseDALModel<IdType>, new()
         where ViewModel : BaseViewModel<IdType>
         where InputModel : BaseInputModel<IdType>
     {

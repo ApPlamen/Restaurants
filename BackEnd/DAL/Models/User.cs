@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DAL.Models
 {
-    public class User : IdentityUser<string>, BaseDALModel<string>
+    public class User : IdentityUser<string>, IBaseDALModel<string>
     {
         public string Fullname { get; set; }
 
