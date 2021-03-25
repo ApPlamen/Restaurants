@@ -2,6 +2,7 @@
 using System.Linq;
 using Common.Authentication;
 using DAL.Models;
+using System.Collections.Generic;
 
 namespace DAL.Extensions
 {
@@ -11,6 +12,7 @@ namespace DAL.Extensions
         {
             SeedRoles(data);
             SeedAdmin(data);
+            SeedRestaurantAndCompany(data);
 
             data.SaveChanges();
         }
@@ -51,6 +53,14 @@ namespace DAL.Extensions
                     Name = RoleStrings.RestaurantAdmin,
                     NormalizedName = RoleStrings.RestaurantAdmin.ToUpper()
                 });
+
+                data.Roles.Add(new Role()
+                {
+                    Id = RoleIds.CompanyOwner,
+                    ConcurrencyStamp = "38921a10-79fa-49d1-8c91-6a03761d84ef",
+                    Name = RoleStrings.CompanyOwner,
+                    NormalizedName = RoleStrings.CompanyOwner.ToUpper()
+                });
             }
         }
 
@@ -84,6 +94,61 @@ namespace DAL.Extensions
                 };
 
                 data.UserRoles.Add(userRole);
+            }
+        }
+
+        private static void SeedRestaurantAndCompany(Context data)
+        {
+            if (data.Restaurants.Count() == 0 && data.Companies.Count() == 0)
+            {
+                var admin = new User()
+                {
+                    Id = "8e13686a-ce33-4f7e-b599-5f7f0db57e72",
+                };
+
+                Company company = new Company()
+                {
+                    Id = "ca76d562-7e0e-4d62-922e-39bd94e629c5",
+                    Name = "Test Company",
+                };
+
+                data.Companies.Add(company);
+
+                UserRole userRoleCompany = new UserRole()
+                {
+                    UserId = admin.Id,
+                    RoleId = RoleIds.CompanyOwner,
+                    Companies = new List<Company>() { company }
+                };
+
+                data.UserRoles.Add(userRoleCompany);
+
+                Restaurant restaurant = new Restaurant()
+                {
+                    Id = "ca76d562-7e0e-4d62-922e-39bd94e629c5",
+                    Name = "Test Restaurant",
+                    Company = company,
+                };
+
+                data.Restaurants.Add(restaurant);
+
+                UserRole userRoleRestaurantAdmin = new UserRole()
+                {
+                    UserId = admin.Id,
+                    RoleId = RoleIds.RestaurantAdmin,
+                    Restaurants = new List<Restaurant>() { restaurant },
+                };
+
+                data.UserRoles.Add(userRoleRestaurantAdmin);
+
+                UserRole userRoleRestaurant = new UserRole()
+                {
+                    UserId = admin.Id,
+                    RoleId = RoleIds.Restaurant,
+                    Restaurants = new List<Restaurant>() { restaurant },
+                };
+
+                data.UserRoles.Add(userRoleRestaurant);
             }
         }
     }

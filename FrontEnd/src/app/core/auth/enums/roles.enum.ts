@@ -4,4 +4,5 @@ export enum RolesEnum
     client = 'Client',
     restaurant = 'Restaurant',
     restaurantAdmin = 'RestaurantAdmin',
+    companyOwner = 'CompanyOwner',
 }
