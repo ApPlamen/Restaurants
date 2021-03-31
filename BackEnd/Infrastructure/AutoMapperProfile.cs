@@ -11,6 +11,12 @@
         {
             CreateMap<UserInputModel, User>();
             CreateMap<User, UserViewModel>();
+
+            CreateMap<CompanyInputModel, Company>();
+            CreateMap<Company, CompanyViewModel>();
+
+            CreateMap<RestaurantInputModel, Restaurant>();
+            CreateMap<Restaurant, RestaurantViewModel>();
         }
     }
 }
