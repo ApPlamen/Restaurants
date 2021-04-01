@@ -28,6 +28,22 @@
           </a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link active"
+             *ngIf="hasAccessRole([rolesEnum.admin])"
+             routerLink="companies">
+            Companies
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active"
+             *ngIf="hasAccessRole([rolesEnum.admin, rolesEnum.restaurantAdmin])"
+             routerLink="restaurants-management">
+            Restaurants
+          </a>
+        </li>
+
       </ul>
 
       <ul class="navbar-nav">

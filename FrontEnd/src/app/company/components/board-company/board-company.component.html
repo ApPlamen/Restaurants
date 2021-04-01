@@ -1,0 +1,9 @@
+<div class="row justify-content-center m-0">
+  <tmc-simple-table [columns]="columns" [data]="companies"></tmc-simple-table>
+</div>
+
+<ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
+  <div class="table-actions-container">
+    <tmc-button label="Edit"></tmc-button>
+  </div>
+</ng-template>

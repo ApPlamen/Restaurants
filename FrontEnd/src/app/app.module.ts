@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { RestaurantManagementModule } from './restaurant-management/restaurant-management.module';
+import { CompanyModule } from './company/company.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     AppRoutingModule,
     CoreModule,
+    CompanyModule,
+    RestaurantManagementModule,
     SharedModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BoardUsersComponent } from './components/board-users-component/board-users-component.component';
+import { BoardUsersComponent } from './components/board-users/board-users.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { LogInComponent } from './components/login/login.component';
 import { LogOutComponent } from './components/logout/logout.component';

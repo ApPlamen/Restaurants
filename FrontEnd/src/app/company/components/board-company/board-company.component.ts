@@ -1,31 +1,23 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
-import { UserService } from '../../services/user.service';
+import { CompanyService } from '../../services/company.service';
 
 @Component({
-  templateUrl: './board-users-component.component.html',
+  templateUrl: './board-company.component.html',
 })
-export class BoardUsersComponent implements OnInit {
+export class BoardCompanyComponent implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
-  public users;
+  public companies;
 
   public columns: SimpleTableColumn<{ [key: string]: string }>[] = [
     {
-      header: 'Email',
-      field: 'email',
+      header: 'Name',
+      field: 'name',
     },
-    {
-      header: 'User Name',
-      field: 'userName',
-    },
-    {
-      header: 'Fullname',
-      field: 'fullname',
-    }
   ];
 
-  constructor(private userService: UserService) { }
+  constructor(private companyService: CompanyService) { }
 
   ngOnInit(): void {
     this.columns = [
@@ -40,7 +32,7 @@ export class BoardUsersComponent implements OnInit {
   }
 
   private fillProfileForm(): void {
-    this.userService.getUserBoard()
-      .subscribe(users => this.users = users);
+    this.companyService.getCompanyBoard()
+      .subscribe(companies => this.companies = companies);
   }
 }

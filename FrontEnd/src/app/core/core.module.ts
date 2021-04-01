@@ -15,7 +15,7 @@ import { LogInForm } from './auth/forms/login.form';
 import { ChangePasswordForm } from './auth/forms/change-password.form';
 import { ProfileForm } from './auth/forms/profile.form';
 import { RegisterForm } from './auth/forms/register.form';
-import { BoardUsersComponent } from './auth/components/board-users-component/board-users-component.component';
+import { BoardUsersComponent } from './auth/components/board-users/board-users.component';
 
 @NgModule({
   declarations: [
