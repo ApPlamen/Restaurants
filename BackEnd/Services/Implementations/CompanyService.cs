@@ -25,7 +25,7 @@ namespace Services
                 {
                     Id = c.Id,
                     Name = c.Name,
-                    Owners = c.UserRoles.Select(ur => ur.UserId)
+                    Owners = c.UserRoles.Select(ur => ur.User.Email)
                 })
                 .ToList();
 
