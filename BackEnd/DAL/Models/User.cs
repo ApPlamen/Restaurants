@@ -7,6 +7,6 @@ namespace DAL.Models
     {
         public string Fullname { get; set; }
 
-        public virtual ICollection<UserRole> Roles { get; set; } = new List<UserRole>();
+        public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
     }
 }

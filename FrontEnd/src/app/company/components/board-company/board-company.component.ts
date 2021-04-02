@@ -15,6 +15,10 @@ export class BoardCompanyComponent implements OnInit {
       header: 'Name',
       field: 'name',
     },
+    {
+      header: 'Owners',
+      field: 'owners',
+    },
   ];
 
   constructor(private companyService: CompanyService) { }

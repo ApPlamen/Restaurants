@@ -44,7 +44,7 @@ namespace Services
                 {
                     AccessToken = await this.GenerateJwtTokenAsync(user),
                     RefreshToken = this.GenerateRefreshToken(user),
-                    Roles = user.Roles.Select(r => r.Role.Name).ToList(),
+                    Roles = user.UserRoles.Select(r => r.Role.Name).ToList(),
                 };
             }
 
@@ -69,7 +69,7 @@ namespace Services
                 NormalizedEmail = model.Email.ToUpper(),
                 NormalizedUserName = model.Username.ToUpper(),
 
-                Roles = new List<UserRole>
+                UserRoles = new List<UserRole>
                 {
                     new() { RoleId = RoleIds.Client }
                 }
@@ -95,7 +95,7 @@ namespace Services
                 {
                     AccessToken = await this.GenerateJwtTokenAsync(user),
                     RefreshToken = this.GenerateRefreshToken(user),
-                    Roles = user.Roles.Select(r => r.Role.Name).ToList(),
+                    Roles = user.UserRoles.Select(r => r.Role.Name).ToList(),
                 };
             }
             catch (SecurityTokenException)
@@ -114,7 +114,7 @@ namespace Services
             }
 
             var userfull = repo.All()
-                .Include(u => u.Roles)
+                .Include(u => u.UserRoles)
                 .ThenInclude(r => r.Role)
                 .Where(u => u.Id == user.Id)
                 .FirstOrDefault();
@@ -135,7 +135,7 @@ namespace Services
                 new Claim(ClaimNames.Email, user.Email),
             });
 
-            foreach (var role in user.Roles)
+            foreach (var role in user.UserRoles)
             {
                 claims.Add(new Claim(ClaimNames.Role, role.RoleId));
             }

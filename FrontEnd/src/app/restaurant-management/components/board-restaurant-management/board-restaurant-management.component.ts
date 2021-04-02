@@ -15,6 +15,10 @@ export class BoardRestaurantComponent implements OnInit {
       header: 'Name',
       field: 'name',
     },
+    {
+      header: 'Company',
+      field: 'companyName',
+    },
   ];
 
   constructor(private restaurantManagementService: RestaurantManagementService) { }

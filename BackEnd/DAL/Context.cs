@@ -26,7 +26,7 @@ namespace DAL
             // Add your customizations after calling base.OnModelCreating(builder);
 
             builder.Entity<User>()
-                .HasMany(e => e.Roles)
+                .HasMany(e => e.UserRoles)
                 .WithOne()
                 .HasForeignKey(e => e.UserId)
                 .IsRequired()
