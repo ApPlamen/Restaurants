@@ -10,6 +10,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { RestaurantManagementModule } from './restaurant-management/restaurant-management.module';
 import { CompanyModule } from './company/company.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CompanyModule } from './company/company.module';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }),
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
