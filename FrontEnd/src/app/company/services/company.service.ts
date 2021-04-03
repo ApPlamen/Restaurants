@@ -14,8 +14,8 @@ const BASE_URL = environment.apiUrl + CONTROLER_URL;
 export class CompanyService {
   constructor(private http: HttpClient) { }
 
-  getCompany(): Observable<CompanyModel> {
-    return this.http.get<CompanyModel>(BASE_URL + '/profile');
+  getCompany(companyId: string): Observable<CompanyModel> {
+    return this.http.get<CompanyModel>(BASE_URL + '/' + companyId);
   }
 
   saveCompany(profileModel: CompanyModel): Observable<any> {
