@@ -1,4 +1,4 @@
-import { Action } from "@ngrx/store";
+import { Action } from '@ngrx/store';
 
 export const SET_COMPANY_ID = '[COMPANY_STORE] Set Company Id';
 

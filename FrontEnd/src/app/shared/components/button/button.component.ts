@@ -7,8 +7,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ButtonComponent {
   @Input() label = '';
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
-  @Input() design: string = "primary"
-  @Input() class: string
+  @Input() design = 'primary';
+  @Input() class: string;
   @Input() iconName: string;
   @Input() isDisabled = false;
   @Input() isLoading = false;

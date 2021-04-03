@@ -9,7 +9,7 @@ import { CompanyStoreService } from '../../store/companyStore.service';
   templateUrl: './create-edit-company.component.html',
 })
 export class CreateEditCompanyComponent implements OnInit, OnDestroy {
-  isNew: boolean = true
+  isNew = true;
 
   constructor(private companyService: CompanyService,
               private companyStoreService: CompanyStoreService,
@@ -21,11 +21,11 @@ export class CreateEditCompanyComponent implements OnInit, OnDestroy {
     this.companyStoreService.getCompanyId$.subscribe(
       companyId => {
         if ( companyId ) {
-          this.isNew = false
-          this.companyService.getCompany(companyId).subscribe( company => this.companyForm.setModel(company) )
+          this.isNew = false;
+          this.companyService.getCompany(companyId).subscribe( company => this.companyForm.setModel(company) );
         }
       }
-    )
+    );
   }
 
   ngOnDestroy(): void {
