@@ -77,6 +77,13 @@ namespace DAL.Repository
             this.context.SaveChanges();
         }
 
+        public void Delete(T entity)
+        {
+            this.entities.Remove(entity);
+
+            this.Save();
+        }
+
         public void Delete(object id)
         {
             var entity = this.entities.Find(id);

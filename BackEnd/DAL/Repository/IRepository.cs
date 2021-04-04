@@ -22,6 +22,8 @@ namespace DAL.Repository
 
         void Save();
 
+        void Delete(T entity);
+
         void Delete(object id);
     }
 }

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ButtonDesign } from './button-design.model';
 
 @Component({
   selector: 'tmc-button',
@@ -8,7 +7,8 @@ import { ButtonDesign } from './button-design.model';
 export class ButtonComponent {
   @Input() label = '';
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
-  @Input() design = ButtonDesign.primary;
+  @Input() design = 'primary';
+  @Input() class: string;
   @Input() iconName: string;
   @Input() isDisabled = false;
   @Input() isLoading = false;

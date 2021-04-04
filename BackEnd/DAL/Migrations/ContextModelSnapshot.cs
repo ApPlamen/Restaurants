@@ -19,6 +19,55 @@ namespace DAL.Migrations
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CompanyUserRole", b =>
+                {
+                    b.Property<string>("CompaniesId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserRolesUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserRolesRoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CompaniesId", "UserRolesUserId", "UserRolesRoleId");
+
+                    b.HasIndex("UserRolesUserId", "UserRolesRoleId");
+
+                    b.ToTable("CompanyUserRole");
+                });
+
+            modelBuilder.Entity("DAL.Models.Company", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Companies");
+                });
+
+            modelBuilder.Entity("DAL.Models.Restaurant", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("Restaurants");
+                });
+
             modelBuilder.Entity("DAL.Models.Role", b =>
                 {
                     b.Property<string>("Id")
@@ -218,6 +267,48 @@ namespace DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("RestaurantUserRole", b =>
+                {
+                    b.Property<string>("RestaurantsId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserRolesUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserRolesRoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("RestaurantsId", "UserRolesUserId", "UserRolesRoleId");
+
+                    b.HasIndex("UserRolesUserId", "UserRolesRoleId");
+
+                    b.ToTable("RestaurantUserRole");
+                });
+
+            modelBuilder.Entity("CompanyUserRole", b =>
+                {
+                    b.HasOne("DAL.Models.Company", null)
+                        .WithMany()
+                        .HasForeignKey("CompaniesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAL.Models.UserRole", null)
+                        .WithMany()
+                        .HasForeignKey("UserRolesUserId", "UserRolesRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DAL.Models.Restaurant", b =>
+                {
+                    b.HasOne("DAL.Models.Company", "Company")
+                        .WithMany("Restaurants")
+                        .HasForeignKey("CompanyId");
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("DAL.Models.UserRole", b =>
                 {
                     b.HasOne("DAL.Models.Role", "Role")
@@ -269,6 +360,26 @@ namespace DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("RestaurantUserRole", b =>
+                {
+                    b.HasOne("DAL.Models.Restaurant", null)
+                        .WithMany()
+                        .HasForeignKey("RestaurantsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAL.Models.UserRole", null)
+                        .WithMany()
+                        .HasForeignKey("UserRolesUserId", "UserRolesRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DAL.Models.Company", b =>
+                {
+                    b.Navigation("Restaurants");
                 });
 
             modelBuilder.Entity("DAL.Models.User", b =>

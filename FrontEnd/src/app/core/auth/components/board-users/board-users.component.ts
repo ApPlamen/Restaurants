@@ -3,7 +3,7 @@ import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  templateUrl: './board-users-component.component.html',
+  templateUrl: './board-users.component.html',
 })
 export class BoardUsersComponent implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;

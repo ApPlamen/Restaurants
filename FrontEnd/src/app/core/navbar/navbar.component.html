@@ -1,7 +1,7 @@
 <nav class="navbar navbar-dark bg-primary navbar-expand-md">
   <div class="container-fluid">
 
-    <a class="navbar-brand" href="#">Restaurants</a>
+    <a class="navbar-brand" href="">Restaurants</a>
 
     <button class="navbar-toggler"
             type="button"
@@ -22,9 +22,25 @@
 
         <li class="nav-item">
           <a class="nav-link active"
-             *ngIf="hasAccessRole([rolesEnum.admin, rolesEnum.restaurantAdmin])"
+             *ngIf="hasAccessRole([rolesEnum.admin])"
              routerLink="users">
             Users
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active"
+             *ngIf="hasAccessRole([rolesEnum.admin, rolesEnum.companyOwner])"
+             routerLink="companies">
+            Companies
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active"
+             *ngIf="hasAccessRole([rolesEnum.admin, rolesEnum.companyOwner, rolesEnum.restaurantAdmin])"
+             routerLink="restaurants-management">
+            Restaurants
           </a>
         </li>
 
