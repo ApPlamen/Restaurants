@@ -6,7 +6,7 @@ using DAL.InputModels;
 namespace Domain.Controllers
 {
     [Route("[controller]")]
-    //[Authorize(Policy = "RequireAdminRole")]
+    [Authorize(Policy = "RequireAdminRole")]
     public class CompanyController : BaseServiceController<ICompanyService>
     {
         public CompanyController(ICompanyService service)

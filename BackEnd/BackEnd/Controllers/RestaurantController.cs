@@ -6,8 +6,7 @@ using DAL.InputModels;
 namespace Domain.Controllers
 {
     [Route("[controller]")]
-    //[Authorize]
-    //[Authorize(Policy = "RequireAdminOrTeacherRole")]
+    [Authorize(Policy = "RequireAdminRole")]
     public class RestaurantController : BaseServiceController<IRestaurantService>
     {
         public RestaurantController(IRestaurantService service)
@@ -30,7 +29,6 @@ namespace Domain.Controllers
         }
 
         [HttpPost]
-
         public IActionResult Save(RestaurantInputModel model)
         {
             this.service.Save(model);

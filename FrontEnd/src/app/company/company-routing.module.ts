@@ -7,7 +7,7 @@ import { BoardCompanyComponent } from './components/board-company/board-company.
 const routes: Routes = [
   { path: 'companies',
     canActivate: [AuthGuard],
-    data: { accessRoles: [RolesEnum.admin] },
+    data: { accessRoles: [RolesEnum.admin, RolesEnum.companyOwner] },
     component: BoardCompanyComponent },
 ];
 
