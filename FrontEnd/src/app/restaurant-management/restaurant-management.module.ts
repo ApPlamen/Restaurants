@@ -5,10 +5,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
 import { BoardRestaurantComponent } from './components/board-restaurant-management/board-restaurant-management.component';
+import { StoreModule } from '@ngrx/store';
+import { restaurantRecuder } from './store/restaurantStore.reducer';
+import { RestaurantForm } from './forms/restaurant.form';
+import { CreateEditRestaurantComponent } from './dialogs/create-edit-restaurant/create-edit-restaurant.component';
 
 @NgModule({
   declarations: [
     BoardRestaurantComponent,
+    CreateEditRestaurantComponent,
   ],
   imports: [
     CommonModule,
@@ -16,10 +21,12 @@ import { BoardRestaurantComponent } from './components/board-restaurant-manageme
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
+    StoreModule.forFeature('restaurant', restaurantRecuder),
   ],
   exports: [
   ],
   providers: [
+    RestaurantForm,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

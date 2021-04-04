@@ -14,8 +14,8 @@ const BASE_URL = environment.apiUrl + CONTROLER_URL;
 export class RestaurantManagementService {
   constructor(private http: HttpClient) { }
 
-  getRestaurant(): Observable<RestaurantModel> {
-    return this.http.get<RestaurantModel>(BASE_URL + '/profile');
+  getRestaurant(restaurantId: string): Observable<RestaurantModel> {
+    return this.http.get<RestaurantModel>(BASE_URL + '/' + restaurantId);
   }
 
   saveRestaurant(profileModel: RestaurantModel): Observable<any> {
