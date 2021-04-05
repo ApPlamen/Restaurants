@@ -1,12 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState } from 'src/app/store/store.state';
 
-export interface RestaurantState extends AppState {
+export interface RestaurantState {
   restaurantId: string;
 }
 
 export const initialState: RestaurantState = {
-  restaurantId: null,
+  restaurantId: undefined,
 };
 
 const getRestaurantFeatureState = createFeatureSelector<RestaurantState>('restaurant');

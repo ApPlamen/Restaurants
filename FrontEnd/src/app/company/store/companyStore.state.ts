@@ -1,12 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState } from 'src/app/store/store.state';
 
-export interface CompanyState extends AppState {
+export interface CompanyState {
   companyId: string;
 }
 
 export const initialState: CompanyState = {
-  companyId: null,
+  companyId: undefined,
 };
 
 const getCompanyFeatureState = createFeatureSelector<CompanyState>('company');

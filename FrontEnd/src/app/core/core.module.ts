@@ -35,7 +35,7 @@ import { ErrorsRoutingModule } from './auth/errors-routing.module';
     HttpClientModule,
     SharedModule,
     AuthRoutingModule,
-    ErrorsRoutingModule,
+    //ErrorsRoutingModule,
   ],
   exports: [
     NavbarComponent,

@@ -6,7 +6,7 @@ import { BoardRestaurantComponent } from './components/board-restaurant-manageme
 
 const routes: Routes = [
   {
-    path: 'restaurants-management',
+    path: '',
     canActivate: [AuthGuard],
     data: { accessRoles: [RolesEnum.admin, RolesEnum.companyOwner, RolesEnum.restaurantAdmin] },
     component: BoardRestaurantComponent
