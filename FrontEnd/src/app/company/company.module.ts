@@ -1,5 +1,4 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,6 +8,7 @@ import { CreateEditCompanyComponent } from './dialogs/create-edit-company/create
 import { StoreModule } from '@ngrx/store';
 import { companyRecuder } from './store/companyStore.reducer';
 import { CompanyForm } from './forms/company.form';
+import { CompanyRoutingModule } from './company-routing.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { CompanyForm } from './forms/company.form';
   ],
   imports: [
     CommonModule,
-    RouterModule,
+    CompanyRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,

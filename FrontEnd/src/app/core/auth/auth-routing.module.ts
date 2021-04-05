@@ -12,26 +12,34 @@ import { AuthGuard } from './guards/auth-guard';
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'logout',
+  {
+    path: 'logout',
     canActivate: [AuthGuard],
     data: { accessRoles: [RolesEnum.admin, RolesEnum.companyOwner, RolesEnum.restaurantAdmin, RolesEnum.restaurant, RolesEnum.client] },
-    component: LogOutComponent },
-  { path: 'profile',
+    component: LogOutComponent
+  },
+  {
+    path: 'profile',
     canActivate: [AuthGuard],
     data: { accessRoles: [RolesEnum.admin, RolesEnum.companyOwner, RolesEnum.restaurantAdmin, RolesEnum.restaurant, RolesEnum.client] },
-    component: ProfileComponent },
-  { path: 'change-password',
+    component: ProfileComponent
+  },
+  {
+    path: 'change-password',
     canActivate: [AuthGuard],
     data: { accessRoles: [RolesEnum.admin, RolesEnum.companyOwner, RolesEnum.restaurantAdmin, RolesEnum.restaurant, RolesEnum.client] },
-    component: ChangePasswordComponent },
-  { path: 'users',
+    component: ChangePasswordComponent
+  },
+  {
+    path: 'users',
     canActivate: [AuthGuard],
     data: { accessRoles: [RolesEnum.admin] },
-    component: BoardUsersComponent },
+    component: BoardUsersComponent
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class AuthRoutingModule { }

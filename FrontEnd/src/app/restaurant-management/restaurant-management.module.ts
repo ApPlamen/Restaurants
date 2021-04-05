@@ -1,5 +1,4 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { restaurantRecuder } from './store/restaurantStore.reducer';
 import { RestaurantForm } from './forms/restaurant.form';
 import { CreateEditRestaurantComponent } from './dialogs/create-edit-restaurant/create-edit-restaurant.component';
+import { RestaurantManagementRoutingModule } from './restaurant-management-routing.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { CreateEditRestaurantComponent } from './dialogs/create-edit-restaurant/
   ],
   imports: [
     CommonModule,
-    RouterModule,
+    RestaurantManagementRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,

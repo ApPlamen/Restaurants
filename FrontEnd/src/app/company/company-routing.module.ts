@@ -5,14 +5,16 @@ import { AuthGuard } from '../core/auth/guards/auth-guard';
 import { BoardCompanyComponent } from './components/board-company/board-company.component';
 
 const routes: Routes = [
-  { path: 'companies',
+  {
+    path: 'companies',
     canActivate: [AuthGuard],
     data: { accessRoles: [RolesEnum.admin, RolesEnum.companyOwner] },
-    component: BoardCompanyComponent },
+    component: BoardCompanyComponent
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class CompanyRoutingModule { }

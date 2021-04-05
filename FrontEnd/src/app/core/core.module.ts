@@ -16,6 +16,8 @@ import { ChangePasswordForm } from './auth/forms/change-password.form';
 import { ProfileForm } from './auth/forms/profile.form';
 import { RegisterForm } from './auth/forms/register.form';
 import { BoardUsersComponent } from './auth/components/board-users/board-users.component';
+import { AuthRoutingModule } from './auth/auth-routing.module';
+import { ErrorsRoutingModule } from './auth/errors-routing.module';
 
 @NgModule({
   declarations: [
@@ -29,10 +31,11 @@ import { BoardUsersComponent } from './auth/components/board-users/board-users.c
   ],
   imports: [
     CommonModule,
-    RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
+    AuthRoutingModule,
+    ErrorsRoutingModule,
   ],
   exports: [
     NavbarComponent,
