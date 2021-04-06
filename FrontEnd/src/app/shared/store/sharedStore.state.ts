@@ -1,8 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ManageRolesModel } from '../models/manage-roles.store-model';
+import { ManageRolesStoreModel } from '../storemodels/manage-roles.storemodel';
 
 export interface SharedState {
-  manageRoles: ManageRolesModel;
+  manageRoles: ManageRolesStoreModel;
 }
 
 export const initialState: SharedState = {

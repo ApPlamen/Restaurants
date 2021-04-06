@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RoleIdsEnum } from 'src/app/core/auth/enums/roles.enum';
 import { ManageRolesComponent } from 'src/app/shared/dialogs/manage-roles/manage-roles.component';
-import { ManageRolesModel } from 'src/app/shared/models/manage-roles.store-model';
+import { ManageRolesStoreModel } from 'src/app/shared/storemodels/manage-roles.storemodel';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
 import { CreateEditRestaurantComponent } from '../../dialogs/create-edit-restaurant/create-edit-restaurant.component';
@@ -56,7 +56,7 @@ export class BoardRestaurantComponent implements OnInit {
   }
 
   openManageRestaurantAdmins(restaurantId: string): void {
-    const storeValue: ManageRolesModel = {
+    const storeValue: ManageRolesStoreModel = {
       roleId: RoleIdsEnum.restaurantAdmin,
       payload: restaurantId,
     }
@@ -66,7 +66,7 @@ export class BoardRestaurantComponent implements OnInit {
   }
 
   openManageRestaurantWorkers(restaurantId: string): void {
-    const storeValue: ManageRolesModel = {
+    const storeValue: ManageRolesStoreModel = {
       roleId: RoleIdsEnum.restaurant,
       payload: restaurantId,
     }

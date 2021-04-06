@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AssignUserRoleForm } from '../../forms/assign-user-role.form';
-import { ManageRolesModel } from '../../models/manage-roles.store-model';
+import { ManageRolesStoreModel } from '../../storemodels/manage-roles.storemodel';
 import { UnassignUserRoleModel } from '../../models/unassign-user-role.model';
 import { SimpleTableColumn } from '../../models/simple-table.model';
 import { UserRoleRequestModel } from '../../models/user-role-request.model';
@@ -29,7 +29,7 @@ export class ManageRolesComponent implements OnInit {
     },
   ];
 
-  manageRolesModel: ManageRolesModel
+  manageRolesModel: ManageRolesStoreModel
 
   constructor(private sharedService: SharedService,
               private sharedStoreService: SharedStoreService,

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserModel } from '../models/user.model';
+import { UserViewModel } from '../viewmodels/user.viewmodel';
 import { UserRoleRequestModel } from '../models/user-role-request.model';
 import { AssignUserRoleModel } from '../models/assign-user-role.model';
 import { UnassignUserRoleModel } from '../models/unassign-user-role.model';
@@ -23,7 +23,7 @@ export class SharedService {
     return this.http.post(BASE_URL + 'UserRoles/unassign-role', model);
   }
 
-  getUsersOfRole(userRoleRequestModel: UserRoleRequestModel): Observable<UserModel> {
-    return this.http.post<UserModel>(BASE_URL + 'UserRoles/users', userRoleRequestModel);
+  getUsersOfRole(userRoleRequestModel: UserRoleRequestModel): Observable<UserViewModel> {
+    return this.http.post<UserViewModel>(BASE_URL + 'UserRoles/users', userRoleRequestModel);
   }
 }

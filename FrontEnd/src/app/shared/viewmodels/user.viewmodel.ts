@@ -1,6 +1,5 @@
-export class Users {
+export class UserViewModel {
   id: string;
-  userName: string;
   email: string;
   fullname: string;
 }
