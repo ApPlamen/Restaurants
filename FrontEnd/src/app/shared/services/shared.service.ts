@@ -15,11 +15,11 @@ const BASE_URL = environment.apiUrl;
 export class SharedService {
   constructor(private http: HttpClient) { }
 
-  addUserRole(model: AssignUserRoleModel): Observable<object> {
+  addUserRole(model: AssignUserRoleModel): Observable<unknown> {
     return this.http.post(BASE_URL + 'UserRoles/assign-role', model);
   }
 
-  removeUserRole(model: UnassignUserRoleModel): Observable<object> {
+  removeUserRole(model: UnassignUserRoleModel): Observable<unknown> {
     return this.http.post(BASE_URL + 'UserRoles/unassign-role', model);
   }
 

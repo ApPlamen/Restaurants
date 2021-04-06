@@ -59,7 +59,7 @@ export class BoardCompanyComponent implements OnInit {
     const storeValue: ManageRolesStoreModel = {
       roleId: RoleIdsEnum.companyOwner,
       payload: companyId,
-    }
+    };
     this.sharedStoreService.setManageRoles = storeValue;
 
     this.openManageOwnersModal();

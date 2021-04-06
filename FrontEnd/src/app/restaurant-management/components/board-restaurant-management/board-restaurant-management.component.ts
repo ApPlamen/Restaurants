@@ -59,7 +59,7 @@ export class BoardRestaurantComponent implements OnInit {
     const storeValue: ManageRolesStoreModel = {
       roleId: RoleIdsEnum.restaurantAdmin,
       payload: restaurantId,
-    }
+    };
     this.sharedStoreService.setManageRoles = storeValue;
 
     this.openManageOwnersModal();
@@ -69,7 +69,7 @@ export class BoardRestaurantComponent implements OnInit {
     const storeValue: ManageRolesStoreModel = {
       roleId: RoleIdsEnum.restaurant,
       payload: restaurantId,
-    }
+    };
     this.sharedStoreService.setManageRoles = storeValue;
 
     this.openManageOwnersModal();

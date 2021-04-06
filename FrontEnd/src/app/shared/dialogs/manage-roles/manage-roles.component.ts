@@ -14,7 +14,7 @@ import { SharedStoreService } from '../../store/sharedStore.service';
 })
 export class ManageRolesComponent implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
-  
+
   public assignUserRoleForm: AssignUserRoleForm = new AssignUserRoleForm();
   public users;
 
@@ -29,7 +29,7 @@ export class ManageRolesComponent implements OnInit {
     },
   ];
 
-  manageRolesModel: ManageRolesStoreModel
+  private manageRolesModel: ManageRolesStoreModel = new ManageRolesStoreModel();
 
   constructor(private sharedService: SharedService,
               private sharedStoreService: SharedStoreService,
@@ -52,7 +52,7 @@ export class ManageRolesComponent implements OnInit {
         this.assignUserRoleForm.patchModel({ payload: this.manageRolesModel.payload });
         this.fillProfileForm();
       }
-    )
+    );
   }
 
   close(): void {
@@ -65,30 +65,30 @@ export class ManageRolesComponent implements OnInit {
       this.sharedService.addUserRole(this.assignUserRoleForm.model)
         .subscribe(_ => {
           this.toastr.success('Success!');
-          this.fillProfileForm()
+          this.fillProfileForm();
         });
     }
   }
 
   delete(userId: string) {
     const model: UnassignUserRoleModel = {
-      userId: userId,
+      userId,
       roleId: this.manageRolesModel.roleId,
       payload: this.manageRolesModel.payload,
-    }
+    };
 
     this.sharedService.removeUserRole(model)
       .subscribe(_ => {
         this.toastr.success('Success!');
-        this.fillProfileForm()
+        this.fillProfileForm();
       });
   }
 
   private fillProfileForm(): void {
-    var userRoleRequestModel: UserRoleRequestModel = {
+    const userRoleRequestModel: UserRoleRequestModel = {
       roleId: this.manageRolesModel.roleId,
       payload: this.manageRolesModel.payload
-    }
+    };
 
     this.sharedService.getUsersOfRole(userRoleRequestModel)
       .subscribe(users => this.users = users);
