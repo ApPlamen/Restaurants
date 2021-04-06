@@ -1,19 +1,25 @@
 <div class="row d-grid justify-content-end m-0 mt-1">
   <tmc-button design="success"
               label="Add new Company"
+              *ngIf="hasAccessRole([rolesEnum.admin])"
               (clicked)="openCreate()">
   </tmc-button>
 </div>
 
-<div class="row m-0">
+<div class="row m-0 mt-1">
   <tmc-simple-table [columns]="columns" [data]="companies"></tmc-simple-table>
 </div>
 
 <ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
-  <div class="table-actions-container">
+  <div class="table-actions-container btn-group gap-2">
     <tmc-button design="warning"
                 label="Edit"
                 (clicked)="openEdit(dataItem.id)">
+    </tmc-button>
+
+    <tmc-button design="warning"
+                label="Manage Owners"
+                (clicked)="openManageOwners(dataItem.id)">
     </tmc-button>
   </div>
 </ng-template>

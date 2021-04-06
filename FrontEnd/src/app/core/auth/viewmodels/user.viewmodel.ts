@@ -1,4 +1,4 @@
-export class Users {
+export class UsersViewModel {
   id: string;
   userName: string;
   email: string;

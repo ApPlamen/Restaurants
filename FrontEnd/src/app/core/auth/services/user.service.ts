@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ProfileModel } from '../models/profile.model';
 import { ChangePasswordModel } from '../models/change-password.model';
 import { environment } from 'src/environments/environment';
-import { Users } from '../models/user.model';
+import { UsersViewModel } from '../viewmodels/user.viewmodel';
 
 const CONTROLER_URL = 'User';
 const BASE_URL = environment.apiUrl + CONTROLER_URL;
@@ -27,7 +27,7 @@ export class UserService {
     return this.http.put(BASE_URL + '/change-password', model);
   }
 
-  getUserBoard(): Observable<Users> {
-    return this.http.get<Users>(BASE_URL);
+  getUserBoard(): Observable<UsersViewModel> {
+    return this.http.get<UsersViewModel>(BASE_URL);
   }
 }

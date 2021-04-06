@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using DAL.InputModels;
 using Services;
+using System.Threading.Tasks;
 
 namespace Domain.Controllers
 {
@@ -15,18 +16,26 @@ namespace Domain.Controllers
 
         [Route("assign-role")]
         [HttpPost]
-        public IActionResult AssignRole(UserRolesInputModel model)
+        public async Task<IActionResult> AssignRole(AssignUserRoleInputModel model)
         {
-            this.service.AssignRole(model.UserId, model.RoleIds, model.Payload);
+            await this.service.AssignRole(model.UserEmail, model.RoleId, model.Payload);
             return this.Ok();
         }
 
         [Route("unassign-role")]
         [HttpPost]
-        public IActionResult UnassignRole(UserRolesInputModel model)
+        public async Task<IActionResult> UnassignRole(UnassignUserRoleInputModel model)
         {
-            this.service.UnassignRole(model.UserId, model.RoleIds, model.Payload);
+            await this.service.UnassignRole(model.UserId, model.RoleId, model.Payload);
             return this.Ok();
+        }
+
+        [Route("users")]
+        [HttpPost]
+        public async Task<IActionResult> GetUsersOfRole(UserRoleRequestModel model)
+        {
+            var users = await this.service.GetUsersOfRole(model.RoleId, model.Payload);
+            return this.Ok(users);
         }
     }
 }

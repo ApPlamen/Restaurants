@@ -1,5 +1,10 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ManageRolesComponent } from 'src/app/shared/dialogs/manage-roles/manage-roles.component';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
+import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
+import { ManageRolesStoreModel } from 'src/app/shared/storemodels/manage-roles.storemodel';
+import { RoleIdsEnum } from '../../enums/roles.enum';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -25,7 +30,9 @@ export class BoardUsersComponent implements OnInit {
     }
   ];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private sharedStoreService: SharedStoreService,
+              private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.columns = [
@@ -37,6 +44,21 @@ export class BoardUsersComponent implements OnInit {
     ];
 
     this.fillProfileForm();
+  }
+
+  openManageAdmins(): void {
+    const storeValue: ManageRolesStoreModel = {
+      roleId: RoleIdsEnum.admin,
+    };
+    this.sharedStoreService.setManageRoles = storeValue;
+
+    this.openManageAdminsModal();
+  }
+
+  private openManageAdminsModal() {
+    this.modalService.open(ManageRolesComponent, {size: 'lg'})
+      .closed
+      .subscribe(_ => this.fillProfileForm());
   }
 
   private fillProfileForm(): void {

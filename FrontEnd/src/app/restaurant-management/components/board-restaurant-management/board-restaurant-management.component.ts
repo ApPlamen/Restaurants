@@ -1,14 +1,20 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RoleIdsEnum } from 'src/app/core/auth/enums/roles.enum';
+import { ManageRolesComponent } from 'src/app/shared/dialogs/manage-roles/manage-roles.component';
+import { ManageRolesStoreModel } from 'src/app/shared/storemodels/manage-roles.storemodel';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
+import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
 import { CreateEditRestaurantComponent } from '../../dialogs/create-edit-restaurant/create-edit-restaurant.component';
 import { RestaurantManagementService } from '../../services/restaurant-management.service';
 import { RestaurantStoreService } from '../../store/restaurantStore.service';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
+import { RolesFilteringBaseClass } from 'src/app/shared/base-classes/roles-filtering.class';
 
 @Component({
   templateUrl: './board-restaurant-management.component.html',
 })
-export class BoardRestaurantComponent implements OnInit {
+export class BoardRestaurantComponent extends RolesFilteringBaseClass implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
   public restaurants;
@@ -26,7 +32,11 @@ export class BoardRestaurantComponent implements OnInit {
 
   constructor(private restaurantManagementService: RestaurantManagementService,
               private restaurantStoreService: RestaurantStoreService,
-              private modalService: NgbModal) { }
+              private sharedStoreService: SharedStoreService,
+              private modalService: NgbModal,
+              protected tokenStorageService: TokenStorageService) {
+    super(tokenStorageService);
+  }
 
   ngOnInit(): void {
     this.columns = [
@@ -42,16 +52,42 @@ export class BoardRestaurantComponent implements OnInit {
 
   openCreate(): void {
     this.restaurantStoreService.setRestaurantId = null;
-    this.openModal();
+    this.openEditModal();
   }
 
   openEdit(restaurantId: string): void {
     this.restaurantStoreService.setRestaurantId = restaurantId;
-    this.openModal();
+    this.openEditModal();
   }
 
-  private openModal() {
+  openManageRestaurantAdmins(restaurantId: string): void {
+    const storeValue: ManageRolesStoreModel = {
+      roleId: RoleIdsEnum.restaurantAdmin,
+      payload: restaurantId,
+    };
+    this.sharedStoreService.setManageRoles = storeValue;
+
+    this.openManageOwnersModal();
+  }
+
+  openManageRestaurantWorkers(restaurantId: string): void {
+    const storeValue: ManageRolesStoreModel = {
+      roleId: RoleIdsEnum.restaurant,
+      payload: restaurantId,
+    };
+    this.sharedStoreService.setManageRoles = storeValue;
+
+    this.openManageOwnersModal();
+  }
+
+  private openEditModal() {
     this.modalService.open(CreateEditRestaurantComponent)
+      .closed
+      .subscribe(_ => this.fillProfileForm());
+  }
+
+  private openManageOwnersModal() {
+    this.modalService.open(ManageRolesComponent, {size: 'lg'})
       .closed
       .subscribe(_ => this.fillProfileForm());
   }
