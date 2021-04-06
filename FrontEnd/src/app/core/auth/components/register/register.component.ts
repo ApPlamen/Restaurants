@@ -10,12 +10,12 @@ import { TokenStorageService } from '../../services/token-storage.service';
 })
 export class RegisterComponent implements OnInit {
   roles: string[] = [];
+  registerForm: RegisterForm = new RegisterForm();
 
   constructor(private authService: AuthService,
               private tokenStorageService: TokenStorageService,
               private router: Router,
-              private toastr: ToastrService,
-              public registerForm: RegisterForm) { }
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     if (this.tokenStorageService.getToken()) {

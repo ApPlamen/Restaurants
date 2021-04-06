@@ -11,13 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { authInterceptorProviders } from './auth/interceptors/auth.interceptor';
 import { SharedModule } from '../shared/shared.module';
-import { LogInForm } from './auth/forms/login.form';
-import { ChangePasswordForm } from './auth/forms/change-password.form';
-import { ProfileForm } from './auth/forms/profile.form';
-import { RegisterForm } from './auth/forms/register.form';
 import { BoardUsersComponent } from './auth/components/board-users/board-users.component';
 import { AuthRoutingModule } from './auth/auth-routing.module';
-import { ErrorsRoutingModule } from './auth/errors-routing.module';
 
 @NgModule({
   declarations: [
@@ -42,10 +37,6 @@ import { ErrorsRoutingModule } from './auth/errors-routing.module';
   ],
   providers: [
     authInterceptorProviders,
-    LogInForm,
-    ChangePasswordForm,
-    ProfileForm,
-    RegisterForm,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

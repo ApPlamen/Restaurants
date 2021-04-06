@@ -7,7 +7,6 @@ import { BoardCompanyComponent } from './components/board-company/board-company.
 import { CreateEditCompanyComponent } from './dialogs/create-edit-company/create-edit-company.component';
 import { StoreModule } from '@ngrx/store';
 import { companyRecuder } from './store/companyStore.reducer';
-import { CompanyForm } from './forms/company.form';
 import { CompanyRoutingModule } from './company-routing.module';
 
 @NgModule({
@@ -26,7 +25,6 @@ import { CompanyRoutingModule } from './company-routing.module';
   exports: [
   ],
   providers: [
-    CompanyForm,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

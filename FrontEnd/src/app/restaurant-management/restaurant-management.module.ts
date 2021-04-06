@@ -6,7 +6,6 @@ import { SharedModule } from '../shared/shared.module';
 import { BoardRestaurantComponent } from './components/board-restaurant-management/board-restaurant-management.component';
 import { StoreModule } from '@ngrx/store';
 import { restaurantRecuder } from './store/restaurantStore.reducer';
-import { RestaurantForm } from './forms/restaurant.form';
 import { CreateEditRestaurantComponent } from './dialogs/create-edit-restaurant/create-edit-restaurant.component';
 import { RestaurantManagementRoutingModule } from './restaurant-management-routing.module';
 
@@ -26,7 +25,6 @@ import { RestaurantManagementRoutingModule } from './restaurant-management-routi
   exports: [
   ],
   providers: [
-    RestaurantForm,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
