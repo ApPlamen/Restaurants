@@ -14,6 +14,7 @@
   <div class="table-actions-container btn-group gap-2">
     <tmc-button design="warning"
                 label="Edit"
+                *ngIf="hasAccessRole([rolesEnum.admin])"
                 (clicked)="openEdit(dataItem.id)">
     </tmc-button>
     
