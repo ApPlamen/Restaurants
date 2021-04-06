@@ -8,7 +8,7 @@ import { UserService } from '../../services/user.service';
 })
 export class ChangePasswordComponent {
   changePasswordForm: ChangePasswordForm = new ChangePasswordForm();
-  
+
   constructor(private userService: UserService,
               private toastr: ToastrService) { }
 

@@ -10,7 +10,7 @@ import { RestaurantStoreService } from '../../store/restaurantStore.service';
 })
 export class CreateEditRestaurantComponent implements OnInit {
   isNew = true;
-  restaurantForm: RestaurantForm = new RestaurantForm()
+  restaurantForm: RestaurantForm = new RestaurantForm();
 
   constructor(private restaurantService: RestaurantManagementService,
               private restaurantStoreService: RestaurantStoreService,
