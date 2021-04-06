@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ManageRolesComponent } from 'src/app/shared/dialogs/manage-roles/manage-roles.component';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { CreateEditCompanyComponent } from '../../dialogs/create-edit-company/create-edit-company.component';
 import { CompanyService } from '../../services/company.service';
@@ -42,16 +43,26 @@ export class BoardCompanyComponent implements OnInit {
 
   openCreate(): void {
     this.companyStoreService.setCompanyId = null;
-    this.openModal();
+    this.openEditModal();
   }
 
   openEdit(companyId: string): void {
     this.companyStoreService.setCompanyId = companyId;
-    this.openModal();
+    this.openEditModal();
   }
 
-  private openModal() {
+  openManageOwners(companyId: string): void {
+    this.openManageOwnersModal();
+  }
+
+  private openEditModal() {
     this.modalService.open(CreateEditCompanyComponent)
+      .closed
+      .subscribe(_ => this.fillProfileForm());
+  }
+
+  private openManageOwnersModal() {
+    this.modalService.open(ManageRolesComponent, {size: 'lg'})
       .closed
       .subscribe(_ => this.fillProfileForm());
   }

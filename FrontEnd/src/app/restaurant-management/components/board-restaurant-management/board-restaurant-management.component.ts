@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ManageRolesComponent } from 'src/app/shared/dialogs/manage-roles/manage-roles.component';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { CreateEditRestaurantComponent } from '../../dialogs/create-edit-restaurant/create-edit-restaurant.component';
 import { RestaurantManagementService } from '../../services/restaurant-management.service';
@@ -42,16 +43,26 @@ export class BoardRestaurantComponent implements OnInit {
 
   openCreate(): void {
     this.restaurantStoreService.setRestaurantId = null;
-    this.openModal();
+    this.openEditModal();
   }
 
   openEdit(restaurantId: string): void {
     this.restaurantStoreService.setRestaurantId = restaurantId;
-    this.openModal();
+    this.openEditModal();
   }
 
-  private openModal() {
+  openManageOwners(restaurantId: string): void {
+    this.openManageOwnersModal();
+  }
+
+  private openEditModal() {
     this.modalService.open(CreateEditRestaurantComponent)
+      .closed
+      .subscribe(_ => this.fillProfileForm());
+  }
+
+  private openManageOwnersModal() {
+    this.modalService.open(ManageRolesComponent, {size: 'lg'})
       .closed
       .subscribe(_ => this.fillProfileForm());
   }
