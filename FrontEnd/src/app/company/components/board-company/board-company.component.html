@@ -1,11 +1,12 @@
 <div class="row d-grid justify-content-end m-0 mt-1">
   <tmc-button design="success"
               label="Add new Company"
+              *ngIf="hasAccessRole([rolesEnum.admin])"
               (clicked)="openCreate()">
   </tmc-button>
 </div>
 
-<div class="row m-0">
+<div class="row m-0 mt-1">
   <tmc-simple-table [columns]="columns" [data]="companies"></tmc-simple-table>
 </div>
 

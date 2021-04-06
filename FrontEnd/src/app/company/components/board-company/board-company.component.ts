@@ -8,11 +8,13 @@ import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
 import { CreateEditCompanyComponent } from '../../dialogs/create-edit-company/create-edit-company.component';
 import { CompanyService } from '../../services/company.service';
 import { CompanyStoreService } from '../../store/companyStore.service';
+import { RolesFilteringBaseClass } from 'src/app/shared/base-classes/roles-filtering.class';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 
 @Component({
   templateUrl: './board-company.component.html',
 })
-export class BoardCompanyComponent implements OnInit {
+export class BoardCompanyComponent extends RolesFilteringBaseClass implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
   public companies;
@@ -31,7 +33,10 @@ export class BoardCompanyComponent implements OnInit {
   constructor(private companyService: CompanyService,
               private companyStoreService: CompanyStoreService,
               private sharedStoreService: SharedStoreService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              protected tokenStorageService: TokenStorageService) {
+    super(tokenStorageService);
+  }
 
   ngOnInit(): void {
     this.columns = [

@@ -8,11 +8,13 @@ import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
 import { CreateEditRestaurantComponent } from '../../dialogs/create-edit-restaurant/create-edit-restaurant.component';
 import { RestaurantManagementService } from '../../services/restaurant-management.service';
 import { RestaurantStoreService } from '../../store/restaurantStore.service';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
+import { RolesFilteringBaseClass } from 'src/app/shared/base-classes/roles-filtering.class';
 
 @Component({
   templateUrl: './board-restaurant-management.component.html',
 })
-export class BoardRestaurantComponent implements OnInit {
+export class BoardRestaurantComponent extends RolesFilteringBaseClass implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
   public restaurants;
@@ -31,7 +33,10 @@ export class BoardRestaurantComponent implements OnInit {
   constructor(private restaurantManagementService: RestaurantManagementService,
               private restaurantStoreService: RestaurantStoreService,
               private sharedStoreService: SharedStoreService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              protected tokenStorageService: TokenStorageService) {
+    super(tokenStorageService);
+  }
 
   ngOnInit(): void {
     this.columns = [
