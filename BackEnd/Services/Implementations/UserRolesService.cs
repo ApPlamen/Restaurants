@@ -2,10 +2,12 @@
 using Common.Authentication;
 using DAL.Models;
 using DAL.Repository;
+using DAL.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Services
 {
@@ -25,20 +27,22 @@ namespace Services
             this.restaurantRepo = restaurantRepo;
         }
 
-        public void AssignRole(string userId, string roleIds, string payload = null)
+        public async Task AssignRole(string userEmail, string roleIds, string payload = null)
         {
             var exists = this.repo.All()
                 .Include(ur => ur.Restaurants)
                 .Include(ur => ur.Companies)
-                .FirstOrDefault(ur => ur.UserId.Equals(userId) && ur.RoleId.Equals(roleIds));
-            
+                .FirstOrDefault(ur => ur.UserId.Equals(userEmail) && ur.RoleId.Equals(roleIds));
+
+            var user = await userManager.FindByEmailAsync(userEmail);
+
             switch (roleIds)
             {
                 case RoleIds.Admin:
                 case RoleIds.Client:
                     var userRole = new UserRole()
                     {
-                        UserId = userId,
+                        UserId = user.Id,
                         RoleId = roleIds,
                     };
                     this.repo.Add(userRole);
@@ -55,7 +59,7 @@ namespace Services
                     {
                         var userRoleCompany = new UserRole()
                         {
-                            UserId = userId,
+                            UserId = user.Id,
                             RoleId = roleIds,
                             Companies = new List<Company>() { company },
                         };
@@ -75,7 +79,7 @@ namespace Services
                     {
                         var userRoleRestaurant = new UserRole()
                         {
-                            UserId = userId,
+                            UserId = user.Id,
                             RoleId = roleIds,
                             Restaurants = new List<Restaurant>() { restaurant },
                         };
@@ -87,12 +91,14 @@ namespace Services
             this.repo.Save();
         }
 
-        public void UnassignRole(string userId, string roleIds, string payload = null)
+        public async Task UnassignRole(string userEmail, string roleIds, string payload = null)
         {
+            var user = await userManager.FindByEmailAsync(userEmail);
+
             var role = this.repo.All()
                 .Include(ur => ur.Restaurants)
                 .Include(ur => ur.Companies)
-                .FirstOrDefault(ur => ur.UserId.Equals(userId) && ur.RoleId.Equals(roleIds));
+                .FirstOrDefault(ur => ur.UserId.Equals(user.Id) && ur.RoleId.Equals(roleIds));
 
             switch (roleIds)
             {
@@ -122,6 +128,24 @@ namespace Services
 
             this.repo.Delete(role);
             this.repo.Save();
+        }
+
+        public async Task<IEnumerable<UserViewModel>> GetUsersOfRole(string roleIds, string payload = null)
+        {
+            var users = await this.repo.All()
+                .Include(ur => ur.Restaurants)
+                .Include(ur => ur.Companies)
+                .Where(ur => ur.RoleId.Equals(roleIds))
+                .Select(ur => ur.User)
+                .Select(u => new UserViewModel
+                {
+                    Id = u.Id,
+                    Fullname = u.Fullname,
+                    Email = u.Email,
+                })
+                .ToListAsync();
+
+            return users;
         }
     }
 }

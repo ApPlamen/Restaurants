@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
 import { ButtonComponent } from './components/button/button.component';
 import { InputComponent } from './components/input/input.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SimpleTableComponent } from './components/simple-table/simple-table.component';
 import { ManageRolesComponent } from './dialogs/manage-roles/manage-roles.component';
 import { authInterceptorProviders } from './interceptors/auth.interceptor';
+import { sharedRecuder } from './store/sharedStore.reducer';
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import { authInterceptorProviders } from './interceptors/auth.interceptor';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    StoreModule.forFeature('shared', sharedRecuder),
   ],
   exports: [
     SimpleTableComponent,

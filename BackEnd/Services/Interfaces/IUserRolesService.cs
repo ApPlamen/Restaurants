@@ -1,9 +1,15 @@
-﻿namespace Services
+﻿using DAL.ViewModels;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Services
 {
     public interface IUserRolesService
     {
-        void AssignRole(string userId, string roleIds, string payload = null);
+        Task AssignRole(string userEmail, string roleIds, string payload = null);
 
-        void UnassignRole(string userId, string roleIds, string payload = null);
+        Task UnassignRole(string userEmail, string roleIds, string payload = null);
+
+        Task<IEnumerable<UserViewModel>> GetUsersOfRole(string roleIds, string payload = null);
     }
 }

@@ -17,8 +17,13 @@
     </tmc-button>
     
     <tmc-button design="warning"
-                label="Manage Owners"
-                (clicked)="openManageOwners(dataItem.id)">
+                label="Manage admins"
+                (clicked)="openManageRestaurantAdmins(dataItem.id)">
+    </tmc-button>
+
+    <tmc-button design="warning"
+        label="Manage workers"
+        (clicked)="openManageRestaurantWorkers(dataItem.id)">
     </tmc-button>
   </div>
 </ng-template>

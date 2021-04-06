@@ -1,7 +1,10 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RoleIdsEnum } from 'src/app/core/auth/enums/roles.enum';
 import { ManageRolesComponent } from 'src/app/shared/dialogs/manage-roles/manage-roles.component';
+import { ManageRolesModel } from 'src/app/shared/models/manage-roles.store-model';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
+import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
 import { CreateEditRestaurantComponent } from '../../dialogs/create-edit-restaurant/create-edit-restaurant.component';
 import { RestaurantManagementService } from '../../services/restaurant-management.service';
 import { RestaurantStoreService } from '../../store/restaurantStore.service';
@@ -27,6 +30,7 @@ export class BoardRestaurantComponent implements OnInit {
 
   constructor(private restaurantManagementService: RestaurantManagementService,
               private restaurantStoreService: RestaurantStoreService,
+              private sharedStoreService: SharedStoreService,
               private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -51,7 +55,23 @@ export class BoardRestaurantComponent implements OnInit {
     this.openEditModal();
   }
 
-  openManageOwners(restaurantId: string): void {
+  openManageRestaurantAdmins(restaurantId: string): void {
+    const storeValue: ManageRolesModel = {
+      roleId: RoleIdsEnum.restaurantAdmin,
+      payload: restaurantId,
+    }
+    this.sharedStoreService.setManageRoles = storeValue;
+
+    this.openManageOwnersModal();
+  }
+
+  openManageRestaurantWorkers(restaurantId: string): void {
+    const storeValue: ManageRolesModel = {
+      roleId: RoleIdsEnum.restaurant,
+      payload: restaurantId,
+    }
+    this.sharedStoreService.setManageRoles = storeValue;
+
     this.openManageOwnersModal();
   }
 

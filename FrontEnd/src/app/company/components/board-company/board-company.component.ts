@@ -1,7 +1,10 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RoleIdsEnum } from 'src/app/core/auth/enums/roles.enum';
 import { ManageRolesComponent } from 'src/app/shared/dialogs/manage-roles/manage-roles.component';
+import { ManageRolesModel } from 'src/app/shared/models/manage-roles.store-model';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
+import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
 import { CreateEditCompanyComponent } from '../../dialogs/create-edit-company/create-edit-company.component';
 import { CompanyService } from '../../services/company.service';
 import { CompanyStoreService } from '../../store/companyStore.service';
@@ -27,6 +30,7 @@ export class BoardCompanyComponent implements OnInit {
 
   constructor(private companyService: CompanyService,
               private companyStoreService: CompanyStoreService,
+              private sharedStoreService: SharedStoreService,
               private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -52,6 +56,12 @@ export class BoardCompanyComponent implements OnInit {
   }
 
   openManageOwners(companyId: string): void {
+    const storeValue: ManageRolesModel = {
+      roleId: RoleIdsEnum.companyOwner,
+      payload: companyId,
+    }
+    this.sharedStoreService.setManageRoles = storeValue;
+
     this.openManageOwnersModal();
   }
 
