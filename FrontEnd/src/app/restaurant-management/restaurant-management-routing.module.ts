@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     canActivate: [AuthGuard],
-    data: { accessRoles: [RolesEnum.admin, RolesEnum.companyOwner, RolesEnum.restaurantAdmin] },
+    data: { accessRoles: [RolesEnum.admin, RolesEnum.companyOwner, RolesEnum.restaurantAdmin, RolesEnum.restaurant] },
     component: BoardRestaurantComponent
   },
 ];

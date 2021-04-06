@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Services;
 using DAL.InputModels;
+using Common.Authentication;
+using Domain.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Domain.Controllers
 {
     [Route("[controller]")]
-    [Authorize(Policy = "RequireAdminRole")]
+    [Authorize]
     public class RestaurantController : BaseServiceController<IRestaurantService>
     {
         public RestaurantController(IRestaurantService service)
@@ -14,6 +16,7 @@ namespace Domain.Controllers
         { }
 
         [HttpGet]
+        [AuthorizeRoles(RoleIds.Admin, RoleIds.CompanyOwner, RoleIds.RestaurantAdmin, RoleIds.Restaurant)]
         public IActionResult GetAll()
         {
             var result = this.service.GetAll();
@@ -22,6 +25,7 @@ namespace Domain.Controllers
 
         [Route("{id}")]
         [HttpGet]
+        [AuthorizeRoles(RoleIds.Admin)]
         public IActionResult Get(string id)
         {
             var result = this.service.Get(id);
@@ -29,6 +33,7 @@ namespace Domain.Controllers
         }
 
         [HttpPost]
+        [AuthorizeRoles(RoleIds.Admin)]
         public IActionResult Save(RestaurantInputModel model)
         {
             this.service.Save(model);
@@ -37,6 +42,7 @@ namespace Domain.Controllers
 
         [Route("{id}")]
         [HttpDelete]
+        [AuthorizeRoles(RoleIds.Admin)]
         public IActionResult Delete(string id)
         {
             this.service.Delete(id);

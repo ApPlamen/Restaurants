@@ -4,6 +4,7 @@ using DAL.InputModels;
 using Services;
 using Domain.Extensions;
 using System.Threading.Tasks;
+using Common.Authentication;
 
 namespace Domain.Controllers
 {
@@ -16,7 +17,7 @@ namespace Domain.Controllers
         { }
 
         [HttpGet]
-        [Authorize(Policy = "RequireAdminRole")]
+        [AuthorizeRoles(RoleIds.Admin)]
         public IActionResult GetAll()
         {
             var result = this.service.GetAll();

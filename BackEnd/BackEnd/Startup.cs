@@ -91,17 +91,7 @@ namespace Domain
                     };
                 });
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("RequireAdminRole",
-                    policy => policy.RequireRole(RoleIds.Admin));
-                options.AddPolicy("RequireCompanyOwnerRole",
-                    policy => policy.RequireRole(RoleIds.CompanyOwner));
-                options.AddPolicy("RequireRestaurantAdminRole",
-                    policy => policy.RequireRole(RoleIds.RestaurantAdmin));
-                options.AddPolicy("RequireRestaurantRole",
-                    policy => policy.RequireRole(RoleIds.Restaurant));
-            });
+            services.AddAuthorization();
 
             services.AddSingleton(_ =>
             {

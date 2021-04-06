@@ -34,7 +34,10 @@
 
         <li class="nav-item">
           <a class="nav-link active"
-             *ngIf="hasAccessRole([rolesEnum.admin, rolesEnum.companyOwner, rolesEnum.restaurantAdmin])"
+             *ngIf="hasAccessRole([rolesEnum.admin,
+              rolesEnum.companyOwner,
+              rolesEnum.restaurantAdmin,
+              rolesEnum.restaurant])"
              routerLink="restaurants-management">
             Restaurants
           </a>
