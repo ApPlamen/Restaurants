@@ -5,14 +5,13 @@
 
   <form class="needs-validation"
         (ngSubmit)="onSubmit()"
-        [formGroup]="addRoleForm.formGroup"
+        [formGroup]="assignUserRoleForm.formGroup"
         novalidate >
 
-    <tmc-input type="text" label="Add new user to the role" placeholder="Email" formControlName="email"></tmc-input>
+    <tmc-input type="text" label="Add new user to the role" placeholder="Email" formControlName="userEmail"></tmc-input>
 
     <tmc-button type='submit'
-                label="Save"
-                (clicked)="onSubmit()">
+                label="Save">
     </tmc-button>
   </form>
 
@@ -31,9 +30,9 @@
 
 <ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
   <div class="table-actions-container">
-    <tmc-button design="delete"
+    <tmc-button design="danger"
                 label="Delete"
-                (clicked)="openEdit(dataItem.id)">
+                (clicked)="delete(dataItem.id)">
     </tmc-button>
   </div>
 </ng-template>

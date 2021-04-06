@@ -6,10 +6,10 @@ namespace Services
 {
     public interface IUserRolesService
     {
-        Task AssignRole(string userEmail, string roleIds, string payload = null);
+        Task AssignRole(string userEmail, string roleId, string payload);
 
-        Task UnassignRole(string userEmail, string roleIds, string payload = null);
+        Task UnassignRole(string userId, string roleId, string payload);
 
-        Task<IEnumerable<UserViewModel>> GetUsersOfRole(string roleIds, string payload = null);
+        Task<IEnumerable<UserViewModel>> GetUsersOfRole(string roleId, string payload);
     }
 }

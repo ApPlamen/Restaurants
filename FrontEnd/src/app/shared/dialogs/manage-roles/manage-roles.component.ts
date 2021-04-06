@@ -1,8 +1,13 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { AddRoleForm } from '../../forms/add-role.form';
+import { AssignUserRoleForm } from '../../forms/assign-user-role.form';
+import { ManageRolesModel } from '../../models/manage-roles.store-model';
+import { UnassignUserRoleModel } from '../../models/unassign-user-role.model';
 import { SimpleTableColumn } from '../../models/simple-table.model';
+import { UserRoleRequestModel } from '../../models/user-role-request.model';
+import { SharedService } from '../../services/shared.service';
+import { SharedStoreService } from '../../store/sharedStore.service';
 
 @Component({
   templateUrl: './manage-roles.component.html',
@@ -10,13 +15,13 @@ import { SimpleTableColumn } from '../../models/simple-table.model';
 export class ManageRolesComponent implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
   
-  public addRoleForm: AddRoleForm = new AddRoleForm();
+  public assignUserRoleForm: AssignUserRoleForm = new AssignUserRoleForm();
   public users;
 
   public columns: SimpleTableColumn<{ [key: string]: string }>[] = [
     {
       header: 'Name',
-      field: 'name',
+      field: 'fullname',
     },
     {
       header: 'Email',
@@ -24,7 +29,11 @@ export class ManageRolesComponent implements OnInit {
     },
   ];
 
-  constructor(private activeModalService: NgbActiveModal,
+  manageRolesModel: ManageRolesModel
+
+  constructor(private sharedService: SharedService,
+              private sharedStoreService: SharedStoreService,
+              private activeModalService: NgbActiveModal,
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -35,6 +44,15 @@ export class ManageRolesComponent implements OnInit {
         cellTemplate: this.tableActionCellTemplate
       }
     ];
+
+    this.sharedStoreService.getManageRoles$.subscribe(
+      manageRolesModel => {
+        this.manageRolesModel = manageRolesModel;
+        this.assignUserRoleForm.patchModel({ roleId: this.manageRolesModel.roleId });
+        this.assignUserRoleForm.patchModel({ payload: this.manageRolesModel.payload });
+        this.fillProfileForm();
+      }
+    )
   }
 
   close(): void {
@@ -42,12 +60,37 @@ export class ManageRolesComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.addRoleForm.formGroup.valid) {
-      // this.companyService.saveCompany(this.addRoleForm.model)
-      //   .subscribe(_ => {
-      //     this.toastr.success('Success!');
-      //     this.activeModalService.close();
-      //   });
+    console.log(this.assignUserRoleForm.model);
+    if (this.assignUserRoleForm.formGroup.valid) {
+      this.sharedService.addUserRole(this.assignUserRoleForm.model)
+        .subscribe(_ => {
+          this.toastr.success('Success!');
+          this.fillProfileForm()
+        });
     }
+  }
+
+  delete(userId: string) {
+    const model: UnassignUserRoleModel = {
+      userId: userId,
+      roleId: this.manageRolesModel.roleId,
+      payload: this.manageRolesModel.payload,
+    }
+
+    this.sharedService.removeUserRole(model)
+      .subscribe(_ => {
+        this.toastr.success('Success!');
+        this.fillProfileForm()
+      });
+  }
+
+  private fillProfileForm(): void {
+    var userRoleRequestModel: UserRoleRequestModel = {
+      roleId: this.manageRolesModel.roleId,
+      payload: this.manageRolesModel.payload
+    }
+
+    this.sharedService.getUsersOfRole(userRoleRequestModel)
+      .subscribe(users => this.users = users);
   }
 }

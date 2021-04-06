@@ -27,23 +27,23 @@ namespace Services
             this.restaurantRepo = restaurantRepo;
         }
 
-        public async Task AssignRole(string userEmail, string roleIds, string payload = null)
+        public async Task AssignRole(string userEmail, string roleId, string payload = null)
         {
             var exists = this.repo.All()
                 .Include(ur => ur.Restaurants)
                 .Include(ur => ur.Companies)
-                .FirstOrDefault(ur => ur.UserId.Equals(userEmail) && ur.RoleId.Equals(roleIds));
+                .FirstOrDefault(ur => ur.UserId.Equals(userEmail) && ur.RoleId.Equals(roleId));
 
             var user = await userManager.FindByEmailAsync(userEmail);
 
-            switch (roleIds)
+            switch (roleId)
             {
                 case RoleIds.Admin:
                 case RoleIds.Client:
                     var userRole = new UserRole()
                     {
                         UserId = user.Id,
-                        RoleId = roleIds,
+                        RoleId = roleId,
                     };
                     this.repo.Add(userRole);
                     break;
@@ -60,7 +60,7 @@ namespace Services
                         var userRoleCompany = new UserRole()
                         {
                             UserId = user.Id,
-                            RoleId = roleIds,
+                            RoleId = roleId,
                             Companies = new List<Company>() { company },
                         };
                         this.repo.Add(userRoleCompany);
@@ -80,7 +80,7 @@ namespace Services
                         var userRoleRestaurant = new UserRole()
                         {
                             UserId = user.Id,
-                            RoleId = roleIds,
+                            RoleId = roleId,
                             Restaurants = new List<Restaurant>() { restaurant },
                         };
                         this.repo.Add(userRoleRestaurant);
@@ -91,16 +91,14 @@ namespace Services
             this.repo.Save();
         }
 
-        public async Task UnassignRole(string userEmail, string roleIds, string payload = null)
+        public async Task UnassignRole(string userId, string roleId, string payload = null)
         {
-            var user = await userManager.FindByEmailAsync(userEmail);
-
             var role = this.repo.All()
                 .Include(ur => ur.Restaurants)
                 .Include(ur => ur.Companies)
-                .FirstOrDefault(ur => ur.UserId.Equals(user.Id) && ur.RoleId.Equals(roleIds));
+                .FirstOrDefault(ur => ur.UserId.Equals(userId) && ur.RoleId.Equals(roleId));
 
-            switch (roleIds)
+            switch (roleId)
             {
                 case RoleIds.CompanyOwner:
                     var company = companyRepo.All().FirstOrDefault(c => c.Id.Equals(payload));
@@ -130,12 +128,12 @@ namespace Services
             this.repo.Save();
         }
 
-        public async Task<IEnumerable<UserViewModel>> GetUsersOfRole(string roleIds, string payload = null)
+        public async Task<IEnumerable<UserViewModel>> GetUsersOfRole(string roleId, string payload = null)
         {
             var users = await this.repo.All()
                 .Include(ur => ur.Restaurants)
                 .Include(ur => ur.Companies)
-                .Where(ur => ur.RoleId.Equals(roleIds))
+                .Where(ur => ur.RoleId.Equals(roleId))
                 .Select(ur => ur.User)
                 .Select(u => new UserViewModel
                 {

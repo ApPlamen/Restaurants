@@ -16,25 +16,25 @@ namespace Domain.Controllers
 
         [Route("assign-role")]
         [HttpPost]
-        public async Task<IActionResult> AssignRole(UserRolesInputModel model)
+        public async Task<IActionResult> AssignRole(AssignUserRoleInputModel model)
         {
-            await this.service.AssignRole(model.UserEmail, model.RoleIds, model.Payload);
+            await this.service.AssignRole(model.UserEmail, model.RoleId, model.Payload);
             return this.Ok();
         }
 
         [Route("unassign-role")]
         [HttpPost]
-        public async Task<IActionResult> UnassignRole(UserRolesInputModel model)
+        public async Task<IActionResult> UnassignRole(UnassignUserRoleInputModel model)
         {
-            await this.service.UnassignRole(model.UserEmail, model.RoleIds, model.Payload);
+            await this.service.UnassignRole(model.UserId, model.RoleId, model.Payload);
             return this.Ok();
         }
 
         [Route("users")]
         [HttpPost]
-        public async Task<IActionResult> GetUsersOfRole(UserRolesInputModel model)
+        public async Task<IActionResult> GetUsersOfRole(UserRoleRequestModel model)
         {
-            var users = await this.service.GetUsersOfRole(model.RoleIds, model.Payload);
+            var users = await this.service.GetUsersOfRole(model.RoleId, model.Payload);
             return this.Ok(users);
         }
     }

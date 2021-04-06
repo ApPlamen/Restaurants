@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { BaseFormModel } from 'src/app/shared/models/base-form.model';
-import { AddRoleModel } from '../models/add-role.model';
+import { AssignUserRoleModel } from '../models/assign-user-role.model';
 
 @Injectable()
-export class AddRoleForm extends BaseFormModel<AddRoleModel> {
+export class AssignUserRoleForm extends BaseFormModel<AssignUserRoleModel> {
   constructor() {
     super();
 
     this.formGroup = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      userEmail: ['', [Validators.required, Validators.email]],
     });
   }
 }
