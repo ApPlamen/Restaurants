@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { TokenStorageService } from '../../services/token-storage.service';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 
 @Component({
   templateUrl: './logout.component.html',

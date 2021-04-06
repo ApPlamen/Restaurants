@@ -17,10 +17,6 @@
       <ul class="navbar-nav me-auto">
 
         <li class="nav-item">
-          <a class="nav-link active" routerLink="home">Home</a>
-        </li>
-
-        <li class="nav-item">
           <a class="nav-link active"
              *ngIf="hasAccessRole([rolesEnum.admin])"
              routerLink="users">

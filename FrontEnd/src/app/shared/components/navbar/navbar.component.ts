@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RolesEnum } from '../auth/enums/roles.enum';
-import { TokenStorageService } from '../auth/services/token-storage.service';
+import { RolesEnum } from 'src/app/core/auth/enums/roles.enum';
+import { TokenStorageService } from '../../services/token-storage.service';
 
 @Component({
   selector: 'navbar',

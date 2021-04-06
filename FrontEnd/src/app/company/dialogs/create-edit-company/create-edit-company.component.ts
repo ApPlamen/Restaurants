@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CompanyForm } from '../../forms/company.form';
@@ -8,14 +8,14 @@ import { CompanyStoreService } from '../../store/companyStore.service';
 @Component({
   templateUrl: './create-edit-company.component.html',
 })
-export class CreateEditCompanyComponent implements OnInit, OnDestroy {
+export class CreateEditCompanyComponent implements OnInit {
   isNew = true;
+  companyForm: CompanyForm = new CompanyForm();
 
   constructor(private companyService: CompanyService,
               private companyStoreService: CompanyStoreService,
               private activeModalService: NgbActiveModal,
-              private toastr: ToastrService,
-              public companyForm: CompanyForm) { }
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.companyStoreService.getCompanyId$.subscribe(
@@ -26,10 +26,6 @@ export class CreateEditCompanyComponent implements OnInit, OnDestroy {
         }
       }
     );
-  }
-
-  ngOnDestroy(): void {
-    this.companyForm.clear();
   }
 
   onSubmit(): void {

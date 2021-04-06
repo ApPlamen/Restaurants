@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { LogInForm } from '../../forms/login.form';
 import { AuthService } from '../../services/auth.service';
-import { TokenStorageService } from '../../services/token-storage.service';
 
 @Component({
   templateUrl: './login.component.html',
 })
 export class LogInComponent implements OnInit {
   roles: string[] = [];
+  logInForm: LogInForm = new LogInForm();
 
   constructor(private authService: AuthService,
               private tokenStorageService: TokenStorageService,
               private router: Router,
-              private toastr: ToastrService,
-              public logInForm: LogInForm) { }
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     if (this.tokenStorageService.getToken()) {

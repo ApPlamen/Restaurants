@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { RestaurantForm } from '../../forms/restaurant.form';
@@ -8,14 +8,14 @@ import { RestaurantStoreService } from '../../store/restaurantStore.service';
 @Component({
   templateUrl: './create-edit-restaurant.component.html',
 })
-export class CreateEditRestaurantComponent implements OnInit, OnDestroy {
+export class CreateEditRestaurantComponent implements OnInit {
   isNew = true;
+  restaurantForm: RestaurantForm = new RestaurantForm();
 
   constructor(private restaurantService: RestaurantManagementService,
               private restaurantStoreService: RestaurantStoreService,
               private activeModalService: NgbActiveModal,
-              private toastr: ToastrService,
-              public restaurantForm: RestaurantForm) { }
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.restaurantStoreService.getRestaurantId$.subscribe(
@@ -26,10 +26,6 @@ export class CreateEditRestaurantComponent implements OnInit, OnDestroy {
         }
       }
     );
-  }
-
-  ngOnDestroy(): void {
-    this.restaurantForm.clear();
   }
 
   onSubmit(): void {

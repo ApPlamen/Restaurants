@@ -7,9 +7,10 @@ import { UserService } from '../../services/user.service';
   templateUrl: './change-password.component.html',
 })
 export class ChangePasswordComponent {
+  changePasswordForm: ChangePasswordForm = new ChangePasswordForm();
+
   constructor(private userService: UserService,
-              private toastr: ToastrService,
-              public changePasswordForm: ChangePasswordForm) { }
+              private toastr: ToastrService) { }
 
   onSubmit(): void {
     if (this.changePasswordForm.formGroup.valid) {
