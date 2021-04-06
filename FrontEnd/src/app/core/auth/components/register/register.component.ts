@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { RegisterForm } from '../../forms/register.form';
 import { AuthService } from '../../services/auth.service';
-import { TokenStorageService } from '../../services/token-storage.service';
 
 @Component({
   templateUrl: './register.component.html',

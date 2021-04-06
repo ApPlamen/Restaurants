@@ -11,7 +11,6 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import { CoreModule } from './core/core.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    CoreModule,
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,

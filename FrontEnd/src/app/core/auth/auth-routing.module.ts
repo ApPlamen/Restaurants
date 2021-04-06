@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/shared/guards/auth-guard';
 import { BoardUsersComponent } from './components/board-users/board-users.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { LogInComponent } from './components/login/login.component';
@@ -7,7 +8,6 @@ import { LogOutComponent } from './components/logout/logout.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RolesEnum } from './enums/roles.enum';
-import { AuthGuard } from './guards/auth-guard';
 
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
