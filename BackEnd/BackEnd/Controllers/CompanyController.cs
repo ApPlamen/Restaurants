@@ -18,7 +18,7 @@ namespace Domain.Controllers
 
         [HttpGet]
         [AuthorizeRoles(RoleIds.Admin, RoleIds.CompanyOwner)]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAll()
         {
             var userId = User.GetAuthUserId();
 
