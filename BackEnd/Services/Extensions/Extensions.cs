@@ -20,5 +20,20 @@ namespace Services
 
             return query;
         }
+
+        public static IQueryable<Restaurant> RestaurantsFilterByUser(this IQueryable<Restaurant> query, User user)
+        {
+            if (user.UserRoles.Any(ur => ur.RoleId.Equals(RoleIds.Admin)))
+            {
+                return query.Where(r => true);
+            }
+
+            if (user.UserRoles.Any(ur => ur.RoleId.Equals(RoleIds.RestaurantAdmin) || ur.RoleId.Equals(RoleIds.Restaurant)))
+            {
+                query = query.Where(r => r.UserRoles.Any(ur => ur.UserId.Equals(user.Id)));
+            }
+
+            return query;
+        }
     }
 }

@@ -4,8 +4,11 @@ using DAL.Models;
 using DAL.Repository;
 using DAL.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Services
 {
@@ -18,9 +21,14 @@ namespace Services
         {
         }
 
-        public override IEnumerable<RestaurantViewModel> GetAll()
+        public async Task<IEnumerable<RestaurantViewModel>> GetAll(string userId)
         {
+            var user = await userManager.Users
+                .Include(u => u.UserRoles)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
             var result = this.repo.All()
+                .RestaurantsFilterByUser(user)
                 .Select(r => new RestaurantViewModel()
                 {
                     Id = r.Id,
@@ -30,6 +38,12 @@ namespace Services
                 .ToList();
 
             return result;
+        }
+
+        protected override void Create(Restaurant model)
+        {
+            model.Id = Guid.NewGuid().ToString();
+            this.repo.Add(model);
         }
     }
 }
