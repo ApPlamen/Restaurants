@@ -8,7 +8,7 @@ namespace Services
     {
         Task AssignRole(string userEmail, string roleId, string payload);
 
-        Task UnassignRole(string userId, string roleId, string payload);
+        void UnassignRole(string userId, string roleId, string payload);
 
         Task<IEnumerable<UserViewModel>> GetUsersOfRole(string roleId, string payload);
     }
