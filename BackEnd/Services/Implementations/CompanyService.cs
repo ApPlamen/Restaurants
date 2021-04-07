@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Common.Authentication;
 using DAL.InputModels;
 using DAL.Models;
 using DAL.Repository;
@@ -9,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Services
@@ -31,7 +29,6 @@ namespace Services
 
             var result = this.repo.All()
                 .CompaniesFilterByUser(user)
-                //.Where(FilterByUser(user))
                 .Select(c => new CompanyViewModel()
                 {
                     Id = c.Id,
@@ -47,21 +44,6 @@ namespace Services
         {
             model.Id = Guid.NewGuid().ToString();
             this.repo.Add(model);
-        }
-
-        public static Expression<Func<Company, bool>> FilterByUser(User user)
-        {
-            if (user.UserRoles.Any(ur => ur.RoleId.Equals(RoleIds.Admin)))
-            {
-                return data => true;
-            }
-
-            if (user.UserRoles.Any(ur => ur.RoleId.Equals(RoleIds.CompanyOwner)))
-            {
-                return data => data.UserRoles.Any(ur => ur.UserId.Equals(user.Id));
-            }
-
-            return data => false;
         }
     }
 }
