@@ -4,6 +4,7 @@ using DAL.InputModels;
 using Domain.Extensions;
 using Common.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace Domain.Controllers
 {
@@ -17,9 +18,11 @@ namespace Domain.Controllers
 
         [HttpGet]
         [AuthorizeRoles(RoleIds.Admin, RoleIds.CompanyOwner)]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = this.service.GetAll();
+            var userId = User.GetAuthUserId();
+
+            var result = await this.service.GetAll(userId);
             return this.Ok(result);
         }
 

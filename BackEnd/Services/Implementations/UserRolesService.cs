@@ -5,8 +5,10 @@ using DAL.Repository;
 using DAL.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Services
@@ -29,12 +31,12 @@ namespace Services
 
         public async Task AssignRole(string userEmail, string roleId, string payload = null)
         {
+            var user = await userManager.FindByEmailAsync(userEmail);
+
             var exists = this.repo.All()
                 .Include(ur => ur.Restaurants)
                 .Include(ur => ur.Companies)
-                .FirstOrDefault(ur => ur.UserId.Equals(userEmail) && ur.RoleId.Equals(roleId));
-
-            var user = await userManager.FindByEmailAsync(userEmail);
+                .FirstOrDefault(ur => ur.UserId.Equals(user.Id) && ur.RoleId.Equals(roleId));
 
             switch (roleId)
             {
@@ -91,7 +93,7 @@ namespace Services
             this.repo.Save();
         }
 
-        public async Task UnassignRole(string userId, string roleId, string payload = null)
+        public void UnassignRole(string userId, string roleId, string payload = null)
         {
             var role = this.repo.All()
                 .Include(ur => ur.Restaurants)
@@ -133,6 +135,7 @@ namespace Services
             var users = await this.repo.All()
                 .Include(ur => ur.Restaurants)
                 .Include(ur => ur.Companies)
+                .Where(FilterByCompanyOrRestaurant(payload))
                 .Where(ur => ur.RoleId.Equals(roleId))
                 .Select(ur => ur.User)
                 .Select(u => new UserViewModel
@@ -144,6 +147,17 @@ namespace Services
                 .ToListAsync();
 
             return users;
+        }
+
+        public static Expression<Func<UserRole, bool>> FilterByCompanyOrRestaurant(string payload)
+        {
+            if(payload==null)
+            {
+                return ur => true;
+            }
+
+            return ur => ur.Restaurants.Any(r => r.Id.Equals(payload))
+                || ur.Companies.Any(c => c.Id.Equals(payload));
         }
     }
 }

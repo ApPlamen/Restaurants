@@ -28,9 +28,9 @@ namespace Domain.Controllers
         [Route("unassign-role")]
         [HttpPost]
         [AuthorizeRoles(RoleIds.Admin, RoleIds.CompanyOwner, RoleIds.RestaurantAdmin)]
-        public async Task<IActionResult> UnassignRole(UnassignUserRoleInputModel model)
+        public IActionResult UnassignRole(UnassignUserRoleInputModel model)
         {
-            await this.service.UnassignRole(model.UserId, model.RoleId, model.Payload);
+            this.service.UnassignRole(model.UserId, model.RoleId, model.Payload);
             return this.Ok();
         }
 
