@@ -28,7 +28,9 @@ namespace Services
                 return query.Where(r => true);
             }
 
-            if (user.UserRoles.Any(ur => ur.RoleId.Equals(RoleIds.RestaurantAdmin) || ur.RoleId.Equals(RoleIds.Restaurant)))
+            if (user.UserRoles.Any(ur => ur.RoleId.Equals(RoleIds.CompanyOwner)
+                || ur.RoleId.Equals(RoleIds.RestaurantAdmin)
+                || ur.RoleId.Equals(RoleIds.Restaurant)))
             {
                 query = query.Where(r => r.UserRoles.Any(ur => ur.UserId.Equals(user.Id)));
             }

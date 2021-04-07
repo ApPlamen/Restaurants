@@ -20,12 +20,14 @@
     
     <tmc-button design="warning"
                 label="Manage admins"
+                *ngIf="dataItem.canManageRestaurantAdmins"
                 (clicked)="openManageRestaurantAdmins(dataItem.id)">
     </tmc-button>
 
     <tmc-button design="warning"
-        label="Manage workers"
-        (clicked)="openManageRestaurantWorkers(dataItem.id)">
+                label="Manage workers"
+                *ngIf="dataItem.canManageRestaurantWorkers"
+                (clicked)="openManageRestaurantWorkers(dataItem.id)">
     </tmc-button>
   </div>
 </ng-template>

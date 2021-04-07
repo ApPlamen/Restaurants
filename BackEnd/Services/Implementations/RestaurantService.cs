@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Common.Authentication;
 using DAL.InputModels;
 using DAL.Models;
 using DAL.Repository;
@@ -34,6 +35,8 @@ namespace Services
                     Id = r.Id,
                     Name = r.Name,
                     CompanyName = r.Company.Name,
+                    CanManageRestaurantWorkers = r.UserRoles.Any(ur => ur.UserId.Equals(userId) && ur.RoleId.Equals(RoleIds.RestaurantAdmin)),
+                    CanManageRestaurantAdmins = r.Company.UserRoles.Any(ur => ur.UserId.Equals(userId)),
                 })
                 .ToList();
 
