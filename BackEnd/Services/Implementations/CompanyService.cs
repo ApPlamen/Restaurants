@@ -27,13 +27,13 @@ namespace Services
                 .Include(u => u.UserRoles)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            var result = this.repo.All()
+            var result = this.repo.GetAll()
                 .CompaniesFilterByUser(user)
                 .Select(c => new CompanyViewModel()
                 {
                     Id = c.Id,
                     Name = c.Name,
-                    Owners = c.UserRoles.Select(ur => ur.User.Email)
+                    Owners = c.UserRoles.Select(ur => ur.User.Email),
                 })
                 .ToList();
 

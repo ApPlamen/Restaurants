@@ -6,6 +6,8 @@ using DAL.InputModels;
 using DAL.Repository;
 using DAL.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using System;
+using System.Linq.Expressions;
 
 namespace Services
 {
@@ -23,13 +25,19 @@ namespace Services
 
         public virtual IEnumerable<ViewModel> GetAll()
         {
-            var result = this.repo.All();
+            var result = this.repo.GetAll();
+            return mapper.Map<IEnumerable<ViewModel>>(result);
+        }
+
+        public virtual IEnumerable<ViewModel> GetAll(params Expression<Func<DALModel, object>>[] includeExpressions)
+        {
+            var result = this.repo.GetAll(includeExpressions);
             return mapper.Map<IEnumerable<ViewModel>>(result);
         }
 
         public virtual ViewModel Get(IdType id)
         {
-            var result = this.repo.All().FirstOrDefault(u => u.Id.Equals(id));
+            var result = this.repo.GetAll().FirstOrDefault(u => u.Id.Equals(id));
             return mapper.Map<ViewModel>(result);
         }
 

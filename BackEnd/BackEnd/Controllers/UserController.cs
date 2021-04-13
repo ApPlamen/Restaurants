@@ -26,30 +26,30 @@ namespace Domain.Controllers
 
         [Route("profile")]
         [HttpGet]
-        public async Task<IActionResult> GetAsync()
+        public async Task<IActionResult> Get()
         {
             var userId = User.GetAuthUserId();
 
-            var result = await this.service.GetAsync(userId);
+            var result = await this.service.Get(userId);
             return this.Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveAsync(UserInputModel model)
+        public async Task<IActionResult> Save(UserInputModel model)
         {
             model.Id = User.GetAuthUserId();
 
-            await this.service.SaveAsync(model);
+            await this.service.Save(model);
             return this.Ok();
         }
 
         [Route("change-password")]
         [HttpPut]
-        public async Task<IActionResult> ChangePasswordAsync(ChangePasswordInputModel model)
+        public async Task<IActionResult> ChangePassword(ChangePasswordInputModel model)
         {
             var userId = User.GetAuthUserId();
 
-            await this.service.ChangePasswordAsync(userId, model);
+            await this.service.ChangePassword(userId, model);
             return this.Ok();
         }
     }

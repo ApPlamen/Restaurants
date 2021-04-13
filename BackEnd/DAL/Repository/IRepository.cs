@@ -6,9 +6,7 @@ namespace DAL.Repository
 {
     public interface IRepository<T> where T : class, new()
     {
-        IQueryable<T> All(params Expression<Func<T, object>>[] includeExpressions);
-
-        IQueryable<T> All(bool includeInactive, params Expression<Func<T, object>>[] includeExpressions);
+        IQueryable<T> GetAll(params Expression<Func<T, object>>[] includeExpressions);
 
         IQueryable<T> GetAll();
 

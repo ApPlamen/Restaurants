@@ -28,7 +28,7 @@ namespace Services
                 .Include(u => u.UserRoles)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            var result = this.repo.All()
+            var result = this.repo.GetAll()
                 .RestaurantsFilterByUser(user)
                 .Select(r => new RestaurantViewModel()
                 {
