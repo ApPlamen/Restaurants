@@ -18,11 +18,15 @@ export class CompanyService {
     return this.http.get<CompanyModel>(BASE_URL + '/' + companyId);
   }
 
-  saveCompany(profileModel: CompanyModel): Observable<any> {
-    return this.http.post(BASE_URL, profileModel);
+  saveCompany(profileModel: CompanyModel): Observable<void> {
+    return this.http.post<void>(BASE_URL, profileModel);
   }
 
   getCompanyBoard(): Observable<CompanyViewModel> {
     return this.http.get<CompanyViewModel>(BASE_URL);
+  }
+
+  deleteCompany(companyId: string): Observable<void> {
+    return this.http.delete<void>(BASE_URL + '/' + companyId);
   }
 }

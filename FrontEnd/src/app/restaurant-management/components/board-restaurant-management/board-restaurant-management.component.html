@@ -29,5 +29,11 @@
                 *ngIf="dataItem.canManageRestaurantWorkers"
                 (clicked)="openManageRestaurantWorkers(dataItem.id)">
     </tmc-button>
+
+    <tmc-button design="danger"
+                label="Delete"
+                *ngIf="hasAccessRole([rolesEnum.admin])"
+                (clicked)="delete(dataItem.id)">
+    </tmc-button>
   </div>
 </ng-template>

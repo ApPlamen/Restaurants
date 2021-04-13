@@ -9,6 +9,6 @@ namespace DAL.Models
 
         public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
 
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
     }
 }

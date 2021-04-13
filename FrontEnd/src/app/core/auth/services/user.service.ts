@@ -19,15 +19,19 @@ export class UserService {
     return this.http.get<ProfileModel>(BASE_URL + '/profile');
   }
 
-  saveUserProfile(profileModel: ProfileModel): Observable<any> {
-    return this.http.post(BASE_URL, profileModel);
+  saveUserProfile(profileModel: ProfileModel): Observable<void>  {
+    return this.http.post<void> (BASE_URL, profileModel);
   }
 
-  changePasswordUser(model: ChangePasswordModel): Observable<any> {
-    return this.http.put(BASE_URL + '/change-password', model);
+  changePasswordUser(model: ChangePasswordModel): Observable<void>  {
+    return this.http.put<void> (BASE_URL + '/change-password', model);
   }
 
   getUserBoard(): Observable<UsersViewModel> {
     return this.http.get<UsersViewModel>(BASE_URL);
+  }
+
+  deleteUser(userId: string): Observable<void> {
+    return this.http.delete<void>(BASE_URL + '/' + userId);
   }
 }

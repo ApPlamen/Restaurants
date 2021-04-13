@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { ManageRolesComponent } from 'src/app/shared/dialogs/manage-roles/manage-roles.component';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
@@ -32,7 +33,8 @@ export class BoardUsersComponent implements OnInit {
 
   constructor(private userService: UserService,
               private sharedStoreService: SharedStoreService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.columns = [
@@ -53,6 +55,14 @@ export class BoardUsersComponent implements OnInit {
     this.sharedStoreService.setManageRoles = storeValue;
 
     this.openManageAdminsModal();
+  }
+
+  delete(userId: string): void {
+    this.userService.deleteUser(userId)
+      .subscribe(_ => {
+        this.toastr.success('Success!');
+        this.fillProfileForm();
+      });
   }
 
   private openManageAdminsModal() {
