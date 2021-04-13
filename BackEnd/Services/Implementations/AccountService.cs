@@ -36,6 +36,11 @@ namespace Services
         {
             User user = await this.GetUserByEmailAsync(model.Email);
 
+            if(!user.IsActive)
+            {
+                throw new InvalidOperationException();
+            }
+
             SignInResult result = await this.signInManager.CheckPasswordSignInAsync(user, model.Password, false);
 
             if (result.Succeeded)
