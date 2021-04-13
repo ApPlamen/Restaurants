@@ -36,6 +36,11 @@ namespace Services
         {
             User user = await this.GetUserByEmailAsync(model.Email);
 
+            if(!user.IsActive)
+            {
+                throw new InvalidOperationException();
+            }
+
             SignInResult result = await this.signInManager.CheckPasswordSignInAsync(user, model.Password, false);
 
             if (result.Succeeded)
@@ -113,7 +118,7 @@ namespace Services
                 throw new WrongCredentialsException();
             }
 
-            var userfull = repo.All()
+            var userfull = repo.GetAll()
                 .Include(u => u.UserRoles)
                 .ThenInclude(r => r.Role)
                 .Where(u => u.Id == user.Id)

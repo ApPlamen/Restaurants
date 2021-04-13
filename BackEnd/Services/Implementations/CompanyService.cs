@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class CompanyService : BaseCRUDService<Company, CompanyViewModel, CompanyInputModel, string>, ICompanyService
+    public class CompanyService : BaseCRUDSoftDeleteService<Company, CompanyViewModel, CompanyInputModel, string>, ICompanyService
     {
         public CompanyService(IMapper mapper,
             IRepository<Company> company,
@@ -27,13 +27,14 @@ namespace Services
                 .Include(u => u.UserRoles)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            var result = this.repo.All()
+            var result = this.repo.GetAll()
+                .Where(m => m.IsActive)
                 .CompaniesFilterByUser(user)
                 .Select(c => new CompanyViewModel()
                 {
                     Id = c.Id,
                     Name = c.Name,
-                    Owners = c.UserRoles.Select(ur => ur.User.Email)
+                    Owners = c.UserRoles.Select(ur => ur.User.Email),
                 })
                 .ToList();
 

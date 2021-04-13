@@ -10,6 +10,7 @@ import { RestaurantManagementService } from '../../services/restaurant-managemen
 import { RestaurantStoreService } from '../../store/restaurantStore.service';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { RolesFilteringBaseClass } from 'src/app/shared/base-classes/roles-filtering.class';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   templateUrl: './board-restaurant-management.component.html',
@@ -34,6 +35,7 @@ export class BoardRestaurantComponent extends RolesFilteringBaseClass implements
               private restaurantStoreService: RestaurantStoreService,
               private sharedStoreService: SharedStoreService,
               private modalService: NgbModal,
+              private toastr: ToastrService,
               protected tokenStorageService: TokenStorageService) {
     super(tokenStorageService);
   }
@@ -78,6 +80,14 @@ export class BoardRestaurantComponent extends RolesFilteringBaseClass implements
     this.sharedStoreService.setManageRoles = storeValue;
 
     this.openManageOwnersModal();
+  }
+
+  delete(restaurantId: string): void {
+    this.restaurantManagementService.deleteRestaurant(restaurantId)
+      .subscribe(_ => {
+        this.toastr.success('Success!');
+        this.fillProfileForm();
+      });
   }
 
   private openEditModal() {

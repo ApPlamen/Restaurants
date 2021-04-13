@@ -10,6 +10,7 @@ import { CompanyService } from '../../services/company.service';
 import { CompanyStoreService } from '../../store/companyStore.service';
 import { RolesFilteringBaseClass } from 'src/app/shared/base-classes/roles-filtering.class';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   templateUrl: './board-company.component.html',
@@ -34,6 +35,7 @@ export class BoardCompanyComponent extends RolesFilteringBaseClass implements On
               private companyStoreService: CompanyStoreService,
               private sharedStoreService: SharedStoreService,
               private modalService: NgbModal,
+              private toastr: ToastrService,
               protected tokenStorageService: TokenStorageService) {
     super(tokenStorageService);
   }
@@ -68,6 +70,14 @@ export class BoardCompanyComponent extends RolesFilteringBaseClass implements On
     this.sharedStoreService.setManageRoles = storeValue;
 
     this.openManageOwnersModal();
+  }
+
+  delete(companyId: string): void {
+    this.companyService.deleteCompany(companyId)
+      .subscribe(_ => {
+        this.toastr.success('Success!');
+        this.fillProfileForm();
+      });
   }
 
   private openEditModal() {

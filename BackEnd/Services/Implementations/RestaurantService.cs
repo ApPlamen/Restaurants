@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class RestaurantService : BaseCRUDService<Restaurant, RestaurantViewModel, RestaurantInputModel, string>, IRestaurantService
+    public class RestaurantService : BaseCRUDSoftDeleteService<Restaurant, RestaurantViewModel, RestaurantInputModel, string>, IRestaurantService
     {
         public RestaurantService(IMapper mapper,
             IRepository<Restaurant> restaurant,
@@ -28,7 +28,8 @@ namespace Services
                 .Include(u => u.UserRoles)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            var result = this.repo.All()
+            var result = this.repo.GetAll()
+                .Where(m => m.IsActive)
                 .RestaurantsFilterByUser(user)
                 .Select(r => new RestaurantViewModel()
                 {

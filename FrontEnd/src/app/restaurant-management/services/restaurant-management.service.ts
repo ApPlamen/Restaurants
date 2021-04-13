@@ -18,11 +18,15 @@ export class RestaurantManagementService {
     return this.http.get<RestaurantModel>(BASE_URL + '/' + restaurantId);
   }
 
-  saveRestaurant(profileModel: RestaurantModel): Observable<any> {
-    return this.http.post(BASE_URL, profileModel);
+  saveRestaurant(profileModel: RestaurantModel): Observable<void> {
+    return this.http.post<void>(BASE_URL, profileModel);
   }
 
   getRestaurantBoard(): Observable<RestaurantViewModel> {
     return this.http.get<RestaurantViewModel>(BASE_URL);
+  }
+
+  deleteRestaurant(restaurantId: string): Observable<void> {
+    return this.http.delete<void>(BASE_URL + '/' + restaurantId);
   }
 }

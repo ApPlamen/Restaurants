@@ -7,10 +7,10 @@ namespace Services
 {
     public interface IUserService : IBaseCRUDService<User, UserViewModel, UserInputModel, string>, IBaseService
     {
-        public Task<UserViewModel> GetAsync(string userId);
+        public new Task<UserViewModel> Get(string userId);
 
-        public Task SaveAsync(UserInputModel model);
+        public new Task Save(UserInputModel model);
 
-        public Task ChangePasswordAsync(string userId, ChangePasswordInputModel model);
+        public Task ChangePassword(string userId, ChangePasswordInputModel model);
     }
 }

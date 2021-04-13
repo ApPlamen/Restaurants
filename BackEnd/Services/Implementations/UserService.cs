@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Services
 {
-    public class UserService : BaseCRUDService<User, UserViewModel, UserInputModel, string>, IUserService
+    public class UserService : BaseCRUDSoftDeleteService<User, UserViewModel, UserInputModel, string>, IUserService
     {
         public UserService(IMapper mapper,
             IRepository<User> user,
@@ -19,14 +19,14 @@ namespace Services
         {
         }
 
-        public async Task<UserViewModel> GetAsync(string userId)
+        public new async Task<UserViewModel> Get(string userId)
         {
             var user = await userManager.FindByIdAsync(userId);
 
             return mapper.Map<UserViewModel>(user);
         }
 
-        public async Task SaveAsync(UserInputModel model)
+        public new async Task Save(UserInputModel model)
         {
             if (model.IsIdEmpty())
             {
@@ -48,7 +48,7 @@ namespace Services
             this.repo.Save(user);
         }
 
-        public async Task ChangePasswordAsync(string userId, ChangePasswordInputModel model)
+        public async Task ChangePassword(string userId, ChangePasswordInputModel model)
         {
             if (string.IsNullOrWhiteSpace(userId))
             {
