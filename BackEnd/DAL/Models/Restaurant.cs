@@ -2,7 +2,7 @@
 
 namespace DAL.Models
 {
-    public class Restaurant : BaseDALModel<string>
+    public class Restaurant : BaseSoftDeleteDALModel<string>
     {
         public string Name { get; set; }
 

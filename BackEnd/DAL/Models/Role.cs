@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DAL.Models
 {
-    public class Role : IdentityRole<string>
+    public class Role : IdentityRole<string>, IBaseDALModel<string>
     {
         public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
     }

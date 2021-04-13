@@ -2,7 +2,7 @@
 
 namespace DAL.Models
 {
-    public class Company : BaseDALModel<string>
+    public class Company : BaseSoftDeleteDALModel<string>
     {
         public string Name { get; set; }
 

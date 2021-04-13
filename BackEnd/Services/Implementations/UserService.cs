@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Services
 {
-    public class UserService : BaseCRUDService<User, UserViewModel, UserInputModel, string>, IUserService
+    public class UserService : BaseCRUDSoftDeleteService<User, UserViewModel, UserInputModel, string>, IUserService
     {
         public UserService(IMapper mapper,
             IRepository<User> user,

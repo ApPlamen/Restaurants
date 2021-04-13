@@ -43,6 +43,15 @@ namespace Domain.Controllers
             return this.Ok();
         }
 
+        [Route("{id}")]
+        [HttpDelete]
+        [AuthorizeRoles(RoleIds.Admin)]
+        public IActionResult Delete(string id)
+        {
+            this.service.Delete(id);
+            return this.Ok();
+        }
+
         [Route("change-password")]
         [HttpPut]
         public async Task<IActionResult> ChangePassword(ChangePasswordInputModel model)
