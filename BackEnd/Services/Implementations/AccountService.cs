@@ -105,7 +105,7 @@ namespace Services
             }
             catch (SecurityTokenException)
             {
-                throw new NotAuthorizedException();
+                throw new UnauthorizedAccessException("Not Authorized");
             }
         }
 
