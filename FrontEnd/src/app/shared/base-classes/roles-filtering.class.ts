@@ -1,10 +1,10 @@
-import { RolesEnum } from "src/app/core/auth/enums/roles.enum";
-import { TokenStorageService } from "../services/token-storage.service";
+import { RolesEnum } from 'src/app/core/auth/enums/roles.enum';
+import { TokenStorageService } from '../services/token-storage.service';
 
 export class RolesFilteringBaseClass {
-  protected tokenStorageService: TokenStorageService
+  protected tokenStorageService: TokenStorageService;
 
-  constructor(tokenStorageService: TokenStorageService) { 
+  constructor(tokenStorageService: TokenStorageService) {
     this.tokenStorageService = tokenStorageService;
   }
 
