@@ -41,10 +41,28 @@ namespace Services
             return result;
         }
 
-        protected override void Create(Company model)
+        public override void Save(CompanyInputModel model)
         {
-            model.Id = Guid.NewGuid().ToString();
-            this.repo.Add(model);
+            var inputModel = mapper.Map<Company>(model);
+
+            var legalIdExists = this.repo.GetAll()
+                .Any(r => r.LegalId.Equals(inputModel.LegalId) && !r.Id.Equals(inputModel.Id));
+            if (legalIdExists)
+            {
+                throw new ArgumentException("Legal ID exists!");
+            }
+
+            if (!model.IsIdEmpty() || this.repo.Exists(inputModel))
+            {
+                this.Update(inputModel);
+            }
+            else
+            {
+                inputModel.Id = Guid.NewGuid().ToString();
+                this.Create(inputModel);
+            }
+
+            this.repo.Save();
         }
     }
 }
