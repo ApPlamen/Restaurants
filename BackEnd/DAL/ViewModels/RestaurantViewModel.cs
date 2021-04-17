@@ -8,6 +8,8 @@
 
         public string LegalId { get; set; }
 
+        public string CompanyLegalId { get; set; }
+
         public bool CanManageRestaurantWorkers { get; set; }
 
         public bool CanManageRestaurantAdmins { get; set; }

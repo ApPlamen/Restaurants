@@ -15,11 +15,15 @@ namespace Services
 {
     public class RestaurantService : BaseCRUDSoftDeleteService<Restaurant, RestaurantViewModel, RestaurantInputModel, string>, IRestaurantService
     {
+        private readonly IRepository<Company> company;
+
         public RestaurantService(IMapper mapper,
             IRepository<Restaurant> restaurant,
+            IRepository<Company> company,
             UserManager<User> userManager)
             : base(mapper, restaurant, userManager)
         {
+            this.company = company;
         }
 
         public async Task<IEnumerable<RestaurantViewModel>> GetAll(string userId)
@@ -44,10 +48,39 @@ namespace Services
             return result;
         }
 
-        protected override void Create(Restaurant model)
+        public override RestaurantViewModel Get(string id)
         {
-            model.Id = Guid.NewGuid().ToString();
-            this.repo.Add(model);
+            var result = this.repo.GetAll()
+                .Where(r => r.Id.Equals(id))
+                .Select(r => new RestaurantViewModel()
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    LegalId = r.LegalId,
+                    CompanyLegalId = r.Company.LegalId
+                })
+                .FirstOrDefault();
+
+            return result;
+        }
+
+        public override void Save(RestaurantInputModel model)
+        {
+            var inputModel = mapper.Map<Restaurant>(model);
+            var company = this.company.GetAll().FirstOrDefault(c => c.LegalId.Equals(model.CompanyLegalId));
+            inputModel.Company = company;
+
+            if (!model.IsIdEmpty() || this.repo.Exists(inputModel))
+            {
+                this.Update(inputModel);
+            }
+            else
+            {
+                inputModel.Id = Guid.NewGuid().ToString();
+                this.Create(inputModel);
+            }
+
+            this.repo.Save();
         }
     }
 }
