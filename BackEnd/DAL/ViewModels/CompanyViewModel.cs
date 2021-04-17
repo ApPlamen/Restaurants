@@ -6,6 +6,8 @@ namespace DAL.ViewModels
     {
         public string Name { get; set; }
 
+        public string LegalId { get; set; }
+
         public IEnumerable<string> Owners { get; set; }
     }
 }

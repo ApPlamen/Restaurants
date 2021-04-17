@@ -10,6 +10,7 @@ export class RestaurantForm extends BaseFormModel<RestaurantModel> {
 
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.required],
+      legalId: ['', Validators.required],
     });
   }
 }
