@@ -68,6 +68,12 @@ namespace Services
         {
             var inputModel = mapper.Map<Restaurant>(model);
             var company = this.company.GetAll().FirstOrDefault(c => c.LegalId.Equals(model.CompanyLegalId));
+
+            if(company == null || !company.IsActive)
+            {
+                throw new ArgumentException("No company found!");
+            }
+
             inputModel.Company = company;
 
             if (!model.IsIdEmpty() || this.repo.Exists(inputModel))
