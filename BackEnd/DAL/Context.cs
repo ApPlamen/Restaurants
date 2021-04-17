@@ -36,6 +36,26 @@ namespace DAL
                     .HasForeignKey(ur => ur.UserId)
                     .IsRequired();
             });
+
+            builder.Entity<Company>(company =>
+            {
+                company.Property("Name").IsRequired();
+
+                company.Property("LegalId").IsRequired();
+                company.HasIndex("LegalId").IsUnique();
+
+                company.Property("IsActive").HasDefaultValue(true);
+            });
+
+            builder.Entity<Restaurant>(restaurant =>
+            {
+                restaurant.Property("Name").IsRequired();
+
+                restaurant.Property("LegalId").IsRequired();
+                restaurant.HasIndex("LegalId").IsUnique();
+
+                restaurant.Property("IsActive").HasDefaultValue(true);
+            });
         }
     }
 }

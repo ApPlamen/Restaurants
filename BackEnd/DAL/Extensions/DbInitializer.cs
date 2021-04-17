@@ -109,6 +109,7 @@ namespace DAL.Extensions
                 Company company = new Company()
                 {
                     Id = "ca76d562-7e0e-4d62-922e-39bd94e629c5",
+                    LegalId = "1",
                     Name = "Test Company",
                 };
 
@@ -127,6 +128,7 @@ namespace DAL.Extensions
                 {
                     Id = "ca76d562-7e0e-4d62-922e-39bd94e629c5",
                     Name = "Test Restaurant",
+                    LegalId = "1",
                     Company = company,
                 };
 

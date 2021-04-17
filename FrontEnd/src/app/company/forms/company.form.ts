@@ -10,6 +10,7 @@ export class CompanyForm extends BaseFormModel<CompanyModel> {
 
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.required],
+      legalId: ['', Validators.required],
     });
   }
 }

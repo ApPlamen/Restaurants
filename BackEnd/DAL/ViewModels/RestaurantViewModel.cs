@@ -6,7 +6,9 @@
 
         public string CompanyName { get; set; }
 
-        public CompanyViewModel Company { get; set; }
+        public string LegalId { get; set; }
+
+        public string CompanyLegalId { get; set; }
 
         public bool CanManageRestaurantWorkers { get; set; }
 

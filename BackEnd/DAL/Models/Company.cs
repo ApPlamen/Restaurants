@@ -6,6 +6,8 @@ namespace DAL.Models
     {
         public string Name { get; set; }
 
+        public string LegalId { get; set; }
+
         public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
 
         public virtual ICollection<Restaurant> Restaurants { get; set; } = new List<Restaurant>();
