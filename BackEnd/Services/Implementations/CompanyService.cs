@@ -27,7 +27,7 @@ namespace Services
                 .Include(u => u.UserRoles)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            var result = this.repo.GetAll()
+            var result = this.repo.All()
                 .Where(m => m.IsActive)
                 .CompaniesFilterByUser(user)
                 .Select(c => new CompanyViewModel()
@@ -45,7 +45,7 @@ namespace Services
         {
             var inputModel = mapper.Map<Company>(model);
 
-            var legalIdExists = this.repo.GetAll()
+            var legalIdExists = this.repo.All()
                 .Any(r => r.LegalId.Equals(inputModel.LegalId) && !r.Id.Equals(inputModel.Id));
             if (legalIdExists)
             {

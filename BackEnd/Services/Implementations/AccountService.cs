@@ -118,7 +118,7 @@ namespace Services
                 throw new WrongCredentialsException();
             }
 
-            var userfull = repo.GetAll()
+            var userfull = repo.All()
                 .Include(u => u.UserRoles)
                 .ThenInclude(r => r.Role)
                 .Where(u => u.Id == user.Id)
