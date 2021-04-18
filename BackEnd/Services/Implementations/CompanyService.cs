@@ -3,6 +3,7 @@ using DAL.InputModels;
 using DAL.Models;
 using DAL.Repository;
 using DAL.ViewModels;
+using Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -49,7 +50,7 @@ namespace Services
                 .Any(r => r.LegalId.Equals(inputModel.LegalId) && !r.Id.Equals(inputModel.Id));
             if (legalIdExists)
             {
-                throw new ArgumentException("Legal ID exists!");
+                throw new EntityExistsException("Legal ID");
             }
 
             if (!model.IsIdEmpty() || this.repo.Exists(inputModel))

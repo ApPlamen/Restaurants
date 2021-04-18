@@ -3,6 +3,7 @@ using Common.Authentication;
 using DAL.Models;
 using DAL.Repository;
 using DAL.ViewModels;
+using Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -32,6 +33,11 @@ namespace Services
         public async Task AssignRole(string userEmail, string roleId, string payload = null)
         {
             var user = await userManager.FindByEmailAsync(userEmail);
+
+            if(user == null)
+            {
+                throw new EntityDoesNotExistsException("User");
+            }
 
             var exists = this.repo.All()
                 .Include(ur => ur.Restaurants)
@@ -99,6 +105,11 @@ namespace Services
                 .Include(ur => ur.Restaurants)
                 .Include(ur => ur.Companies)
                 .FirstOrDefault(ur => ur.UserId.Equals(userId) && ur.RoleId.Equals(roleId));
+
+            if (role == null)
+            {
+                throw new EntityDoesNotExistsException("Role");
+            }
 
             switch (roleId)
             {

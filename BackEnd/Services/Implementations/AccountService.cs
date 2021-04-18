@@ -62,7 +62,7 @@ namespace Services
 
             if(userExists)
             {
-                throw new UserExistsException();
+                throw new EntityExistsException("User");
             }
 
             var newUser = new User
