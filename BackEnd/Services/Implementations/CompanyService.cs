@@ -15,11 +15,15 @@ namespace Services
 {
     public class CompanyService : BaseCRUDSoftDeleteService<Company, CompanyViewModel, CompanyInputModel, string>, ICompanyService
     {
+        private readonly IRepository<Restaurant> restaurant;
+
         public CompanyService(IMapper mapper,
             IRepository<Company> company,
+            IRepository<Restaurant> restaurant,
             UserManager<User> userManager)
             : base(mapper, company, userManager)
         {
+            this.restaurant = restaurant;
         }
 
         public async Task<IEnumerable<CompanyViewModel>> GetAll(string userId)
@@ -62,6 +66,19 @@ namespace Services
                 inputModel.Id = Guid.NewGuid().ToString();
                 this.Create(inputModel);
             }
+
+            this.repo.Save();
+        }
+
+        public new async Task Delete(string id)
+        {
+            var company = this.repo.GetById(id);
+
+            company.IsActive = false;
+
+            await this.restaurant.All()
+                .Where(r => r.Company.Equals(company))
+                .ForEachAsync(r => r.IsActive = false);
 
             this.repo.Save();
         }

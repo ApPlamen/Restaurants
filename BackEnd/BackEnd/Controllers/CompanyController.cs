@@ -46,9 +46,9 @@ namespace Domain.Controllers
         [Route("{id}")]
         [HttpDelete]
         [AuthorizeRoles(RoleIds.Admin)]
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> DeleteAsync(string id)
         {
-            this.service.Delete(id);
+            await this.service.Delete(id);
             return this.Ok();
         }
     }
