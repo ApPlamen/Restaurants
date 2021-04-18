@@ -16,7 +16,7 @@ namespace DAL.Repository
             this.entities = context.Set<T>();
         }
 
-        public IQueryable<T> GetAll(params Expression<Func<T, object>>[] includeExpressions)
+        public IQueryable<T> All(params Expression<Func<T, object>>[] includeExpressions)
         {
             IQueryable<T> set = this.entities;
 
@@ -28,7 +28,7 @@ namespace DAL.Repository
             return set;
         }
 
-        public IQueryable<T> GetAll()
+        public IQueryable<T> All()
         {
             IQueryable<T> set = this.entities;
             return set;

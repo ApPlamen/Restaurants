@@ -8,6 +8,8 @@ namespace Services
 {
     public interface ICompanyService : IBaseCRUDService<Company, CompanyViewModel, CompanyInputModel, string>, IBaseService
     {
-        public Task<IEnumerable<CompanyViewModel>> GetAll(string userId); 
+        public Task<IEnumerable<CompanyViewModel>> GetAll(string userId);
+
+        new Task Delete(string id);
     }
 }

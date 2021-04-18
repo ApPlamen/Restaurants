@@ -37,7 +37,7 @@ namespace Services
 
             if (user == null)
             {
-                throw new UserDoesntExistsException();
+                throw new EntityDoesNotExistsException("User");
             }
 
             user.UserName = model.UserName;
@@ -59,7 +59,7 @@ namespace Services
 
             if (user == null)
             {
-                throw new UserDoesntExistsException();
+                throw new EntityDoesNotExistsException("User");
             }
 
             var validCurrentPassword = await userManager.CheckPasswordAsync(user, model.CurrentPassword);

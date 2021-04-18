@@ -3,6 +3,7 @@ using Common.Authentication;
 using DAL.Models;
 using DAL.Repository;
 using DAL.ViewModels;
+using Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -33,7 +34,12 @@ namespace Services
         {
             var user = await userManager.FindByEmailAsync(userEmail);
 
-            var exists = this.repo.GetAll()
+            if(user == null)
+            {
+                throw new EntityDoesNotExistsException("User");
+            }
+
+            var exists = this.repo.All()
                 .Include(ur => ur.Restaurants)
                 .Include(ur => ur.Companies)
                 .FirstOrDefault(ur => ur.UserId.Equals(user.Id) && ur.RoleId.Equals(roleId));
@@ -51,7 +57,7 @@ namespace Services
                     break;
 
                 case RoleIds.CompanyOwner:
-                    var company = companyRepo.GetAll().FirstOrDefault(c => c.Id.Equals(payload));
+                    var company = companyRepo.All().FirstOrDefault(c => c.Id.Equals(payload));
 
                     if (exists != null)
                     {
@@ -71,7 +77,7 @@ namespace Services
 
                 case RoleIds.RestaurantAdmin:
                 case RoleIds.Restaurant:
-                    var restaurant = restaurantRepo.GetAll().FirstOrDefault(r => r.Id.Equals(payload));
+                    var restaurant = restaurantRepo.All().FirstOrDefault(r => r.Id.Equals(payload));
 
                     if (exists != null)
                     {
@@ -95,15 +101,20 @@ namespace Services
 
         public void UnassignRole(string userId, string roleId, string payload = null)
         {
-            var role = this.repo.GetAll()
+            var role = this.repo.All()
                 .Include(ur => ur.Restaurants)
                 .Include(ur => ur.Companies)
                 .FirstOrDefault(ur => ur.UserId.Equals(userId) && ur.RoleId.Equals(roleId));
 
+            if (role == null)
+            {
+                throw new EntityDoesNotExistsException("Role");
+            }
+
             switch (roleId)
             {
                 case RoleIds.CompanyOwner:
-                    var company = companyRepo.GetAll().FirstOrDefault(c => c.Id.Equals(payload));
+                    var company = companyRepo.All().FirstOrDefault(c => c.Id.Equals(payload));
 
                     role.Companies.Remove(company);
                     if(role.Companies.Count > 0)
@@ -115,7 +126,7 @@ namespace Services
 
                 case RoleIds.RestaurantAdmin:
                 case RoleIds.Restaurant:
-                    var restaurant = restaurantRepo.GetAll().FirstOrDefault(r => r.Id.Equals(payload));
+                    var restaurant = restaurantRepo.All().FirstOrDefault(r => r.Id.Equals(payload));
 
                     role.Restaurants.Remove(restaurant);
                     if (role.Restaurants.Count > 0)
@@ -132,7 +143,7 @@ namespace Services
 
         public async Task<IEnumerable<UserViewModel>> GetUsersOfRole(string roleId, string payload = null)
         {
-            var users = await this.repo.GetAll()
+            var users = await this.repo.All()
                 .Include(ur => ur.Restaurants)
                 .Include(ur => ur.Companies)
                 .Where(FilterByCompanyOrRestaurant(payload))

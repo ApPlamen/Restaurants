@@ -25,13 +25,13 @@ namespace Services
 
         public virtual new IEnumerable<ViewModel> GetAll()
         {
-            var result = this.repo.GetAll().Where(m => m.IsActive);
+            var result = this.repo.All().Where(m => m.IsActive);
             return mapper.Map<IEnumerable<ViewModel>>(result);
         }
 
         public virtual new IEnumerable<ViewModel> GetAll(params Expression<Func<DALModel, object>>[] includeExpressions)
         {
-            var result = this.repo.GetAll(includeExpressions).Where(m => m.IsActive);
+            var result = this.repo.All(includeExpressions).Where(m => m.IsActive);
             return mapper.Map<IEnumerable<ViewModel>>(result);
         }
 

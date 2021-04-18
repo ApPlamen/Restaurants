@@ -4,6 +4,7 @@ using DAL.InputModels;
 using DAL.Models;
 using DAL.Repository;
 using DAL.ViewModels;
+using Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -32,7 +33,7 @@ namespace Services
                 .Include(u => u.UserRoles)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            var result = this.repo.GetAll()
+            var result = this.repo.All()
                 .Where(m => m.IsActive)
                 .RestaurantsFilterByUser(user)
                 .Select(r => new RestaurantViewModel()
@@ -50,7 +51,7 @@ namespace Services
 
         public override RestaurantViewModel Get(string id)
         {
-            var result = this.repo.GetAll()
+            var result = this.repo.All()
                 .Where(r => r.Id.Equals(id))
                 .Select(r => new RestaurantViewModel()
                 {
@@ -67,18 +68,18 @@ namespace Services
         public override void Save(RestaurantInputModel model)
         {
             var inputModel = mapper.Map<Restaurant>(model);
-            var company = this.company.GetAll().FirstOrDefault(c => c.LegalId.Equals(model.CompanyLegalId));
+            var company = this.company.All().FirstOrDefault(c => c.LegalId.Equals(model.CompanyLegalId));
 
             if (company == null || !company.IsActive)
             {
-                throw new ArgumentException("No company found!");
+                throw new EntityDoesNotExistsException("Company");
             }
 
-            var legalIdExists = this.repo.GetAll()
+            var legalIdExists = this.repo.All()
                 .Any(r => r.LegalId.Equals(inputModel.LegalId) && !r.Id.Equals(inputModel.Id));
             if (legalIdExists)
             {
-                throw new ArgumentException("Legal ID exists!");
+                throw new EntityExistsException("Legal ID");
             }
 
             inputModel.Company = company;
