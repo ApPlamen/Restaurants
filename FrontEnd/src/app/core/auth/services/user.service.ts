@@ -19,8 +19,8 @@ export class UserService {
     return this.http.get<ProfileModel>(BASE_URL + '/profile');
   }
 
-  saveUserProfile(profileModel: ProfileModel): Observable<void>  {
-    return this.http.post<void> (BASE_URL, profileModel);
+  saveUserProfile(model: ProfileModel): Observable<void>  {
+    return this.http.post<void> (BASE_URL, model);
   }
 
   changePasswordUser(model: ChangePasswordModel): Observable<void>  {

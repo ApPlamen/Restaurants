@@ -18,8 +18,8 @@ export class CompanyService {
     return this.http.get<CompanyModel>(BASE_URL + '/' + companyId);
   }
 
-  saveCompany(profileModel: CompanyModel): Observable<void> {
-    return this.http.post<void>(BASE_URL, profileModel);
+  saveCompany(model: CompanyModel): Observable<void> {
+    return this.http.post<void>(BASE_URL, model);
   }
 
   getCompanyBoard(): Observable<CompanyViewModel> {

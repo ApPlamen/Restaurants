@@ -14,11 +14,11 @@ const BASE_URL = environment.apiUrl + CONTROLER_URL;
 export class AuthService {
   constructor(private http: HttpClient) { }
 
-  login(logInModel: LogInModel): Observable<any> {
-    return this.http.post(BASE_URL + '/login', logInModel);
+  login(model: LogInModel): Observable<any> {
+    return this.http.post(BASE_URL + '/login', model);
   }
 
-  register(registerModel: RegisterModel): Observable<any> {
-    return this.http.post(BASE_URL + '/register', registerModel);
+  register(model: RegisterModel): Observable<any> {
+    return this.http.post(BASE_URL + '/register', model);
   }
 }
