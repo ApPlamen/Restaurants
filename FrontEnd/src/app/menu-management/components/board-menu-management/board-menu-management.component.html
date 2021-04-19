@@ -1,9 +1,9 @@
 <div class="row d-grid justify-content-end m-0 mt-1">
-  <tmc-button design="success"
+  <!-- <tmc-button design="success"
               label="Add new Restaurant"
               *ngIf="hasAccessRole([rolesEnum.admin])"
               (clicked)="openCreate()">
-  </tmc-button>
+  </tmc-button> -->
 </div>
 
 <div class="row m-0 mt-1">
@@ -12,33 +12,16 @@
 
 <ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
   <div class="table-actions-container btn-group gap-2">
-    <tmc-button design="warning"
+    <!-- <tmc-button design="warning"
                 label="Edit"
                 *ngIf="hasAccessRole([rolesEnum.admin])"
                 (clicked)="openEdit(dataItem.id)">
-    </tmc-button>
-    
-    <tmc-button design="warning"
-                label="Manage admins"
-                *ngIf="dataItem.canManageRestaurantAdmins"
-                (clicked)="openManageRestaurantAdmins(dataItem.id)">
-    </tmc-button>
-
-    <tmc-button design="warning"
-                label="Manage workers"
-                *ngIf="dataItem.canManageRestaurantWorkers"
-                (clicked)="openManageRestaurantWorkers(dataItem.id)">
     </tmc-button>
 
     <tmc-button design="danger"
                 label="Delete"
                 *ngIf="hasAccessRole([rolesEnum.admin])"
                 (clicked)="delete(dataItem.id)">
-    </tmc-button>
-
-    <tmc-button design="info"
-                label="Open menu"
-                (clicked)="openMenu(dataItem.id)">
-    </tmc-button>
+    </tmc-button> -->
   </div>
 </ng-template>

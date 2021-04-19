@@ -11,6 +11,7 @@ import { RestaurantStoreService } from '../../store/restaurantStore.service';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { RolesFilteringBaseClass } from 'src/app/shared/base-classes/roles-filtering.class';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './board-restaurant-management.component.html',
@@ -36,6 +37,7 @@ export class BoardRestaurantComponent extends RolesFilteringBaseClass implements
               private sharedStoreService: SharedStoreService,
               private modalService: NgbModal,
               private toastr: ToastrService,
+              private router: Router,
               protected tokenStorageService: TokenStorageService) {
     super(tokenStorageService);
   }
@@ -60,6 +62,10 @@ export class BoardRestaurantComponent extends RolesFilteringBaseClass implements
   openEdit(restaurantId: string): void {
     this.restaurantStoreService.setRestaurantId = restaurantId;
     this.openEditModal();
+  }
+
+  openMenu(restaurantId: string): void {
+    this.router.navigate(['/restaurants-management/menu', restaurantId]);
   }
 
   openManageRestaurantAdmins(restaurantId: string): void {
