@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public interface IMenuManagementService : IBaseCRUDService<Menu, MenuViewModel, MenuInputModel, string>, IBaseService
+    public interface IMenuManagementService : IBaseCRUDService<MenuItem, MenuItemViewModel, MenuItemInputModel, string>, IBaseService
     {
         public Task<bool> CanActivate(string userId, string restaurantId);
     }

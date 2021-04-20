@@ -1,6 +1,6 @@
 ﻿namespace DAL.InputModels
 {
-    public class MenuInputModel : BaseInputModel<string>
+    public class MenuItemInputModel : BaseInputModel<string>
     {
         public override bool IsIdEmpty()
         {

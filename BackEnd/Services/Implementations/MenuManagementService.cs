@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class MenuManagementService : BaseCRUDSoftDeleteService<Menu, MenuViewModel, MenuInputModel, string>, IMenuManagementService
+    public class MenuManagementService : BaseCRUDSoftDeleteService<MenuItem, MenuItemViewModel, MenuItemInputModel, string>, IMenuManagementService
     {
         private readonly IRepository<Restaurant> restaurant;
 
         public MenuManagementService(IMapper mapper,
-            IRepository<Menu> DALModel,
+            IRepository<MenuItem> DALModel,
             IRepository<Restaurant> restaurant,
             UserManager<User> userManager)
             : base(mapper, DALModel, userManager)

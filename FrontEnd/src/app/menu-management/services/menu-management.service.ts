@@ -12,20 +12,20 @@ const BASE_URL = environment.apiUrl + CONTROLER_URL;
 export class MenuManagementService {
   constructor(private http: HttpClient) { }
 
-  // getRestaurant(restaurantId: string): Observable<RestaurantModel> {
-  //   return this.http.get<RestaurantModel>(BASE_URL + '/' + restaurantId);
+  // getMenuItem(menuItemId: string): Observable<MenuItemModel> {
+  //   return this.http.get<MenuItemModel>(BASE_URL + '/' + menuItemId);
   // }
 
-  // saveMenuItem(profileModel: RestaurantModel): Observable<void> {
+  // saveMenuItem(profileModel: MenuItemModel): Observable<void> {
   //   return this.http.post<void>(BASE_URL, profileModel);
   // }
 
-  // getMenuBoard(): Observable<RestaurantViewModel> {
-  //   return this.http.get<RestaurantViewModel>(BASE_URL);
+  // getMenuBoard(): Observable<MenuItemViewModel> {
+  //   return this.http.get<MenuItemViewModel>(BASE_URL);
   // }
 
-  // deleteRestaurant(restaurantId: string): Observable<void> {
-  //   return this.http.delete<void>(BASE_URL + '/' + restaurantId);
+  // deleteMenuItem(menuItemId: string): Observable<void> {
+  //   return this.http.delete<void>(BASE_URL + '/' + menuItemId);
   // }
 
   canActivate(restaurantId: string): Observable<boolean> {
