@@ -18,6 +18,8 @@ namespace DAL
 
         public DbSet<Company> Companies { get; set; }
 
+        public DbSet<MenuItem> Menu { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -55,6 +57,16 @@ namespace DAL
                 restaurant.HasIndex("LegalId").IsUnique();
 
                 restaurant.Property("IsActive").HasDefaultValue(true);
+            });
+
+            builder.Entity<MenuItem>(menuItem =>
+            {
+                menuItem.Property("Name").IsRequired();
+
+                menuItem.Property("Description").HasColumnType("ntext");
+
+                menuItem.Property("IsAvailable").HasDefaultValue(false);
+                menuItem.Property("IsActive").HasDefaultValue(true);
             });
         }
     }

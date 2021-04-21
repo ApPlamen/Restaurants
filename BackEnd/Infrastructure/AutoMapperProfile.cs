@@ -17,6 +17,9 @@
 
             CreateMap<RestaurantInputModel, Restaurant>();
             CreateMap<Restaurant, RestaurantViewModel>();
+
+            CreateMap<MenuItemInputModel, MenuItem>();
+            CreateMap<MenuItem, MenuItemViewModel>();
         }
     }
 }

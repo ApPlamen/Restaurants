@@ -11,5 +11,7 @@ namespace DAL.Models
         public Company Company { get; set; }
 
         public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+
+        public virtual ICollection<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
     }
 }
