@@ -4,6 +4,7 @@ using Common.Authentication;
 using Domain.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
+using DAL.InputModels;
 
 namespace Domain.Controllers
 {
@@ -22,6 +23,32 @@ namespace Domain.Controllers
         {
             var result = this.service.GetAll(restaurantId);
             return this.Ok(result);
+        }
+
+        [Route("{id}")]
+        [HttpGet]
+        //[AuthorizeRoles(RoleIds.Admin)]
+        public IActionResult Get(string id)
+        {
+            var result = this.service.Get(id);
+            return this.Ok(result);
+        }
+
+        [HttpPost]
+        //[AuthorizeRoles(RoleIds.Admin)]
+        public IActionResult Save(MenuItemInputModel model)
+        {
+            this.service.Save(model);
+            return this.Ok();
+        }
+
+        [Route("{id}")]
+        [HttpDelete]
+        //[AuthorizeRoles(RoleIds.Admin)]
+        public IActionResult Delete(string id)
+        {
+            this.service.Delete(id);
+            return this.Ok();
         }
 
         [Route("restaurant/{restaurantId}/canActivate")]

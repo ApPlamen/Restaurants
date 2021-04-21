@@ -10,6 +10,9 @@ namespace DAL.InputModels
         [Required]
         public string Description { get; set; }
 
+        [Required]
+        public string RestaurantId { get; set; }
+
         public override bool IsIdEmpty()
         {
             return string.IsNullOrWhiteSpace(Id);

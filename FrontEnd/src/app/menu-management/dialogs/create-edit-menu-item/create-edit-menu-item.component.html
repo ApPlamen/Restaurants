@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h3>{{ isNew ? 'Create' : 'Edit'}} menu item</h3>
+</div>
+
+<div class="modal-body">
+
+  <form class="needs-validation"
+        (ngSubmit)="onSubmit()"
+        [formGroup]="menuItemForm.formGroup"
+        novalidate >
+
+    <tmc-input type="text" label="Name" placeholder="Name" formControlName="name"></tmc-input>
+
+    <tmc-input type="text" label="Description" placeholder="Description" formControlName="description"></tmc-input>
+
+    <tmc-input type="text" label="RestaurantId" placeholder="RestaurantId" formControlName="restaurantId"></tmc-input>
+  </form>
+
+</div>
+
+<div class="modal-footer">
+  <tmc-button type='submit'
+              label="Save"
+              (clicked)="onSubmit()">
+  </tmc-button>
+</div>

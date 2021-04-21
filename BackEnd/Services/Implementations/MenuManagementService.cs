@@ -5,6 +5,7 @@ using DAL.Repository;
 using DAL.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,11 +28,13 @@ namespace Services
         public IEnumerable<MenuItemViewModel> GetAll(string restaurantId)
         {
             var result = this.repo.All()
+                .Where(m => m.IsActive)
                 .Where(m => m.RestaurantId.Equals(restaurantId))
                 .Select(m => new MenuItemViewModel()
                 {
                     Id = m.Id,
                     Name = m.Name,
+                    IsAvailable = m.IsAvailable,
                 })
                 .ToList();
 
@@ -50,6 +53,12 @@ namespace Services
                 .Any();
 
             return result;
+        }
+
+        protected override void Create(MenuItem model)
+        {
+            model.Id = Guid.NewGuid().ToString();
+            base.Create(model);
         }
     }
 }

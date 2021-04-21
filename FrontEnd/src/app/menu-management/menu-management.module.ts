@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
-//import { StoreModule } from '@ngrx/store';
 import { MenuManagementRoutingModule } from './menu-management-routing.module';
 import { BoardMenuManagementComponent } from './components/board-menu-management/board-menu-management.component';
+import { StoreModule } from '@ngrx/store';
+import { menuManagementRecuder } from './store/menuManagement.reducer';
+import { CreateEditMenuItemComponent } from './dialogs/create-edit-menu-item/create-edit-menu-item.component';
 
 @NgModule({
   declarations: [
     BoardMenuManagementComponent,
+    CreateEditMenuItemComponent,
   ],
   imports: [
     CommonModule,
@@ -17,7 +20,7 @@ import { BoardMenuManagementComponent } from './components/board-menu-management
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
-    //StoreModule.forFeature('restaurant', restaurantRecuder),
+    StoreModule.forFeature('menu-management', menuManagementRecuder),
   ],
   exports: [
   ],
