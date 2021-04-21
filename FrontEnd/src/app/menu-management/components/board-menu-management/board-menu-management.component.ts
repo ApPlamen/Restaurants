@@ -65,7 +65,7 @@ export class BoardMenuManagementComponent implements OnInit {
   private openEditModal() {
     this.menuManagementStoreService.setRestaurantId = this.restaurantId;
 
-    this.modalService.open(CreateEditMenuItemComponent)
+    this.modalService.open(CreateEditMenuItemComponent, {size: 'lg'})
       .closed
       .subscribe(_ => this.fillProfileForm());
   }
