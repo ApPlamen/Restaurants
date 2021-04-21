@@ -11,7 +11,6 @@ export class MenuItemForm extends BaseFormModel<MenuItemModel> {
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      restaurantId: ['', Validators.required],
     });
   }
 }

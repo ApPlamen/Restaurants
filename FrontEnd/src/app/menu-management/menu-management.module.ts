@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MenuManagementRoutingModule } from './menu-management-routing.module';
 import { BoardMenuManagementComponent } from './components/board-menu-management/board-menu-management.component';
 import { StoreModule } from '@ngrx/store';
-import { menuManagementRecuder } from './store/menuManagement.reducer';
+import { menuManagementRecuder } from './store/menuManagementStore.reducer';
 import { CreateEditMenuItemComponent } from './dialogs/create-edit-menu-item/create-edit-menu-item.component';
 
 @NgModule({

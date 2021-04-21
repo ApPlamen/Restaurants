@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MenuManagementService } from '../../services/menu-management.service';
 import { ActivatedRoute } from '@angular/router';
 import { CreateEditMenuItemComponent } from '../../dialogs/create-edit-menu-item/create-edit-menu-item.component';
-import { MenuManagementStoreService } from '../../store/menuManagement.service';
+import { MenuManagementStoreService } from '../../store/menuManagementStore.service';
 
 @Component({
   templateUrl: './board-menu-management.component.html',
@@ -63,6 +63,8 @@ export class BoardMenuManagementComponent implements OnInit {
   }
 
   private openEditModal() {
+    this.menuManagementStoreService.setRestaurantId = this.restaurantId;
+
     this.modalService.open(CreateEditMenuItemComponent)
       .closed
       .subscribe(_ => this.fillProfileForm());
