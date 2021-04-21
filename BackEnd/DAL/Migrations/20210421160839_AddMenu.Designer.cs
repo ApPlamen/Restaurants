@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210421160024_AddMenu")]
+    [Migration("20210421160839_AddMenu")]
     partial class AddMenu
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,6 +88,7 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RestaurantId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -367,7 +368,9 @@ namespace DAL.Migrations
                 {
                     b.HasOne("DAL.Models.Restaurant", "Restaurant")
                         .WithMany("MenuItems")
-                        .HasForeignKey("RestaurantId");
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Restaurant");
                 });

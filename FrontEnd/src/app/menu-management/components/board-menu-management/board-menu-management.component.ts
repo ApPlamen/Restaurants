@@ -2,6 +2,8 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { ToastrService } from 'ngx-toastr';
+import { MenuManagementService } from '../../services/menu-management.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: './board-menu-management.component.html',
@@ -18,12 +20,17 @@ export class BoardMenuManagementComponent implements OnInit {
     },
   ];
 
-  constructor(//private menuManagementService: MenuManagementService,
+  private restaurantId: string;
+
+  constructor(private menuManagementService: MenuManagementService,
               //private menuManagementStoreService: MenuManagementStoreService,
               private modalService: NgbModal,
-              private toastr: ToastrService,) { }
+              private toastr: ToastrService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.restaurantId = this.route.snapshot.paramMap.get('restaurantId');
+
     this.columns = [
       ...this.columns,
       {
@@ -32,7 +39,7 @@ export class BoardMenuManagementComponent implements OnInit {
       }
     ];
 
-    //this.fillProfileForm();
+    this.fillProfileForm();
   }
 
   // openCreate(): void {
@@ -59,8 +66,8 @@ export class BoardMenuManagementComponent implements OnInit {
   //     .subscribe(_ => this.fillProfileForm());
   // }
 
-  // private fillProfileForm(): void {
-  //   this.menuManagementService.getMenuBoard()
-  //     .subscribe(menuItems => this.menuItems = menuItems);
-  // }
+  private fillProfileForm(): void {
+    this.menuManagementService.getMenuBoard(this.restaurantId)
+      .subscribe(menuItems => this.menuItems = menuItems);
+  }
 }

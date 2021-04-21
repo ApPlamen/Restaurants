@@ -15,6 +15,15 @@ namespace Domain.Controllers
             : base(service)
         { }
 
+        [Route("restaurant/{restaurantId}/menu")]
+        [HttpGet]
+        [AuthorizeRoles(RoleIds.Admin, RoleIds.CompanyOwner, RoleIds.RestaurantAdmin, RoleIds.Restaurant)]
+        public IActionResult GetAll(string restaurantId)
+        {
+            var result = this.service.GetAll(restaurantId);
+            return this.Ok(result);
+        }
+
         [Route("restaurant/{restaurantId}/canActivate")]
         [HttpGet]
         [AuthorizeRoles(RoleIds.Admin, RoleIds.CompanyOwner, RoleIds.RestaurantAdmin, RoleIds.Restaurant)]

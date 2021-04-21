@@ -67,6 +67,11 @@ namespace DAL
 
                 menuItem.Property("IsAvailable").HasDefaultValue(false);
                 menuItem.Property("IsActive").HasDefaultValue(true);
+
+                menuItem.HasOne(m => m.Restaurant)
+                    .WithMany(r => r.MenuItems)
+                    .HasForeignKey(m => m.RestaurantId)
+                    .IsRequired();
             });
         }
     }

@@ -14,7 +14,7 @@ namespace DAL.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "ntext", nullable: true),
                     IsAvailable = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    RestaurantId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    RestaurantId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
@@ -25,7 +25,7 @@ namespace DAL.Migrations
                         column: x => x.RestaurantId,
                         principalTable: "Restaurants",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

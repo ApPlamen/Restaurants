@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { MenuItemViewModel } from '../viewmodels/menu-item.viewmodel';
 
 const CONTROLER_URL = 'MenuManagement';
 const BASE_URL = environment.apiUrl + CONTROLER_URL;
@@ -20,9 +21,9 @@ export class MenuManagementService {
   //   return this.http.post<void>(BASE_URL, profileModel);
   // }
 
-  // getMenuBoard(): Observable<MenuItemViewModel> {
-  //   return this.http.get<MenuItemViewModel>(BASE_URL);
-  // }
+  getMenuBoard(restaurantId: string): Observable<MenuItemViewModel> {
+    return this.http.get<MenuItemViewModel>(BASE_URL + '/restaurant/' + restaurantId + '/menu');
+  }
 
   // deleteMenuItem(menuItemId: string): Observable<void> {
   //   return this.http.delete<void>(BASE_URL + '/' + menuItemId);

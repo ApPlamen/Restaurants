@@ -45,7 +45,7 @@ export class MenuGuard implements CanActivate, CanActivateChild, CanDeactivate<u
   }
 
   async checkUser(route: ActivatedRouteSnapshot, url: any): Promise<boolean> {
-    return await this.menuManagementService.canActivate(route.params.id)
+    return await this.menuManagementService.canActivate(route.params.restaurantId)
       .toPromise()
       .then(canActivate => {
         if(canActivate) {

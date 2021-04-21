@@ -7,7 +7,7 @@ import { MenuGuard } from './guards/menu-guard';
 
 const routes: Routes = [
   {
-    path: ':id',
+    path: ':restaurantId/menu',
     canActivate: [AuthGuard, MenuGuard],
     data: { accessRoles: [RolesEnum.admin, RolesEnum.companyOwner, RolesEnum.restaurantAdmin, RolesEnum.restaurant] },
     component: BoardMenuManagementComponent

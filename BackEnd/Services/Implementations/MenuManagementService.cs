@@ -5,6 +5,7 @@ using DAL.Repository;
 using DAL.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,6 +22,20 @@ namespace Services
             : base(mapper, DALModel, userManager)
         {
             this.restaurant = restaurant;
+        }
+
+        public IEnumerable<MenuItemViewModel> GetAll(string restaurantId)
+        {
+            var result = this.repo.All()
+                .Where(m => m.RestaurantId.Equals(restaurantId))
+                .Select(m => new MenuItemViewModel()
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                })
+                .ToList();
+
+            return result;
         }
 
         public async Task<bool> CanActivate(string userId, string restaurantId)

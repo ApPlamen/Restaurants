@@ -11,7 +11,7 @@ const routes: Routes = [
     loadChildren: () => import('./restaurant-management/restaurant-management.module').then(m => m.RestaurantManagementModule),
   },
   {
-    path: 'restaurants-management/menu',
+    path: 'restaurants-management/restaurant',
     loadChildren: () => import('./menu-management/menu-management.module').then(m => m.MenuManagementModule),
   },
   {

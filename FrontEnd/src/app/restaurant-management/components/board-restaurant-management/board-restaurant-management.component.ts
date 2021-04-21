@@ -65,7 +65,7 @@ export class BoardRestaurantComponent extends RolesFilteringBaseClass implements
   }
 
   openMenu(restaurantId: string): void {
-    this.router.navigate(['/restaurants-management/menu', restaurantId]);
+    this.router.navigate(['/restaurants-management/restaurant', restaurantId, 'menu']);
   }
 
   openManageRestaurantAdmins(restaurantId: string): void {
