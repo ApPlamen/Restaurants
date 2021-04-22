@@ -7,6 +7,7 @@ import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
 import { ManageRolesStoreModel } from 'src/app/shared/storemodels/manage-roles.storemodel';
 import { RoleIdsEnum } from '../../enums/roles.enum';
 import { UserService } from '../../services/user.service';
+import { UsersViewModel } from '../../viewmodels/user.viewmodel';
 
 @Component({
   templateUrl: './board-users.component.html',
@@ -14,7 +15,7 @@ import { UserService } from '../../services/user.service';
 export class BoardUsersComponent implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
-  public users;
+  public users: UsersViewModel[];
 
   public columns: SimpleTableColumn<{ [key: string]: string }>[] = [
     {

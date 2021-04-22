@@ -27,8 +27,8 @@ export class UserService {
     return this.http.put<void> (BASE_URL + '/change-password', model);
   }
 
-  getUserBoard(): Observable<UsersViewModel> {
-    return this.http.get<UsersViewModel>(BASE_URL);
+  getUserBoard(): Observable<UsersViewModel[]> {
+    return this.http.get<UsersViewModel[]>(BASE_URL);
   }
 
   deleteUser(userId: string): Observable<void> {

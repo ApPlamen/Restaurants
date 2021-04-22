@@ -12,6 +12,7 @@ import { TokenStorageService } from 'src/app/shared/services/token-storage.servi
 import { RolesFilteringBaseClass } from 'src/app/shared/base-classes/roles-filtering.class';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { RestaurantViewModel } from '../../viewmodels/restaurant.viewmodel';
 
 @Component({
   templateUrl: './board-restaurant-management.component.html',
@@ -19,7 +20,7 @@ import { Router } from '@angular/router';
 export class BoardRestaurantComponent extends RolesFilteringBaseClass implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
-  public restaurants;
+  public restaurants: RestaurantViewModel[];
 
   public columns: SimpleTableColumn<{ [key: string]: string }>[] = [
     {

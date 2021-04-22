@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CreateEditMenuItemComponent } from '../../dialogs/create-edit-menu-item/create-edit-menu-item.component';
 import { MenuManagementStoreService } from '../../store/menu-management.store.service';
 import { AvailableModel } from 'src/app/shared/models/available.model';
+import { MenuItemViewModel } from '../../viewmodels/menu-item.viewmodel';
 
 @Component({
   templateUrl: './board-menu-management.component.html',
@@ -14,7 +15,7 @@ import { AvailableModel } from 'src/app/shared/models/available.model';
 export class BoardMenuManagementComponent implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
-  public menuItems;
+  public menuItems: MenuItemViewModel[];
 
   public columns: SimpleTableColumn<{ [key: string]: string }>[] = [
     {

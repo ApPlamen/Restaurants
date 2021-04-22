@@ -22,8 +22,8 @@ export class CompanyService {
     return this.http.post<void>(BASE_URL, model);
   }
 
-  getCompanyBoard(): Observable<CompanyViewModel> {
-    return this.http.get<CompanyViewModel>(BASE_URL);
+  getCompanyBoard(): Observable<CompanyViewModel[]> {
+    return this.http.get<CompanyViewModel[]>(BASE_URL);
   }
 
   deleteCompany(companyId: string): Observable<void> {

@@ -11,6 +11,7 @@ import { CompanyStoreService } from '../../store/company.store.service';
 import { RolesFilteringBaseClass } from 'src/app/shared/base-classes/roles-filtering.class';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { ToastrService } from 'ngx-toastr';
+import { CompanyViewModel } from '../../viewmodels/company.viewmodel';
 
 @Component({
   templateUrl: './board-company.component.html',
@@ -18,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 export class BoardCompanyComponent extends RolesFilteringBaseClass implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
-  public companies;
+  public companies: CompanyViewModel[];
 
   public columns: SimpleTableColumn<{ [key: string]: string }>[] = [
     {
