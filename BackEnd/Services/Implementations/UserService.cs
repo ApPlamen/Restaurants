@@ -16,8 +16,7 @@ namespace Services
             IRepository<User> user,
             UserManager<User> userManager)
             : base(mapper, user, userManager)
-        {
-        }
+        { }
 
         public new async Task<UserViewModel> Get(string userId)
         {

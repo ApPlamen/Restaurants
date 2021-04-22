@@ -29,6 +29,10 @@ export class BoardCompanyComponent extends RolesFilteringBaseClass implements On
       header: 'Owners',
       field: 'owners',
     },
+    {
+      header: 'Legal ID',
+      field: 'legalId',
+    },
   ];
 
   constructor(private companyService: CompanyService,

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DAL.ViewModels
+﻿namespace DAL.ViewModels
 {
     public class UserViewModel : BaseViewModel<string>
     {

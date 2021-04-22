@@ -8,6 +8,6 @@ namespace Services
 {
     public interface IRestaurantService : IBaseCRUDService<Restaurant, RestaurantViewModel, RestaurantInputModel, string>, IBaseService
     {
-        public Task<IEnumerable<RestaurantViewModel>> GetAll(string userId);
+        public Task<IEnumerable<RestaurantBoardViewModel>> GetAll(string userId);
     }
 }

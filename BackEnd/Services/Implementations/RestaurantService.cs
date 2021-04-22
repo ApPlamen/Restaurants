@@ -27,7 +27,7 @@ namespace Services
             this.company = company;
         }
 
-        public async Task<IEnumerable<RestaurantViewModel>> GetAll(string userId)
+        public async Task<IEnumerable<RestaurantBoardViewModel>> GetAll(string userId)
         {
             var user = await userManager.Users
                 .Include(u => u.UserRoles)
@@ -36,11 +36,12 @@ namespace Services
             var result = this.repo.All()
                 .Where(m => m.IsActive)
                 .RestaurantsFilterByUser(user)
-                .Select(r => new RestaurantViewModel()
+                .Select(r => new RestaurantBoardViewModel()
                 {
                     Id = r.Id,
                     Name = r.Name,
                     CompanyName = r.Company.Name,
+                    LegalId = r.LegalId,
                     CanManageRestaurantWorkers = r.UserRoles.Any(ur => ur.UserId.Equals(userId) && ur.RoleId.Equals(RoleIds.RestaurantAdmin)),
                     CanManageRestaurantAdmins = r.Company.UserRoles.Any(ur => ur.UserId.Equals(userId)),
                 })

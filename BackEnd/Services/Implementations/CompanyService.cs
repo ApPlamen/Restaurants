@@ -26,7 +26,7 @@ namespace Services
             this.restaurant = restaurant;
         }
 
-        public async Task<IEnumerable<CompanyViewModel>> GetAll(string userId)
+        public async Task<IEnumerable<CompanyBoardViewModel>> GetAll(string userId)
         {
             var user = await userManager.Users
                 .Include(u => u.UserRoles)
@@ -35,10 +35,11 @@ namespace Services
             var result = this.repo.All()
                 .Where(m => m.IsActive)
                 .CompaniesFilterByUser(user)
-                .Select(c => new CompanyViewModel()
+                .Select(c => new CompanyBoardViewModel()
                 {
                     Id = c.Id,
                     Name = c.Name,
+                    LegalId = c.LegalId,
                     Owners = c.UserRoles.Select(ur => ur.User.Email),
                 })
                 .ToList();

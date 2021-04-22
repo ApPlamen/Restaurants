@@ -30,6 +30,10 @@ export class BoardRestaurantComponent extends RolesFilteringBaseClass implements
       header: 'Company',
       field: 'companyName',
     },
+    {
+      header: 'Legal ID',
+      field: 'legalId',
+    },
   ];
 
   constructor(private restaurantManagementService: RestaurantManagementService,
