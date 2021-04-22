@@ -1,5 +1,5 @@
-import * as MenuManagementActions from './menuManagementStore.action';
-import { MenuManagementState, initialState } from './menuManagementStore.state';
+import * as MenuManagementActions from './menu-management.store.action';
+import { MenuManagementState, initialState } from './menu-management.store.state';
 
 export function menuManagementRecuder(state: MenuManagementState = initialState, action) {
   switch (action.type) {

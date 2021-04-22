@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { BoardCompanyComponent } from './components/board-company/board-company.component';
 import { CreateEditCompanyComponent } from './dialogs/create-edit-company/create-edit-company.component';
 import { StoreModule } from '@ngrx/store';
-import { companyRecuder } from './store/companyStore.reducer';
+import { companyRecuder } from './store/company.store.reducer';
 import { CompanyRoutingModule } from './company-routing.module';
 
 @NgModule({

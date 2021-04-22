@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { MenuItemForm } from '../../forms/menu-item.form';
 import { MenuManagementService } from '../../services/menu-management.service';
-import { MenuManagementStoreService } from '../../store/menuManagementStore.service';
+import { MenuManagementStoreService } from '../../store/menu-management.store.service';
 
 @Component({
   templateUrl: './create-edit-menu-item.component.html',

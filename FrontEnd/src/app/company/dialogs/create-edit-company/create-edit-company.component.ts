@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CompanyForm } from '../../forms/company.form';
 import { CompanyService } from '../../services/company.service';
-import { CompanyStoreService } from '../../store/companyStore.service';
+import { CompanyStoreService } from '../../store/company.store.service';
 
 @Component({
   templateUrl: './create-edit-company.component.html',

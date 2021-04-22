@@ -1,8 +1,8 @@
-import * as RestaurantActions from './restaurantStore.action';
+import * as RestaurantActions from './restaurant.store.action';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { RestaurantState, getRestaurantId } from './restaurantStore.state';
+import { RestaurantState, getRestaurantId } from './restaurant.store.state';
 
 @Injectable({
   providedIn: 'root'

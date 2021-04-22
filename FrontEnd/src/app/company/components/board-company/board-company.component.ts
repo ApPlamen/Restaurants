@@ -7,7 +7,7 @@ import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
 import { CreateEditCompanyComponent } from '../../dialogs/create-edit-company/create-edit-company.component';
 import { CompanyService } from '../../services/company.service';
-import { CompanyStoreService } from '../../store/companyStore.service';
+import { CompanyStoreService } from '../../store/company.store.service';
 import { RolesFilteringBaseClass } from 'src/app/shared/base-classes/roles-filtering.class';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { ToastrService } from 'ngx-toastr';

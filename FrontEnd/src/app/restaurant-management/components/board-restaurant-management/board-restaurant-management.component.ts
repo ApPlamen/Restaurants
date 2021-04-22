@@ -7,7 +7,7 @@ import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
 import { CreateEditRestaurantComponent } from '../../dialogs/create-edit-restaurant/create-edit-restaurant.component';
 import { RestaurantManagementService } from '../../services/restaurant-management.service';
-import { RestaurantStoreService } from '../../store/restaurantStore.service';
+import { RestaurantStoreService } from '../../store/restaurant.store.service';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { RolesFilteringBaseClass } from 'src/app/shared/base-classes/roles-filtering.class';
 import { ToastrService } from 'ngx-toastr';

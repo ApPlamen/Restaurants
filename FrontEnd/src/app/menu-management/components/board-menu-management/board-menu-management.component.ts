@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MenuManagementService } from '../../services/menu-management.service';
 import { ActivatedRoute } from '@angular/router';
 import { CreateEditMenuItemComponent } from '../../dialogs/create-edit-menu-item/create-edit-menu-item.component';
-import { MenuManagementStoreService } from '../../store/menuManagementStore.service';
+import { MenuManagementStoreService } from '../../store/menu-management.store.service';
 import { AvailableModel } from 'src/app/shared/models/available.model';
 
 @Component({

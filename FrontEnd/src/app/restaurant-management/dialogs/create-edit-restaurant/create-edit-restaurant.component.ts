@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { RestaurantForm } from '../../forms/restaurant.form';
 import { RestaurantManagementService } from '../../services/restaurant-management.service';
-import { RestaurantStoreService } from '../../store/restaurantStore.service';
+import { RestaurantStoreService } from '../../store/restaurant.store.service';
 
 @Component({
   templateUrl: './create-edit-restaurant.component.html',
