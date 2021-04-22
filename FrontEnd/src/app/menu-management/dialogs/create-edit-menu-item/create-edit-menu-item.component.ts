@@ -12,7 +12,7 @@ export class CreateEditMenuItemComponent implements OnInit {
   isNew = true;
   menuItemForm: MenuItemForm = new MenuItemForm();
 
-  private restaurantId: string
+  private restaurantId: string;
 
   constructor(private menuManagementService: MenuManagementService,
               private menuManagementStoreService: MenuManagementStoreService,
@@ -37,7 +37,7 @@ export class CreateEditMenuItemComponent implements OnInit {
   onSubmit(): void {
     if (this.menuItemForm.formGroup.valid) {
       this.menuItemForm.patchModel({ restaurantId: this.restaurantId });
-      
+
       this.menuManagementService.saveMenuItem(this.menuItemForm.model)
         .subscribe(_ => {
           this.toastr.success('Success!');

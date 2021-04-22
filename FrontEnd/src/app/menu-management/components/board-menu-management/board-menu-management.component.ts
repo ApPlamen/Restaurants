@@ -67,7 +67,7 @@ export class BoardMenuManagementComponent implements OnInit {
     const model: AvailableModel = {
       id: menuItemId,
       available: !available,
-    }
+    };
 
     this.menuManagementService.toggleMenuItemAvailable(model)
       .subscribe(_ => {

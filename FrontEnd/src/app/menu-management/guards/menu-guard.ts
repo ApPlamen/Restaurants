@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot,
   CanActivate,
   CanActivateChild,
@@ -10,8 +10,8 @@ import { ActivatedRouteSnapshot,
   UrlSegment,
   UrlTree
 } from '@angular/router';
-import { Observable } from "rxjs";
-import { MenuManagementService } from "../services/menu-management.service";
+import { Observable } from 'rxjs';
+import { MenuManagementService } from '../services/menu-management.service';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +49,7 @@ export class MenuGuard implements CanActivate, CanActivateChild, CanDeactivate<u
       .toPromise()
       .then(canActivate => {
         if(canActivate) {
-          return true
+          return true;
         }
 
         this.router.navigate(['/restaurants-management']);
