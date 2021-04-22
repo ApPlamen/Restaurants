@@ -1,0 +1,33 @@
+<div class="row d-grid justify-content-end m-0 mt-1">
+  <tmc-button design="success"
+              label="Add new Menu Item"
+              *ngIf="hasRole(['CompanyOwner','RestaurantAdmin'])"
+              (clicked)="openCreate()">
+  </tmc-button>
+</div>
+
+<div class="row m-0 mt-1">
+  <tmc-simple-table [columns]="columns" [data]="menuItems"></tmc-simple-table>
+</div>
+
+<ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
+  <div class="table-actions-container btn-group gap-2">
+    <tmc-button design="{{ dataItem.isAvailable ? 'success' : 'danger' }}"
+                label="Available"
+                *ngIf="hasRole(['CompanyOwner','RestaurantAdmin','Restaurant'])"
+                (clicked)="toggleAvailable(dataItem.id, dataItem.isAvailable)">
+    </tmc-button>
+
+    <tmc-button design="warning"
+                label="Edit"
+                *ngIf="hasRole(['CompanyOwner','RestaurantAdmin'])"
+                (clicked)="openEdit(dataItem.id)">
+    </tmc-button>
+
+    <tmc-button design="danger"
+                label="Delete"
+                *ngIf="hasRole(['CompanyOwner','RestaurantAdmin'])"
+                (clicked)="delete(dataItem.id)">
+    </tmc-button>
+  </div>
+</ng-template>

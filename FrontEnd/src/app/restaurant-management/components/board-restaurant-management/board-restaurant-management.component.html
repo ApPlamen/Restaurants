@@ -35,5 +35,10 @@
                 *ngIf="hasAccessRole([rolesEnum.admin])"
                 (clicked)="delete(dataItem.id)">
     </tmc-button>
+
+    <tmc-button design="info"
+                label="Open menu"
+                (clicked)="openMenu(dataItem.id)">
+    </tmc-button>
   </div>
 </ng-template>

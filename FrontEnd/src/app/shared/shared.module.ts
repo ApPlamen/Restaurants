@@ -7,6 +7,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { InputComponent } from './components/input/input.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SimpleTableComponent } from './components/simple-table/simple-table.component';
+import { TextareaComponent } from './components/textarea/textarea.component';
 import { ManageRolesComponent } from './dialogs/manage-roles/manage-roles.component';
 import { authInterceptorProviders } from './interceptors/auth.interceptor';
 import { sharedRecuder } from './store/sharedStore.reducer';
@@ -16,6 +17,7 @@ import { sharedRecuder } from './store/sharedStore.reducer';
   declarations: [
     SimpleTableComponent,
     InputComponent,
+    TextareaComponent,
     ButtonComponent,
     NavbarComponent,
     ManageRolesComponent,
@@ -30,6 +32,7 @@ import { sharedRecuder } from './store/sharedStore.reducer';
   exports: [
     SimpleTableComponent,
     InputComponent,
+    TextareaComponent,
     ButtonComponent,
     NavbarComponent,
   ],
