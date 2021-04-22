@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { MenuItemViewModel } from '../viewmodels/menu-item.viewmodel';
-import { MenuItemModel } from '../models/menu-management.model';
+import { MenuItemModel } from '../models/menu-item.model';
+import { AvailableModel } from 'src/app/shared/models/available.model';
 
 const CONTROLER_URL = 'MenuManagement';
 const BASE_URL = environment.apiUrl + CONTROLER_URL;
@@ -28,6 +29,10 @@ export class MenuManagementService {
 
   deleteMenuItem(menuItemId: string): Observable<void> {
     return this.http.delete<void>(BASE_URL + '/' + menuItemId);
+  }
+
+  toggleMenuItemAvailable(model: AvailableModel): Observable<void> {
+    return this.http.put<void>(BASE_URL + '/available', model);
   }
 
   canActivate(restaurantId: string): Observable<boolean> {

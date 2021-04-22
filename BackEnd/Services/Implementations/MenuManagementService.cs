@@ -25,12 +25,12 @@ namespace Services
             this.restaurant = restaurant;
         }
 
-        public IEnumerable<MenuItemViewModel> GetAll(string restaurantId)
+        public IEnumerable<MenuItemBoardViewModel> GetAll(string restaurantId)
         {
             var result = this.repo.All()
                 .Where(m => m.IsActive)
                 .Where(m => m.RestaurantId.Equals(restaurantId))
-                .Select(m => new MenuItemViewModel()
+                .Select(m => new MenuItemBoardViewModel()
                 {
                     Id = m.Id,
                     Name = m.Name,
@@ -39,6 +39,15 @@ namespace Services
                 .ToList();
 
             return result;
+        }
+
+        public void ToggleAvailable(AvailableInputModel<string> model)
+        {
+            var menuItem = this.repo.GetById(model.Id);
+
+            menuItem.IsAvailable = model.Available;
+
+            this.repo.Save();
         }
 
         public async Task<bool> CanActivate(string userId, string restaurantId)

@@ -51,6 +51,15 @@ namespace Domain.Controllers
             return this.Ok();
         }
 
+        [Route("available")]
+        [HttpPut]
+        //[AuthorizeRoles(RoleIds.Admin, RoleIds.CompanyOwner, RoleIds.RestaurantAdmin, RoleIds.Restaurant)]
+        public IActionResult ToggleAvailable(AvailableInputModel<string> model)
+        {
+            this.service.ToggleAvailable(model);
+            return this.Ok();
+        }
+
         [Route("restaurant/{restaurantId}/canActivate")]
         [HttpGet]
         [AuthorizeRoles(RoleIds.Admin, RoleIds.CompanyOwner, RoleIds.RestaurantAdmin, RoleIds.Restaurant)]

@@ -6,6 +6,7 @@ import { MenuManagementService } from '../../services/menu-management.service';
 import { ActivatedRoute } from '@angular/router';
 import { CreateEditMenuItemComponent } from '../../dialogs/create-edit-menu-item/create-edit-menu-item.component';
 import { MenuManagementStoreService } from '../../store/menuManagementStore.service';
+import { AvailableModel } from 'src/app/shared/models/available.model';
 
 @Component({
   templateUrl: './board-menu-management.component.html',
@@ -56,6 +57,19 @@ export class BoardMenuManagementComponent implements OnInit {
 
   delete(menuItemId: string): void {
     this.menuManagementService.deleteMenuItem(menuItemId)
+      .subscribe(_ => {
+        this.toastr.success('Success!');
+        this.fillProfileForm();
+      });
+  }
+
+  toggleAvailable(menuItemId: string, available: boolean): void {
+    const model: AvailableModel = {
+      id: menuItemId,
+      available: !available,
+    }
+
+    this.menuManagementService.toggleMenuItemAvailable(model)
       .subscribe(_ => {
         this.toastr.success('Success!');
         this.fillProfileForm();

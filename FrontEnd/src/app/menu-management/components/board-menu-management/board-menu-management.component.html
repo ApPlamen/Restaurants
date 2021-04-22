@@ -12,6 +12,12 @@
 
 <ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
   <div class="table-actions-container btn-group gap-2">
+    <tmc-button design="{{ dataItem.isAvailable ? 'success' : 'danger' }}"
+                label="Available"
+                *ngIf="true"
+                (clicked)="toggleAvailable(dataItem.id, dataItem.isAvailable)">
+    </tmc-button>
+
     <tmc-button design="warning"
                 label="Edit"
                 *ngIf="true"

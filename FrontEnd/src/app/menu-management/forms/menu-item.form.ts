@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { BaseFormModel } from 'src/app/shared/models/base-form.model';
-import { MenuItemModel } from '../models/menu-management.model';
+import { MenuItemModel } from '../models/menu-item.model';
 
 @Injectable()
 export class MenuItemForm extends BaseFormModel<MenuItemModel> {

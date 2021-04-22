@@ -8,7 +8,9 @@ namespace Services
 {
     public interface IMenuManagementService : IBaseCRUDService<MenuItem, MenuItemViewModel, MenuItemInputModel, string>, IBaseService
     {
-        public IEnumerable<MenuItemViewModel> GetAll(string restaurantId);
+        public IEnumerable<MenuItemBoardViewModel> GetAll(string restaurantId);
+
+        public void ToggleAvailable(AvailableInputModel<string> model);
 
         public Task<bool> CanActivate(string userId, string restaurantId);
     }
