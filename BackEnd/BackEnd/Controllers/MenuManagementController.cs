@@ -27,7 +27,7 @@ namespace Domain.Controllers
 
         [Route("{id}")]
         [HttpGet]
-        //[AuthorizeRoles(RoleIds.Admin)]
+        [AuthorizeRoles(RoleIds.CompanyOwner, RoleIds.RestaurantAdmin)]
         public IActionResult Get(string id)
         {
             var result = this.service.Get(id);
@@ -35,7 +35,7 @@ namespace Domain.Controllers
         }
 
         [HttpPost]
-        //[AuthorizeRoles(RoleIds.Admin)]
+        [AuthorizeRoles(RoleIds.CompanyOwner, RoleIds.RestaurantAdmin)]
         public IActionResult Save(MenuItemInputModel model)
         {
             this.service.Save(model);
@@ -44,7 +44,7 @@ namespace Domain.Controllers
 
         [Route("{id}")]
         [HttpDelete]
-        //[AuthorizeRoles(RoleIds.Admin)]
+        [AuthorizeRoles(RoleIds.CompanyOwner, RoleIds.RestaurantAdmin)]
         public IActionResult Delete(string id)
         {
             this.service.Delete(id);
@@ -53,11 +53,22 @@ namespace Domain.Controllers
 
         [Route("available")]
         [HttpPut]
-        //[AuthorizeRoles(RoleIds.Admin, RoleIds.CompanyOwner, RoleIds.RestaurantAdmin, RoleIds.Restaurant)]
+        [AuthorizeRoles(RoleIds.CompanyOwner, RoleIds.RestaurantAdmin, RoleIds.Restaurant)]
         public IActionResult ToggleAvailable(AvailableInputModel<string> model)
         {
             this.service.ToggleAvailable(model);
             return this.Ok();
+        }
+
+        [Route("restaurant/{restaurantId}/user-roles")]
+        [HttpGet]
+        [AuthorizeRoles(RoleIds.Admin, RoleIds.CompanyOwner, RoleIds.RestaurantAdmin, RoleIds.Restaurant)]
+        public async Task<IActionResult> GetRestaurantUserRoles(string restaurantId)
+        {
+            var userId = User.GetAuthUserId();
+
+            var result = await this.service.GetRestaurantUserRoles(userId, restaurantId);
+            return this.Ok(result);
         }
 
         [Route("restaurant/{restaurantId}/canActivate")]

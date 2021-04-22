@@ -35,6 +35,10 @@ export class MenuManagementService {
     return this.http.put<void>(BASE_URL + '/available', model);
   }
 
+  getRestaurantUserRoles(restaurantId: string): Observable<string[]> {
+    return this.http.get<string[]>(BASE_URL + '/restaurant/' + restaurantId + '/user-roles');
+  }
+
   canActivate(restaurantId: string): Observable<boolean> {
     return this.http.get<boolean>(BASE_URL + '/restaurant/' + restaurantId + '/canActivate');
   }

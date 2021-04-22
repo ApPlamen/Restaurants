@@ -50,6 +50,28 @@ namespace Services
             this.repo.Save();
         }
 
+        public async Task<List<string>> GetRestaurantUserRoles(string userId, string restaurantId)
+        {
+            var user = await userManager.Users
+                .Include(u => u.UserRoles)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            var result = this.restaurant.All()
+                .Include(u => u.UserRoles)
+                .Where(r => r.Id.Equals(restaurantId) && r.IsActive)
+                .SelectMany(r => r.UserRoles)
+                .Where(ur => ur.UserId.Equals(user.Id))
+                .Select(ur => ur.Role.Name)
+                .Union(this.restaurant.All()
+                    .Where(r => r.Id.Equals(restaurantId) && r.IsActive)
+                    .SelectMany(r => r.Company.UserRoles)
+                    .Where(ur => ur.UserId.Equals(user.Id))
+                    .Select(ur => ur.Role.Name))
+                .ToList();
+
+            return result;
+        }
+
         public async Task<bool> CanActivate(string userId, string restaurantId)
         {
             var user = await userManager.Users

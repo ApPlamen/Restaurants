@@ -24,6 +24,7 @@ export class BoardMenuManagementComponent implements OnInit {
   ];
 
   private restaurantId: string;
+  private userRoles: string[];
 
   constructor(private menuManagementService: MenuManagementService,
               private menuManagementStoreService: MenuManagementStoreService,
@@ -76,6 +77,10 @@ export class BoardMenuManagementComponent implements OnInit {
       });
   }
 
+  hasRole(roles: string[]) {
+    return roles && roles.filter(value => this.userRoles.includes(value)).length > 0;
+  }
+
   private openEditModal() {
     this.menuManagementStoreService.setRestaurantId = this.restaurantId;
 
@@ -87,5 +92,8 @@ export class BoardMenuManagementComponent implements OnInit {
   private fillProfileForm(): void {
     this.menuManagementService.getMenuBoard(this.restaurantId)
       .subscribe(menuItems => this.menuItems = menuItems);
+
+    this.menuManagementService.getRestaurantUserRoles(this.restaurantId)
+      .subscribe(userRoles => this.userRoles = userRoles);
   }
 }

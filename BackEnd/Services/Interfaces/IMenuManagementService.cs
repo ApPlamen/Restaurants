@@ -12,6 +12,8 @@ namespace Services
 
         public void ToggleAvailable(AvailableInputModel<string> model);
 
+        public Task<List<string>> GetRestaurantUserRoles(string userId, string restaurantId);
+
         public Task<bool> CanActivate(string userId, string restaurantId);
     }
 }
