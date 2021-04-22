@@ -1,8 +1,8 @@
-import * as CompanyActions from './companyStore.action';
+import * as CompanyActions from './company.store.action';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { CompanyState, getCompanyId } from './companyStore.state';
+import { CompanyState, getCompanyId } from './company.store.state';
 
 @Injectable({
   providedIn: 'root'

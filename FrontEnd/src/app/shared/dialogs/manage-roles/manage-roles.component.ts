@@ -50,7 +50,7 @@ export class ManageRolesComponent implements OnInit {
         this.manageRolesModel = manageRolesModel;
         this.assignUserRoleForm.patchModel({ roleId: this.manageRolesModel.roleId });
         this.assignUserRoleForm.patchModel({ payload: this.manageRolesModel.payload });
-        this.fillProfileForm();
+        this.fillForm();
       }
     );
   }
@@ -65,7 +65,7 @@ export class ManageRolesComponent implements OnInit {
       this.sharedService.addUserRole(this.assignUserRoleForm.model)
         .subscribe(_ => {
           this.toastr.success('Success!');
-          this.fillProfileForm();
+          this.fillForm();
         });
     }
   }
@@ -80,11 +80,11 @@ export class ManageRolesComponent implements OnInit {
     this.sharedService.removeUserRole(model)
       .subscribe(_ => {
         this.toastr.success('Success!');
-        this.fillProfileForm();
+        this.fillForm();
       });
   }
 
-  private fillProfileForm(): void {
+  private fillForm(): void {
     const userRoleRequestModel: UserRoleRequestModel = {
       roleId: this.manageRolesModel.roleId,
       payload: this.manageRolesModel.payload

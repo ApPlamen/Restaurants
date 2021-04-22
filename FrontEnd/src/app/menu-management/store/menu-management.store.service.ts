@@ -1,8 +1,8 @@
-import * as MenuManagementActions from './menuManagementStore.action';
+import * as MenuManagementActions from './menu-management.store.action';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { MenuManagementState, getMenuItemId, getRestaurantId } from './menuManagementStore.state';
+import { MenuManagementState, getMenuItemId, getRestaurantId } from './menu-management.store.state';
 
 @Injectable({
   providedIn: 'root'

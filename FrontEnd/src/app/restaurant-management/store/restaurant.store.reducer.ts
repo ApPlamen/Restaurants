@@ -1,5 +1,5 @@
-import * as RestaurantActions from './restaurantStore.action';
-import { RestaurantState, initialState } from './restaurantStore.state';
+import * as RestaurantActions from './restaurant.store.action';
+import { RestaurantState, initialState } from './restaurant.store.state';
 
 export function restaurantRecuder(state: RestaurantState = initialState, action) {
   switch (action.type) {

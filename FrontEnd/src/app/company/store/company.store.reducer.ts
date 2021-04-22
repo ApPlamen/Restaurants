@@ -1,5 +1,5 @@
-import * as CompanyActions from './companyStore.action';
-import { CompanyState, initialState } from './companyStore.state';
+import * as CompanyActions from './company.store.action';
+import { CompanyState, initialState } from './company.store.state';
 
 export function companyRecuder(state: CompanyState = initialState, action) {
   switch (action.type) {

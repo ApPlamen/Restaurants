@@ -22,8 +22,8 @@ export class RestaurantManagementService {
     return this.http.post<void>(BASE_URL, model);
   }
 
-  getRestaurantBoard(): Observable<RestaurantViewModel> {
-    return this.http.get<RestaurantViewModel>(BASE_URL);
+  getRestaurantBoard(): Observable<RestaurantViewModel[]> {
+    return this.http.get<RestaurantViewModel[]>(BASE_URL);
   }
 
   deleteRestaurant(restaurantId: string): Observable<void> {

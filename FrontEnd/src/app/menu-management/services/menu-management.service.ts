@@ -23,8 +23,8 @@ export class MenuManagementService {
     return this.http.post<void>(BASE_URL, model);
   }
 
-  getMenuBoard(restaurantId: string): Observable<MenuItemViewModel> {
-    return this.http.get<MenuItemViewModel>(BASE_URL + '/restaurant/' + restaurantId + '/menu');
+  getMenuBoard(restaurantId: string): Observable<MenuItemViewModel[]> {
+    return this.http.get<MenuItemViewModel[]>(BASE_URL + '/restaurant/' + restaurantId + '/menu');
   }
 
   deleteMenuItem(menuItemId: string): Observable<void> {

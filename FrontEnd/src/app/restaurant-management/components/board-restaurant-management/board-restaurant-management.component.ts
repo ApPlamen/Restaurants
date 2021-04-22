@@ -7,11 +7,12 @@ import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
 import { CreateEditRestaurantComponent } from '../../dialogs/create-edit-restaurant/create-edit-restaurant.component';
 import { RestaurantManagementService } from '../../services/restaurant-management.service';
-import { RestaurantStoreService } from '../../store/restaurantStore.service';
+import { RestaurantStoreService } from '../../store/restaurant.store.service';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { RolesFilteringBaseClass } from 'src/app/shared/base-classes/roles-filtering.class';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { RestaurantViewModel } from '../../viewmodels/restaurant.viewmodel';
 
 @Component({
   templateUrl: './board-restaurant-management.component.html',
@@ -19,7 +20,7 @@ import { Router } from '@angular/router';
 export class BoardRestaurantComponent extends RolesFilteringBaseClass implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
-  public restaurants;
+  public restaurants: RestaurantViewModel[];
 
   public columns: SimpleTableColumn<{ [key: string]: string }>[] = [
     {
@@ -29,6 +30,10 @@ export class BoardRestaurantComponent extends RolesFilteringBaseClass implements
     {
       header: 'Company',
       field: 'companyName',
+    },
+    {
+      header: 'Legal ID',
+      field: 'legalId',
     },
   ];
 
@@ -51,7 +56,7 @@ export class BoardRestaurantComponent extends RolesFilteringBaseClass implements
       }
     ];
 
-    this.fillProfileForm();
+    this.fillData();
   }
 
   openCreate(): void {
@@ -92,23 +97,23 @@ export class BoardRestaurantComponent extends RolesFilteringBaseClass implements
     this.restaurantManagementService.deleteRestaurant(restaurantId)
       .subscribe(_ => {
         this.toastr.success('Success!');
-        this.fillProfileForm();
+        this.fillData();
       });
   }
 
   private openEditModal() {
     this.modalService.open(CreateEditRestaurantComponent)
       .closed
-      .subscribe(_ => this.fillProfileForm());
+      .subscribe(_ => this.fillData());
   }
 
   private openManageOwnersModal() {
     this.modalService.open(ManageRolesComponent, {size: 'lg'})
       .closed
-      .subscribe(_ => this.fillProfileForm());
+      .subscribe(_ => this.fillData());
   }
 
-  private fillProfileForm(): void {
+  private fillData(): void {
     this.restaurantManagementService.getRestaurantBoard()
       .subscribe(restaurants => this.restaurants = restaurants);
   }

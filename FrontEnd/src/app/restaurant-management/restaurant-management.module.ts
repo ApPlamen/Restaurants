@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
 import { BoardRestaurantComponent } from './components/board-restaurant-management/board-restaurant-management.component';
 import { StoreModule } from '@ngrx/store';
-import { restaurantRecuder } from './store/restaurantStore.reducer';
+import { restaurantRecuder } from './store/restaurant.store.reducer';
 import { CreateEditRestaurantComponent } from './dialogs/create-edit-restaurant/create-edit-restaurant.component';
 import { RestaurantManagementRoutingModule } from './restaurant-management-routing.module';
 

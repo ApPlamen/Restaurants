@@ -7,10 +7,11 @@ import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
 import { CreateEditCompanyComponent } from '../../dialogs/create-edit-company/create-edit-company.component';
 import { CompanyService } from '../../services/company.service';
-import { CompanyStoreService } from '../../store/companyStore.service';
+import { CompanyStoreService } from '../../store/company.store.service';
 import { RolesFilteringBaseClass } from 'src/app/shared/base-classes/roles-filtering.class';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { ToastrService } from 'ngx-toastr';
+import { CompanyViewModel } from '../../viewmodels/company.viewmodel';
 
 @Component({
   templateUrl: './board-company.component.html',
@@ -18,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 export class BoardCompanyComponent extends RolesFilteringBaseClass implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
-  public companies;
+  public companies: CompanyViewModel[];
 
   public columns: SimpleTableColumn<{ [key: string]: string }>[] = [
     {
@@ -28,6 +29,10 @@ export class BoardCompanyComponent extends RolesFilteringBaseClass implements On
     {
       header: 'Owners',
       field: 'owners',
+    },
+    {
+      header: 'Legal ID',
+      field: 'legalId',
     },
   ];
 
@@ -49,7 +54,7 @@ export class BoardCompanyComponent extends RolesFilteringBaseClass implements On
       }
     ];
 
-    this.fillProfileForm();
+    this.fillData();
   }
 
   openCreate(): void {
@@ -76,23 +81,23 @@ export class BoardCompanyComponent extends RolesFilteringBaseClass implements On
     this.companyService.deleteCompany(companyId)
       .subscribe(_ => {
         this.toastr.success('Success!');
-        this.fillProfileForm();
+        this.fillData();
       });
   }
 
   private openEditModal() {
     this.modalService.open(CreateEditCompanyComponent)
       .closed
-      .subscribe(_ => this.fillProfileForm());
+      .subscribe(_ => this.fillData());
   }
 
   private openManageOwnersModal() {
     this.modalService.open(ManageRolesComponent, {size: 'lg'})
       .closed
-      .subscribe(_ => this.fillProfileForm());
+      .subscribe(_ => this.fillData());
   }
 
-  private fillProfileForm(): void {
+  private fillData(): void {
     this.companyService.getCompanyBoard()
       .subscribe(companies => this.companies = companies);
   }
