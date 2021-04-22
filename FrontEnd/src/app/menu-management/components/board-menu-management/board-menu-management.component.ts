@@ -78,7 +78,7 @@ export class BoardMenuManagementComponent implements OnInit {
   }
 
   hasRole(roles: string[]) {
-    return roles && roles.filter(value => this.userRoles.includes(value)).length > 0;
+    return this.userRoles && roles && roles.filter(value => this.userRoles.includes(value)).length > 0;
   }
 
   private openEditModal() {
