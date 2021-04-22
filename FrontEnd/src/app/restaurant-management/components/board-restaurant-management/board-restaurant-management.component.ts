@@ -51,7 +51,7 @@ export class BoardRestaurantComponent extends RolesFilteringBaseClass implements
       }
     ];
 
-    this.fillProfileForm();
+    this.fillData();
   }
 
   openCreate(): void {
@@ -92,23 +92,23 @@ export class BoardRestaurantComponent extends RolesFilteringBaseClass implements
     this.restaurantManagementService.deleteRestaurant(restaurantId)
       .subscribe(_ => {
         this.toastr.success('Success!');
-        this.fillProfileForm();
+        this.fillData();
       });
   }
 
   private openEditModal() {
     this.modalService.open(CreateEditRestaurantComponent)
       .closed
-      .subscribe(_ => this.fillProfileForm());
+      .subscribe(_ => this.fillData());
   }
 
   private openManageOwnersModal() {
     this.modalService.open(ManageRolesComponent, {size: 'lg'})
       .closed
-      .subscribe(_ => this.fillProfileForm());
+      .subscribe(_ => this.fillData());
   }
 
-  private fillProfileForm(): void {
+  private fillData(): void {
     this.restaurantManagementService.getRestaurantBoard()
       .subscribe(restaurants => this.restaurants = restaurants);
   }

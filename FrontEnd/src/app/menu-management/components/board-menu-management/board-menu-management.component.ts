@@ -43,7 +43,7 @@ export class BoardMenuManagementComponent implements OnInit {
       }
     ];
 
-    this.fillProfileForm();
+    this.fillData();
   }
 
   openCreate(): void {
@@ -60,7 +60,7 @@ export class BoardMenuManagementComponent implements OnInit {
     this.menuManagementService.deleteMenuItem(menuItemId)
       .subscribe(_ => {
         this.toastr.success('Success!');
-        this.fillProfileForm();
+        this.fillData();
       });
   }
 
@@ -73,7 +73,7 @@ export class BoardMenuManagementComponent implements OnInit {
     this.menuManagementService.toggleMenuItemAvailable(model)
       .subscribe(_ => {
         this.toastr.success('Success!');
-        this.fillProfileForm();
+        this.fillData();
       });
   }
 
@@ -86,10 +86,10 @@ export class BoardMenuManagementComponent implements OnInit {
 
     this.modalService.open(CreateEditMenuItemComponent, {size: 'lg'})
       .closed
-      .subscribe(_ => this.fillProfileForm());
+      .subscribe(_ => this.fillData());
   }
 
-  private fillProfileForm(): void {
+  private fillData(): void {
     this.menuManagementService.getMenuBoard(this.restaurantId)
       .subscribe(menuItems => this.menuItems = menuItems);
 

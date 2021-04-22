@@ -49,7 +49,7 @@ export class BoardCompanyComponent extends RolesFilteringBaseClass implements On
       }
     ];
 
-    this.fillProfileForm();
+    this.fillData();
   }
 
   openCreate(): void {
@@ -76,23 +76,23 @@ export class BoardCompanyComponent extends RolesFilteringBaseClass implements On
     this.companyService.deleteCompany(companyId)
       .subscribe(_ => {
         this.toastr.success('Success!');
-        this.fillProfileForm();
+        this.fillData();
       });
   }
 
   private openEditModal() {
     this.modalService.open(CreateEditCompanyComponent)
       .closed
-      .subscribe(_ => this.fillProfileForm());
+      .subscribe(_ => this.fillData());
   }
 
   private openManageOwnersModal() {
     this.modalService.open(ManageRolesComponent, {size: 'lg'})
       .closed
-      .subscribe(_ => this.fillProfileForm());
+      .subscribe(_ => this.fillData());
   }
 
-  private fillProfileForm(): void {
+  private fillData(): void {
     this.companyService.getCompanyBoard()
       .subscribe(companies => this.companies = companies);
   }

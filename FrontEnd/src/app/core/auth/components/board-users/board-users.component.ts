@@ -45,7 +45,7 @@ export class BoardUsersComponent implements OnInit {
       }
     ];
 
-    this.fillProfileForm();
+    this.fillData();
   }
 
   openManageAdmins(): void {
@@ -61,17 +61,17 @@ export class BoardUsersComponent implements OnInit {
     this.userService.deleteUser(userId)
       .subscribe(_ => {
         this.toastr.success('Success!');
-        this.fillProfileForm();
+        this.fillData();
       });
   }
 
   private openManageAdminsModal() {
     this.modalService.open(ManageRolesComponent, {size: 'lg'})
       .closed
-      .subscribe(_ => this.fillProfileForm());
+      .subscribe(_ => this.fillData());
   }
 
-  private fillProfileForm(): void {
+  private fillData(): void {
     this.userService.getUserBoard()
       .subscribe(users => this.users = users);
   }

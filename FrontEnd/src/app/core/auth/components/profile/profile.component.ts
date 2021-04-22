@@ -13,21 +13,21 @@ export class ProfileComponent implements OnInit {
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.fillProfileForm();
+    this.fillForm();
   }
 
   onSubmit(): void {
     if (this.profileForm.formGroup.valid) {
       this.userService.saveUserProfile(this.profileForm.model)
         .subscribe(_ => {
-          this.fillProfileForm();
+          this.fillForm();
 
           this.toastr.success('Success!');
         });
     }
   }
 
-  private fillProfileForm(): void {
+  private fillForm(): void {
     this.userService.getUserProfile()
       .subscribe(profile => this.profileForm.setModel(profile));
   }
