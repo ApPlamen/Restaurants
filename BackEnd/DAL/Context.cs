@@ -20,6 +20,8 @@ namespace DAL
 
         public DbSet<MenuItem> Menu { get; set; }
 
+        public DbSet<MenuItemPrice> Prices { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -71,6 +73,20 @@ namespace DAL
                 menuItem.HasOne(m => m.Restaurant)
                     .WithMany(r => r.MenuItems)
                     .HasForeignKey(m => m.RestaurantId)
+                    .IsRequired();
+            });
+
+            builder.Entity<MenuItemPrice>(menuItem =>
+            {
+                menuItem.Property("Type").IsRequired();
+
+                menuItem.Property("Price").HasPrecision(20, 2);
+
+                menuItem.Property("IsActive").HasDefaultValue(true);
+
+                menuItem.HasOne(mp => mp.MenuItem)
+                    .WithMany(m => m.MenuItemPrices)
+                    .HasForeignKey(mp => mp.MenuItemId)
                     .IsRequired();
             });
         }
