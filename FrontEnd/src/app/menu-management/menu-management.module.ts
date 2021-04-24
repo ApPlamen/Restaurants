@@ -8,11 +8,13 @@ import { BoardMenuManagementComponent } from './components/board-menu-management
 import { StoreModule } from '@ngrx/store';
 import { menuManagementRecuder } from './store/menu-management.store.reducer';
 import { CreateEditMenuItemComponent } from './dialogs/create-edit-menu-item/create-edit-menu-item.component';
+import { CreateEditPriceComponent } from './dialogs/create-edit-price/create-edit-price.component';
 
 @NgModule({
   declarations: [
     BoardMenuManagementComponent,
     CreateEditMenuItemComponent,
+    CreateEditPriceComponent,
   ],
   imports: [
     CommonModule,
