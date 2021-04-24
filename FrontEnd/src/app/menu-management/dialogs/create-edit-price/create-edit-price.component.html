@@ -11,7 +11,13 @@
 
     <tmc-input type="text" label="Option" placeholder="Option" formControlName="type"></tmc-input>
     
-    <tmc-input type="text" label="Price" placeholder="Price" formControlName="price"></tmc-input>
+    <tmc-number-input type="number"
+                      label="Price"
+                      placeholder="Price"
+                      formControlName="price"
+                      step=".01"
+                      min="0">
+    </tmc-number-input>
   </form>
 
 </div>
