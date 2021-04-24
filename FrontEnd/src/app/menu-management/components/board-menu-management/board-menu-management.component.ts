@@ -23,6 +23,10 @@ export class BoardMenuManagementComponent implements OnInit {
       header: 'Name',
       field: 'name',
     },
+    {
+      header: 'Start price',
+      field: 'startPrice',
+    },
   ];
 
   private restaurantId: string;
