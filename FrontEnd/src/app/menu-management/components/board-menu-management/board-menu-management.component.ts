@@ -97,7 +97,7 @@ export class BoardMenuManagementComponent implements OnInit {
   }
 
   private openEditPricesModal() {
-    this.modalService.open(BoardPricesComponent, {size: 'lg'})
+    this.modalService.open(BoardPricesComponent, {size: 'xl'})
       .closed
       .subscribe(_ => this.fillData());
   }

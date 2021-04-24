@@ -1,12 +1,15 @@
 <div class="modal-header">
+  <h3>Price options</h3>
 </div>
 
 <div class="modal-body">
 
-  <tmc-button design="success"
-              label="Add new Price"
-              (clicked)="openCreate()">
-  </tmc-button>
+  <div class="row d-grid justify-content-end m-0">
+    <tmc-button design="success"
+                label="Add new Price"
+                (clicked)="openCreate()">
+    </tmc-button>
+  </div>
 
   <div class="row m-0 mt-1">
     <tmc-simple-table [columns]="columns" [data]="prices"></tmc-simple-table>
