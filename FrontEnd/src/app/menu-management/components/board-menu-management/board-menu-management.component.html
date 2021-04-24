@@ -19,6 +19,12 @@
     </tmc-button>
 
     <tmc-button design="warning"
+                label="Edit prices"
+                *ngIf="hasRole(['CompanyOwner','RestaurantAdmin'])"
+                (clicked)="openEditPrices(dataItem.id)">
+    </tmc-button>
+
+    <tmc-button design="warning"
                 label="Edit"
                 *ngIf="hasRole(['CompanyOwner','RestaurantAdmin'])"
                 (clicked)="openEdit(dataItem.id)">

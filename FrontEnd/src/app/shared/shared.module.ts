@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { ButtonComponent } from './components/button/button.component';
 import { InputComponent } from './components/input/input.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { NumberInputComponent } from './components/number-input/number-input.component';
 import { SimpleTableComponent } from './components/simple-table/simple-table.component';
 import { TextareaComponent } from './components/textarea/textarea.component';
 import { ManageRolesComponent } from './dialogs/manage-roles/manage-roles.component';
@@ -17,6 +18,7 @@ import { sharedRecuder } from './store/sharedStore.reducer';
   declarations: [
     SimpleTableComponent,
     InputComponent,
+    NumberInputComponent,
     TextareaComponent,
     ButtonComponent,
     NavbarComponent,
@@ -32,6 +34,7 @@ import { sharedRecuder } from './store/sharedStore.reducer';
   exports: [
     SimpleTableComponent,
     InputComponent,
+    NumberInputComponent,
     TextareaComponent,
     ButtonComponent,
     NavbarComponent,

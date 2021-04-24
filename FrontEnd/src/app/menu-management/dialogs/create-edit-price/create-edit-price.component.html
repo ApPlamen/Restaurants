@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h3>{{ isNew ? 'Create' : 'Edit'}} price option</h3>
+</div>
+
+<div class="modal-body">
+
+  <form class="needs-validation"
+        (ngSubmit)="onSubmit()"
+        [formGroup]="priceForm.formGroup"
+        novalidate >
+
+    <tmc-input type="text" label="Option" placeholder="Option" formControlName="type"></tmc-input>
+    
+    <tmc-number-input type="number"
+                      label="Price"
+                      placeholder="Price"
+                      formControlName="price"
+                      step=".01"
+                      min="0">
+    </tmc-number-input>
+  </form>
+
+</div>
+
+<div class="modal-footer">
+  <tmc-button type='submit'
+              label="Save"
+              (clicked)="onSubmit()">
+  </tmc-button>
+</div>

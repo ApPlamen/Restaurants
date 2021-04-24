@@ -34,6 +34,10 @@ namespace Services
                 {
                     Id = m.Id,
                     Name = m.Name,
+                    StartPrice = m.MenuItemPrices
+                        .Where(mp => mp.IsActive)
+                        .Min(mp => mp.Price)
+                        .ToString(),
                     IsAvailable = m.IsAvailable,
                 })
                 .ToList();

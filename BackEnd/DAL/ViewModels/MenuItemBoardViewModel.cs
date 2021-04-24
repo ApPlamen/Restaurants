@@ -4,6 +4,8 @@
     {
         public string Name { get; set; }
 
+        public string StartPrice { get; set; }
+
         public bool IsAvailable { get; set; }
     }
 }
