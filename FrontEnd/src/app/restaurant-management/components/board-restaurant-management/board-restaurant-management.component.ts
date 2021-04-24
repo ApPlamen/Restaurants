@@ -4,7 +4,7 @@ import { RoleIdsEnum } from 'src/app/core/auth/enums/roles.enum';
 import { ManageRolesComponent } from 'src/app/shared/dialogs/manage-roles/manage-roles.component';
 import { ManageRolesStoreModel } from 'src/app/shared/storemodels/manage-roles.storemodel';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
-import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
+import { SharedStoreService } from 'src/app/shared/store/shared.store.service';
 import { CreateEditRestaurantComponent } from '../../dialogs/create-edit-restaurant/create-edit-restaurant.component';
 import { RestaurantManagementService } from '../../services/restaurant-management.service';
 import { RestaurantStoreService } from '../../store/restaurant.store.service';

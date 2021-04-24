@@ -7,7 +7,8 @@ import { UnassignUserRoleModel } from '../../models/unassign-user-role.model';
 import { SimpleTableColumn } from '../../models/simple-table.model';
 import { UserRoleRequestModel } from '../../models/user-role-request.model';
 import { SharedService } from '../../services/shared.service';
-import { SharedStoreService } from '../../store/sharedStore.service';
+import { SharedStoreService } from '../../store/shared.store.service';
+import { UserViewModel } from '../../viewmodels/user.viewmodel';
 
 @Component({
   templateUrl: './manage-roles.component.html',
@@ -16,7 +17,7 @@ export class ManageRolesComponent implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
   public assignUserRoleForm: AssignUserRoleForm = new AssignUserRoleForm();
-  public users;
+  public users: UserViewModel[];
 
   public columns: SimpleTableColumn<{ [key: string]: string }>[] = [
     {

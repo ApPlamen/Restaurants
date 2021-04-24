@@ -4,7 +4,7 @@ import { RoleIdsEnum } from 'src/app/core/auth/enums/roles.enum';
 import { ManageRolesComponent } from 'src/app/shared/dialogs/manage-roles/manage-roles.component';
 import { ManageRolesStoreModel } from 'src/app/shared/storemodels/manage-roles.storemodel';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
-import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
+import { SharedStoreService } from 'src/app/shared/store/shared.store.service';
 import { CreateEditCompanyComponent } from '../../dialogs/create-edit-company/create-edit-company.component';
 import { CompanyService } from '../../services/company.service';
 import { CompanyStoreService } from '../../store/company.store.service';

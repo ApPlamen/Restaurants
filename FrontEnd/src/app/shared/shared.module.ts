@@ -11,7 +11,7 @@ import { SimpleTableComponent } from './components/simple-table/simple-table.com
 import { TextareaComponent } from './components/textarea/textarea.component';
 import { ManageRolesComponent } from './dialogs/manage-roles/manage-roles.component';
 import { authInterceptorProviders } from './interceptors/auth.interceptor';
-import { sharedRecuder } from './store/sharedStore.reducer';
+import { sharedRecuder } from './store/shared.store.reducer';
 
 
 @NgModule({

@@ -3,7 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ManageRolesComponent } from 'src/app/shared/dialogs/manage-roles/manage-roles.component';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
-import { SharedStoreService } from 'src/app/shared/store/sharedStore.service';
+import { SharedStoreService } from 'src/app/shared/store/shared.store.service';
 import { ManageRolesStoreModel } from 'src/app/shared/storemodels/manage-roles.storemodel';
 import { RoleIdsEnum } from '../../enums/roles.enum';
 import { UserService } from '../../services/user.service';
