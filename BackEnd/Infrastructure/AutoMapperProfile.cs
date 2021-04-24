@@ -1,10 +1,10 @@
-﻿namespace Common.Infrastructure
-{
-    using AutoMapper;
-    using DAL.Models;
-    using DAL.InputModels;
-    using DAL.ViewModels;
+﻿using AutoMapper;
+using DAL.Models;
+using DAL.InputModels;
+using DAL.ViewModels;
 
+namespace Common.Infrastructure
+{
     public class AutoMapperProfile : Profile
     {
         public AutoMapperProfile()
@@ -20,6 +20,9 @@
 
             CreateMap<MenuItemInputModel, MenuItem>();
             CreateMap<MenuItem, MenuItemViewModel>();
+
+            CreateMap<MenuItemPriceInputModel, MenuItemPrice>();
+            CreateMap<MenuItemPrice, MenuItemPriceViewModel>();
         }
     }
 }

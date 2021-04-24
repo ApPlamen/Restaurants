@@ -12,7 +12,7 @@ export class CreateEditPriceComponent implements OnInit {
   isNew = true;
   priceForm: PriceForm = new PriceForm();
 
-  private restaurantId: string;
+  private menuItemId: string;
 
   constructor(private menuPricesManagementService: MenuPricesManagementService,
               private menuManagementStoreService: MenuManagementStoreService,
@@ -20,8 +20,8 @@ export class CreateEditPriceComponent implements OnInit {
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.menuManagementStoreService.getRestaurantId$.subscribe(
-      restaurantId => this.restaurantId = restaurantId
+    this.menuManagementStoreService.getMenuItemId$.subscribe(
+      menuItemId => this.menuItemId = menuItemId
     );
 
     this.menuManagementStoreService.getPriceId$.subscribe(
@@ -36,7 +36,7 @@ export class CreateEditPriceComponent implements OnInit {
 
   onSubmit(): void {
     if (this.priceForm.formGroup.valid) {
-      this.priceForm.patchModel({ restaurantId: this.restaurantId });
+      this.priceForm.patchModel({ menuItemId: this.menuItemId });
 
       this.menuPricesManagementService.saveMenuItemPrice(this.priceForm.model)
         .subscribe(_ => {

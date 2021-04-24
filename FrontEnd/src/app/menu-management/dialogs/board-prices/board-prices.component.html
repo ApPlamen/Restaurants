@@ -1,0 +1,36 @@
+<div class="modal-header">
+</div>
+
+<div class="modal-body">
+
+  <tmc-button design="success"
+              label="Add new Price"
+              (clicked)="openCreate()">
+  </tmc-button>
+
+  <div class="row m-0 mt-1">
+    <tmc-simple-table [columns]="columns" [data]="prices"></tmc-simple-table>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <tmc-button design="secondary"
+              label="Close"
+              (clicked)="close()">
+  </tmc-button>
+</div>
+
+<ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
+  <div class="table-actions-container btn-group gap-2">
+    <tmc-button design="warning"
+                label="Edit"
+                (clicked)="openEdit(dataItem.id)">
+    </tmc-button>
+    
+    <tmc-button design="danger"
+                label="Delete"
+                (clicked)="delete(dataItem.id)">
+    </tmc-button>
+  </div>
+</ng-template>

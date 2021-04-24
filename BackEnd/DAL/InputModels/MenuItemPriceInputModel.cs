@@ -10,6 +10,9 @@ namespace DAL.InputModels
         [Required]
         public decimal Price { get; set; }
 
+        [Required]
+        public string MenuItemId { get; set; }
+
         public override bool IsIdEmpty()
         {
             return string.IsNullOrWhiteSpace(Id);

@@ -8,6 +8,7 @@ import { CreateEditMenuItemComponent } from '../../dialogs/create-edit-menu-item
 import { MenuManagementStoreService } from '../../store/menu-management.store.service';
 import { AvailableModel } from 'src/app/shared/models/available.model';
 import { MenuItemViewModel } from '../../viewmodels/menu-item.viewmodel';
+import { BoardPricesComponent } from '../../dialogs/board-prices/board-prices.component';
 
 @Component({
   templateUrl: './board-menu-management.component.html',
@@ -65,6 +66,11 @@ export class BoardMenuManagementComponent implements OnInit {
       });
   }
 
+  openEditPrices(menuItemId: string): void {
+    this.menuManagementStoreService.setMenuItemId = menuItemId;
+    this.openEditPricesModal();
+  }
+
   toggleAvailable(menuItemId: string, available: boolean): void {
     const model: AvailableModel = {
       id: menuItemId,
@@ -86,6 +92,12 @@ export class BoardMenuManagementComponent implements OnInit {
     this.menuManagementStoreService.setRestaurantId = this.restaurantId;
 
     this.modalService.open(CreateEditMenuItemComponent, {size: 'lg'})
+      .closed
+      .subscribe(_ => this.fillData());
+  }
+
+  private openEditPricesModal() {
+    this.modalService.open(BoardPricesComponent, {size: 'lg'})
       .closed
       .subscribe(_ => this.fillData());
   }

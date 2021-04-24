@@ -9,11 +9,13 @@ import { StoreModule } from '@ngrx/store';
 import { menuManagementRecuder } from './store/menu-management.store.reducer';
 import { CreateEditMenuItemComponent } from './dialogs/create-edit-menu-item/create-edit-menu-item.component';
 import { CreateEditPriceComponent } from './dialogs/create-edit-price/create-edit-price.component';
+import { BoardPricesComponent } from './dialogs/board-prices/board-prices.component';
 
 @NgModule({
   declarations: [
     BoardMenuManagementComponent,
     CreateEditMenuItemComponent,
+    BoardPricesComponent,
     CreateEditPriceComponent,
   ],
   imports: [
