@@ -23,7 +23,7 @@ export class SharedService {
     return this.http.post(BASE_URL + 'UserRoles/unassign-role', model);
   }
 
-  getUsersOfRole(userRoleRequestModel: UserRoleRequestModel): Observable<UserViewModel> {
-    return this.http.post<UserViewModel>(BASE_URL + 'UserRoles/users', userRoleRequestModel);
+  getUsersOfRole(userRoleRequestModel: UserRoleRequestModel): Observable<UserViewModel[]> {
+    return this.http.post<UserViewModel[]>(BASE_URL + 'UserRoles/users', userRoleRequestModel);
   }
 }

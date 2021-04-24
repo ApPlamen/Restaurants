@@ -1,5 +1,5 @@
-import * as SharedActions from './sharedStore.action';
-import { SharedState, initialState } from './sharedStore.state';
+import * as SharedActions from './shared.store.action';
+import { SharedState, initialState } from './shared.store.state';
 
 export function sharedRecuder(state: SharedState = initialState, action) {
   switch (action.type) {
