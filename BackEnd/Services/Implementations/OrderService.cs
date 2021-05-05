@@ -76,6 +76,11 @@ namespace Services
 
             var order = this.repo.GetById(orderId);
 
+            if (order == null)
+            {
+                throw new EntityNotFoundException("Order");
+            }
+
             order.UserOrders.Add(new UserOrder()
             {
                 UserId = userId
