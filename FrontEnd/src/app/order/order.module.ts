@@ -6,11 +6,15 @@ import { SharedModule } from '../shared/shared.module';
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderComponent } from './components/order/order.component';
 import { OrderMenuComponent } from './components/menu/menu.component';
+import { StoreModule } from '@ngrx/store';
+import { orderRecuder } from './store/order.store.reducer';
+import { BoardPricesComponent } from './dialogs/board-prices/board-prices.component';
 
 @NgModule({
   declarations: [
     OrderComponent,
     OrderMenuComponent,
+    BoardPricesComponent,
   ],
   imports: [
     CommonModule,
@@ -18,6 +22,7 @@ import { OrderMenuComponent } from './components/menu/menu.component';
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
+    StoreModule.forFeature('order', orderRecuder),
   ],
   exports: [
   ],

@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h3>Price options</h3>
+</div>
+
+<div class="modal-body">
+
+  <div class="row m-0">
+    <tmc-simple-table [columns]="columns" [data]="prices"></tmc-simple-table>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <tmc-button design="secondary"
+              label="Close"
+              (clicked)="close()">
+  </tmc-button>
+</div>
+
+<ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
+  <div class="table-actions-container btn-group gap-2">
+  </div>
+</ng-template>

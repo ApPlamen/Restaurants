@@ -1,34 +1,36 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
-import { BoardPricesComponent } from '../../dialogs/board-prices/board-prices.component';
 import { OrderService } from '../../services/order.service';
 import { OrderStoreService } from '../../store/order.store.service';
-import { MenuItemOrderViewModel } from '../../viewmodels/menu-item-order.viewmodel';
+import { PriceViewModel } from '../../viewmodels/price.viewmodel';
 
 @Component({
-  selector: 'order-menu',
-  templateUrl: './menu.component.html',
+  templateUrl: './board-prices.component.html',
 })
-export class OrderMenuComponent implements OnInit  {
+export class BoardPricesComponent implements OnInit {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
-  public menuItems: MenuItemOrderViewModel[];
+  public prices: PriceViewModel[];
 
   public columns: SimpleTableColumn<{ [key: string]: string }>[] = [
     {
-      header: 'Name',
-      field: 'name',
+      header: 'Option',
+      field: 'type',
     },
     {
-      header: 'Start price',
-      field: 'startPrice',
+      header: 'Price',
+      field: 'price',
     },
   ];
 
+  private menuItemId: string;
+
   constructor(private orderService: OrderService,
               private orderStoreService: OrderStoreService,
-              private modalService: NgbModal) { }
+              private activeModalService: NgbActiveModal,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.columns = [
@@ -39,16 +41,18 @@ export class OrderMenuComponent implements OnInit  {
       }
     ];
 
+    this.orderStoreService.getMenuItemId$
+      .subscribe(menuItemId => this.menuItemId = menuItemId);
+
     this.fillData();
   }
 
-  openPrices(menuItemId: string): void {
-    this.orderStoreService.setMenuItemId = menuItemId;
-    this.modalService.open(BoardPricesComponent, {size: 'xl'});
+  close(): void {
+    this.activeModalService.close();
   }
 
   private fillData(): void {
-    this.orderService.getMenuBoard()
-      .subscribe(menuItems => this.menuItems = menuItems);
+    this.orderService.getMenuPricesBoard(this.menuItemId)
+      .subscribe(prices => this.prices = prices);
   }
 }
