@@ -7,7 +7,11 @@ namespace DAL.Models
     {
         public string Fullname { get; set; }
 
+        public UserOrder UserOrder { get; set; }
+
         public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+
+        public virtual ICollection<MenuItemOrder> MenuItemOrders { get; set; } = new List<MenuItemOrder>();
 
         public bool IsActive { get; set; } = true;
     }

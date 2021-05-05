@@ -12,8 +12,8 @@ namespace DAL.Models
 
         public string RestaurantId { get; set; }
 
-        public Restaurant Restaurant { get; set; }
+        public virtual Restaurant Restaurant { get; set; }
 
-        public virtual ICollection<MenuItemPrice> MenuItemPrices { get; set; }
+        public virtual ICollection<MenuItemPrice> MenuItemPrices { get; set; } = new List<MenuItemPrice>();
     }
 }

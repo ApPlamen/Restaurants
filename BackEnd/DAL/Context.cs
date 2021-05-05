@@ -22,6 +22,12 @@ namespace DAL
 
         public DbSet<MenuItemPrice> Prices { get; set; }
 
+        public DbSet<UserOrder> UserOrders { get; set; }
+
+        public DbSet<MenuItemOrder> MenuItemOrders { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -88,6 +94,51 @@ namespace DAL
                     .WithMany(m => m.MenuItemPrices)
                     .HasForeignKey(mp => mp.MenuItemId)
                     .IsRequired();
+            });
+
+            builder.Entity<UserOrder>(userOrder =>
+            {
+                userOrder.HasKey("UserId");
+
+                userOrder.HasOne(uo => uo.User)
+                    .WithOne(u => u.UserOrder)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            builder.Entity<MenuItemOrder>(menuItemOrder =>
+            {
+                menuItemOrder.HasOne(mio => mio.Order)
+                    .WithMany(o => o.MenuItemOrders)
+                    .HasForeignKey(mio => mio.OrderId)
+                    .IsRequired();
+
+                menuItemOrder.HasOne(mio => mio.MenuItemPrice)
+                    .WithMany(mi => mi.MenuItemOrders)
+                    .HasForeignKey(mio => mio.MenuItemPriceId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                menuItemOrder.HasOne(mio => mio.User)
+                    .WithMany(u => u.MenuItemOrders)
+                    .HasForeignKey(mio => mio.UserId)
+                    .IsRequired();
+            });
+
+            builder.Entity<Order>(order =>
+            {
+                order.HasIndex(o => new { o.RestaurantId, o.TableNumber })
+                    .IsUnique();
+
+                order.HasOne(o => o.Restaurant)
+                    .WithMany(r => r.Orders)
+                    .HasForeignKey(o => o.RestaurantId)
+                    .IsRequired();
+
+                order.HasMany(o => o.UserOrders)
+                    .WithOne(uo => uo.Order)
+                    .HasForeignKey(uo => uo.OrderId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }
