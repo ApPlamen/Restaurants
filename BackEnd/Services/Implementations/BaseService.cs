@@ -5,14 +5,14 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Services
 {
-    public class BaseService<T> : IBaseService where T : class, new()
+    public class BaseService<DALModel> : IBaseService where DALModel : class, new()
     {
         protected readonly IMapper mapper;
-        protected readonly IRepository<T> repo;
+        protected readonly IRepository<DALModel> repo;
         protected readonly UserManager<User> userManager;
 
         public BaseService(IMapper mapper,
-            IRepository<T> repo,
+            IRepository<DALModel> repo,
             UserManager<User> userManager)
         {
             this.mapper = mapper;
