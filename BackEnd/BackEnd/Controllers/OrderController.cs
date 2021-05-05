@@ -36,5 +36,27 @@ namespace Domain.Controllers
             this.service.JionOrder(orderId, userId);
             return this.Ok();
         }
+
+        [Route("get-active-order")]
+        [HttpGet]
+        [AuthorizeRoles(RoleIds.Client)]
+        public IActionResult HasActiveOrder()
+        {
+            var userId = User.GetAuthUserId();
+
+            var result = this.service.GetActiveOrder(userId);
+            return this.Ok(result);
+        }
+
+        [Route("close-order")]
+        [HttpDelete]
+        [AuthorizeRoles(RoleIds.CompanyOwner, RoleIds.RestaurantAdmin, RoleIds.Restaurant)]
+        public IActionResult CloseOrder(string orderId)
+        {
+            var userId = User.GetAuthUserId();
+
+            this.service.CloseOrder(orderId, userId);
+            return this.Ok();
+        }
     }
 }
