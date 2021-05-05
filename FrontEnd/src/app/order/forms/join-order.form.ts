@@ -11,7 +11,7 @@ export class JoinOrderForm extends BaseFormModel<JoinOrderModel> {
     super();
 
     this.formGroup = this.formBuilder.group({
-      orderId: ['', [Validators.required,
+      code: ['', [Validators.required,
                      Validators.minLength(ORDER_ID_LENGTH),
                      Validators.maxLength(ORDER_ID_LENGTH)]],
     });

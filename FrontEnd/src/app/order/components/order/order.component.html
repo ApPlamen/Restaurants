@@ -28,7 +28,7 @@
               [formGroup]="joinOrderForm.formGroup"
               novalidate >
 
-          <tmc-input type="text" label="Order ID" placeholder="Order ID" formControlName="orderId"></tmc-input>
+          <tmc-input type="text" label="Order ID" placeholder="Order ID" formControlName="code"></tmc-input>
 
           <div class="form-group">
             <tmc-button type='submit'
@@ -43,7 +43,7 @@
     <div *ngIf="hasActiveOrder">
       <div class="card card-container p-3 mt-3">
         <div class="alert alert-success">
-          You have active order with Order ID: {{ orderId }}.
+          You have active order with Order ID: {{ activeOrderId }}.
         </div>
       </div>
       

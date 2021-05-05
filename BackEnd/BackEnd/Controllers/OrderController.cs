@@ -4,6 +4,7 @@ using Common.Authentication;
 using Domain.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using DAL.InputModels;
+using DAL.ViewModels;
 
 namespace Domain.Controllers
 {
@@ -23,29 +24,35 @@ namespace Domain.Controllers
             var userId = User.GetAuthUserId();
 
             var result = this.service.StartOrder(orderDetails, userId);
-            return this.Ok(result);
+            return this.Ok(new CodeViewModel()
+            {
+                Code = result,
+            });
         }
 
         [Route("join-order")]
         [HttpPost]
         [AuthorizeRoles(RoleIds.Client)]
-        public IActionResult JionOrder(string orderId)
+        public IActionResult JionOrder(CodeInputModel orderId)
         {
             var userId = User.GetAuthUserId();
 
-            this.service.JionOrder(orderId, userId);
+            this.service.JionOrder(orderId.Code, userId);
             return this.Ok();
         }
 
         [Route("get-active-order")]
         [HttpGet]
         [AuthorizeRoles(RoleIds.Client)]
-        public IActionResult HasActiveOrder()
+        public IActionResult GetActiveOrder()
         {
             var userId = User.GetAuthUserId();
 
             var result = this.service.GetActiveOrder(userId);
-            return this.Ok(result);
+            return this.Ok(new CodeViewModel()
+            {
+                Code = result,
+            });
         }
 
         [Route("close-order")]

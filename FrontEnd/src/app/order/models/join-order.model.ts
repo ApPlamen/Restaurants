@@ -1,3 +1,3 @@
 export class JoinOrderModel {
-  orderId: string;
+  code: string;
 }
