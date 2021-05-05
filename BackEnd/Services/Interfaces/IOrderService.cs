@@ -1,4 +1,6 @@
 ﻿using DAL.InputModels;
+using DAL.ViewModels;
+using System.Collections.Generic;
 
 namespace Services
 {
@@ -10,6 +12,9 @@ namespace Services
 
         string GetActiveOrder(string userId);
 
+        IEnumerable<MenuItemBoardViewModel> GetMenu(string userId);
+
+        //TO BE MOVED
         void CloseOrder(string orderId, string userId);
     }
 }

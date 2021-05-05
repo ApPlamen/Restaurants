@@ -2,8 +2,10 @@
 using DAL.InputModels;
 using DAL.Models;
 using DAL.Repository;
+using DAL.ViewModels;
 using Exceptions;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Services
@@ -99,6 +101,30 @@ namespace Services
             return result;
         }
 
+        public IEnumerable<MenuItemBoardViewModel> GetMenu(string userId)
+        {
+            var result = this.userOrder.All()
+                .Where(uo => uo.UserId.Equals(userId))
+                .SelectMany(uo => uo.Order.Restaurant.MenuItems)
+                .Where(mi => mi.IsActive && mi.IsAvailable
+                    && mi.MenuItemPrices
+                        .Where(mp => mp.IsActive)
+                        .Count() > 0)
+                .Select(m => new MenuItemBoardViewModel()
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                    StartPrice = m.MenuItemPrices
+                        .Where(mp => mp.IsActive)
+                        .Min(mp => mp.Price)
+                        .ToString(),
+                })
+                .ToList();
+
+            return result;
+        }
+
+        //TO BE MOVED
         public void CloseOrder(string orderId, string userId)
         {
             var order = this.repo.GetById(orderId);

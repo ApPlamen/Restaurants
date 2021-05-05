@@ -55,6 +55,18 @@ namespace Domain.Controllers
             });
         }
 
+        [Route("menu")]
+        [HttpGet]
+        [AuthorizeRoles(RoleIds.Client)]
+        public IActionResult GetMenu()
+        {
+            var userId = User.GetAuthUserId();
+
+            var result = this.service.GetMenu(userId);
+            return this.Ok(result);
+        }
+
+        //TO BE MOVED
         [Route("close-order")]
         [HttpDelete]
         [AuthorizeRoles(RoleIds.CompanyOwner, RoleIds.RestaurantAdmin, RoleIds.Restaurant)]
