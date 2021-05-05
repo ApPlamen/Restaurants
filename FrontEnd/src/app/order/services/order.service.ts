@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { NewOrderModel } from '../models/new-order.model copy';
 import { CodeViewModel } from '../viewmodels/code.viewmodel';
 import { JoinOrderModel } from '../models/join-order.model';
+import { MenuItemOrderViewModel } from '../viewmodels/menu-item-order.viewmodel';
 
 const CONTROLER_URL = 'Order';
 const BASE_URL = environment.apiUrl + CONTROLER_URL;
@@ -25,5 +26,9 @@ export class OrderService {
 
   getActiceOrder(): Observable<CodeViewModel> {
     return this.http.get<CodeViewModel>(BASE_URL + '/get-active-order');
+  }
+
+  getMenuBoard(): Observable<MenuItemOrderViewModel[]> {
+    return this.http.get<MenuItemOrderViewModel[]>(BASE_URL + '/menu');
   }
 }
