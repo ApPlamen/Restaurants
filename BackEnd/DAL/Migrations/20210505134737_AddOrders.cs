@@ -35,7 +35,7 @@ namespace DAL.Migrations
                     OrderId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     MenuItemPriceId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    dateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -10,7 +10,7 @@ namespace Services
     public class OrderService : BaseService<Order>, IOrderService
     {
         private readonly IRepository<Restaurant> restaurant;
-        private readonly object lockObj;
+        private readonly object lockObj = new();
 
         public OrderService(IMapper mapper,
             IRepository<Order> DALModel,

@@ -103,6 +103,9 @@ namespace DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("MenuItemPriceId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -114,9 +117,6 @@ namespace DAL.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("dateTime")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
