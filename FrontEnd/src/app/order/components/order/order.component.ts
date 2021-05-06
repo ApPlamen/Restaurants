@@ -17,7 +17,7 @@ export class OrderComponent implements OnInit {
               protected tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.getActiceOrder()
+    this.getActiceOrder();
   }
 
   startNewOrder(): void {
