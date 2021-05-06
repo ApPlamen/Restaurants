@@ -7,6 +7,7 @@ import { CodeViewModel } from '../viewmodels/code.viewmodel';
 import { JoinOrderModel } from '../models/join-order.model';
 import { MenuItemOrderViewModel } from '../viewmodels/menu-item-order.viewmodel';
 import { PriceViewModel } from '../viewmodels/price.viewmodel';
+import { OrderedMenuItemViewModel } from '../viewmodels/ordered-menu-item.viewmodel copy';
 
 const CONTROLER_URL = 'Order';
 const BASE_URL = environment.apiUrl + CONTROLER_URL;
@@ -39,5 +40,9 @@ export class OrderService {
 
   addItemToOrder(itemId: string): Observable<void> {
     return this.http.post<void>(BASE_URL + '/add-item-to-order', { id: itemId });
+  }
+
+  getOrderedItemsBoard(): Observable<OrderedMenuItemViewModel[]> {
+    return this.http.get<OrderedMenuItemViewModel[]>(BASE_URL + '/ordered-items');
   }
 }

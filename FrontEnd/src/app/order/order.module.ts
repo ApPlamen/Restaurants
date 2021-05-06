@@ -9,12 +9,14 @@ import { OrderMenuComponent } from './components/menu/menu.component';
 import { StoreModule } from '@ngrx/store';
 import { orderRecuder } from './store/order.store.reducer';
 import { BoardPricesComponent } from './dialogs/board-prices/board-prices.component';
+import { OrderedItemsComponent } from './components/ordered-items/ordered-items.component';
 
 @NgModule({
   declarations: [
     OrderComponent,
     OrderMenuComponent,
     BoardPricesComponent,
+    OrderedItemsComponent,
   ],
   imports: [
     CommonModule,

@@ -148,6 +148,24 @@ namespace Services
             this.userOrder.Save();
         }
 
+        public IEnumerable<OrderedMenuItemBoardViewModel> GetOrderedItems(string userId)
+        {
+            var result = this.userOrder.All()
+                .Where(uo => uo.UserId.Equals(userId))
+                .SelectMany(uo => uo.Order.MenuItemOrders)
+                .Select(m => new OrderedMenuItemBoardViewModel()
+                {
+                    Id = m.Id,
+                    ItemName = m.MenuItemPrice.MenuItem.Name,
+                    Option = m.MenuItemPrice.Type,
+                    Price = m.MenuItemPrice.Price.ToString(),
+                    UserName = m.User.UserName,
+                })
+                .ToList();
+
+            return result;
+        }
+
         //TO BE MOVED
         public void CloseOrder(string orderId, string userId)
         {

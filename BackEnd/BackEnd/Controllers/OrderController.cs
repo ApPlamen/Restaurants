@@ -77,6 +77,17 @@ namespace Domain.Controllers
             return this.Ok();
         }
 
+        [Route("ordered-items")]
+        [HttpGet]
+        [AuthorizeRoles(RoleIds.Client)]
+        public IActionResult GetOrderedItems()
+        {
+            var userId = User.GetAuthUserId();
+
+            var result = this.service.GetOrderedItems(userId);
+            return this.Ok(result);
+        }
+
         //TO BE MOVED
         [Route("close-order")]
         [HttpDelete]

@@ -16,6 +16,8 @@ namespace Services
 
         void AddItemToOrder(MenuItemOrderInputModel item, string userId);
 
+        IEnumerable<OrderedMenuItemBoardViewModel> GetOrderedItems(string userId);
+
         //TO BE MOVED
         void CloseOrder(string orderId, string userId);
     }
