@@ -87,17 +87,5 @@ namespace Domain.Controllers
             var result = this.service.GetOrderedItems(userId);
             return this.Ok(result);
         }
-
-        //TO BE MOVED
-        [Route("close-order")]
-        [HttpDelete]
-        [AuthorizeRoles(RoleIds.CompanyOwner, RoleIds.RestaurantAdmin, RoleIds.Restaurant)]
-        public IActionResult CloseOrder(string orderId)
-        {
-            var userId = User.GetAuthUserId();
-
-            this.service.CloseOrder(orderId, userId);
-            return this.Ok();
-        }
     }
 }

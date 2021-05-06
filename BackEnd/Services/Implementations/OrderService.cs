@@ -166,16 +166,6 @@ namespace Services
             return result;
         }
 
-        //TO BE MOVED
-        public void CloseOrder(string orderId, string userId)
-        {
-            var order = this.repo.GetById(orderId);
-
-            this.repo.Delete(order);
-
-            this.repo.Save();
-        }
-
         private void HasActiveOrderCheck(string userId)
         {
             var hasActiveOrder = this.userOrder.All()
