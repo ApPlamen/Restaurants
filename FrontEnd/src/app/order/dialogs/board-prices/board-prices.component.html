@@ -19,5 +19,9 @@
 
 <ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
   <div class="table-actions-container btn-group gap-2">
+    <tmc-button design="success"
+                label="Order"
+                (clicked)="orderItem(dataItem.id)">
+    </tmc-button>
   </div>
 </ng-template>

@@ -47,6 +47,11 @@ export class BoardPricesComponent implements OnInit {
     this.fillData();
   }
 
+  orderItem(optionId: string): void {
+    this.orderService.addItemToOrder(optionId)
+      .subscribe(_ => this.toastr.success('Item ordered!'));
+  }
+
   close(): void {
     this.activeModalService.close();
   }

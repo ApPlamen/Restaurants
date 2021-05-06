@@ -5,6 +5,7 @@ using DAL.Repository;
 using DAL.ViewModels;
 using Exceptions;
 using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -122,6 +123,29 @@ namespace Services
                 .ToList();
 
             return result;
+        }
+
+        public void AddItemToOrder(MenuItemOrderInputModel item, string userId)
+        {
+            if (item.IsIdEmpty())
+            {
+                throw new ArgumentException();
+            }
+
+            var order = this.userOrder.All()
+                .Where(uo => uo.UserId.Equals(userId))
+                .Select(uo => uo.Order)
+                .SingleOrDefault();
+
+            var menuItemOrder = new MenuItemOrder()
+            {
+                MenuItemPriceId = item.Id,
+                UserId = userId,
+            };
+
+            order.MenuItemOrders.Add(menuItemOrder);
+
+            this.userOrder.Save();
         }
 
         //TO BE MOVED

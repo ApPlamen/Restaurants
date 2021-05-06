@@ -36,4 +36,8 @@ export class OrderService {
   getMenuPricesBoard(menuItemId: string): Observable<PriceViewModel[]> {
     return this.http.get<PriceViewModel[]>(environment.apiUrl + 'MenuPrice' + '/menuItem/' + menuItemId + '/prices');
   }
+
+  addItemToOrder(itemId: string): Observable<void> {
+    return this.http.post<void>(BASE_URL + '/add-item-to-order', { id: itemId });
+  }
 }

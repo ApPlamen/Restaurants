@@ -66,6 +66,17 @@ namespace Domain.Controllers
             return this.Ok(result);
         }
 
+        [Route("add-item-to-order")]
+        [HttpPost]
+        [AuthorizeRoles(RoleIds.Client)]
+        public IActionResult AddItemToOrder(MenuItemOrderInputModel model)
+        {
+            var userId = User.GetAuthUserId();
+
+            this.service.AddItemToOrder(model, userId);
+            return this.Ok();
+        }
+
         //TO BE MOVED
         [Route("close-order")]
         [HttpDelete]
