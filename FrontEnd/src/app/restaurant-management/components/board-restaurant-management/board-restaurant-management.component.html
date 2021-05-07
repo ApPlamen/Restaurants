@@ -13,6 +13,11 @@
 <ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
   <div class="table-actions-container btn-group gap-2">
     <tmc-button design="info"
+                label="Open orders"
+                (clicked)="openOrders(dataItem.id)">
+    </tmc-button>
+
+    <tmc-button design="info"
                 label="Open menu"
                 (clicked)="openMenu(dataItem.id)">
     </tmc-button>

@@ -69,6 +69,10 @@ export class BoardRestaurantComponent extends RolesFilteringBaseClass implements
     this.openEditModal();
   }
 
+  openOrders(restaurantId: string): void {
+    this.router.navigate(['/order-management/restaurant', restaurantId, 'orders']);
+  }
+
   openMenu(restaurantId: string): void {
     this.router.navigate(['/restaurants-management/restaurant', restaurantId, 'menu']);
   }
