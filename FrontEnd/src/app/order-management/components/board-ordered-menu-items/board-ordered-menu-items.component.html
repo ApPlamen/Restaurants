@@ -1,0 +1,8 @@
+<div class="row m-0 mt-1">
+  <tmc-simple-table [columns]="columns" [data]="orderedMenuItems"></tmc-simple-table>
+</div>
+
+<ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
+  <div class="table-actions-container btn-group gap-2">
+  </div>
+</ng-template>
