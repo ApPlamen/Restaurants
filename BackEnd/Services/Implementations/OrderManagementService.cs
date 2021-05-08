@@ -3,18 +3,25 @@ using DAL.Models;
 using DAL.Repository;
 using DAL.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Services
 {
     public class OrderManagementService : BaseService<Order>, IOrderManagementService
     {
+        private readonly IRepository<Restaurant> restaurant;
+
         public OrderManagementService(IMapper mapper,
-            IRepository<Order> DALModel,
+            IRepository<Order> order,
+            IRepository<Restaurant> restaurant,
             UserManager<User> userManager)
-            : base(mapper, DALModel, userManager)
-        { }
+            : base(mapper, order, userManager)
+        {
+            this.restaurant = restaurant;
+        }
 
         public IEnumerable<OrderManagementBoardViewModel> GetRestaurantOrders(string restaurantId)
         {
@@ -55,6 +62,20 @@ namespace Services
             this.repo.Delete(order);
 
             this.repo.Save();
+        }
+
+        public async Task<bool> CanActivate(string userId, string restaurantId)
+        {
+            var user = await userManager.Users
+                .Include(u => u.UserRoles)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            var result = this.restaurant.All()
+                .Where(r => r.Id.Equals(restaurantId) && r.IsActive)
+                .Where(Filters.RestaurantsFilterByUser(user))
+                .Any();
+
+            return result;
         }
     }
 }

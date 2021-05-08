@@ -1,5 +1,6 @@
 ﻿using DAL.ViewModels;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Services
 {
@@ -10,5 +11,7 @@ namespace Services
         IEnumerable<OrderedMenuItemManagementBoardViewModel> GetOrderedMenuItems(string restaurantId);
 
         void CloseOrder(string orderId, string userId);
+
+        Task<bool> CanActivate(string userId, string restaurantId);
     }
 }

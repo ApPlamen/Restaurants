@@ -21,4 +21,8 @@ export class OrderManagementService {
   getOrderedMenuItems(restaurantId: string): Observable<OrderedMenuItemManagementBoard[]> {
     return this.http.get<OrderedMenuItemManagementBoard[]>(BASE_URL + '/restaurant/' + restaurantId + '/ordered-menu-items');
   }
+
+  canActivate(restaurantId: string): Observable<boolean> {
+    return this.http.get<boolean>(BASE_URL + '/restaurant/' + restaurantId + '/canActivate');
+  }
 }
