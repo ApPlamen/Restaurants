@@ -9,6 +9,38 @@ namespace Services
 {
     public static class Filters
     {
+        public static Expression<Func<Company, bool>> CompaniesFilterByUserOrAdmin(User user)
+        {
+            if (user.UserRoles.Any(ur => ur.RoleId.Equals(RoleIds.Admin)))
+            {
+                return r => true;
+            }
+
+            return CompaniesFilterByUser(user);
+        }
+
+        public static Expression<Func<Company, bool>> CompaniesFilterByUser(User user)
+        {
+            var predicate = PredicateBuilder.New<Company>();
+
+            if (user.UserRoles.Any(ur => ur.RoleId.Equals(RoleIds.CompanyOwner)))
+            {
+                predicate.Or(c => c.UserRoles.Any(ur => ur.UserId.Equals(user.Id)));
+            }
+
+            return predicate;
+        }
+
+        public static Expression<Func<Restaurant, bool>> RestaurantsFilterByUserOrAdmin(User user)
+        {
+            if (user.UserRoles.Any(ur => ur.RoleId.Equals(RoleIds.Admin)))
+            {
+                return r => true;
+            }
+
+            return RestaurantsFilterByUser(user);
+        }
+
         public static Expression<Func<Restaurant, bool>> RestaurantsFilterByUser(User user)
         {
             var predicate = PredicateBuilder.New<Restaurant>();

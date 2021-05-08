@@ -34,7 +34,7 @@ namespace Services
 
             var result = this.repo.All()
                 .Where(m => m.IsActive)
-                .CompaniesFilterByUser(user)
+                .Where(Filters.CompaniesFilterByUserOrAdmin(user))
                 .Select(c => new CompanyBoardViewModel()
                 {
                     Id = c.Id,
