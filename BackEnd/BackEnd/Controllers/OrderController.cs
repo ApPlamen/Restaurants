@@ -12,9 +12,14 @@ namespace Domain.Controllers
     [Authorize]
     public class OrderController : BaseServiceController<IOrderService>
     {
-        public OrderController(IOrderService service)
+        private readonly IUserOrderService userOrderService;
+
+        public OrderController(IOrderService service,
+            IUserOrderService userOrderService)
             : base(service)
-        { }
+        {
+            this.userOrderService = userOrderService;
+        }
 
         [Route("start-order")]
         [HttpPost]
@@ -48,7 +53,7 @@ namespace Domain.Controllers
         {
             var userId = User.GetAuthUserId();
 
-            var result = this.service.GetActiveOrder(userId);
+            var result = this.userOrderService.GetActiveOrder(userId);
             return this.Ok(new CodeViewModel()
             {
                 Code = result,
@@ -62,7 +67,7 @@ namespace Domain.Controllers
         {
             var userId = User.GetAuthUserId();
 
-            var result = this.service.GetMenu(userId);
+            var result = this.userOrderService.GetMenu(userId);
             return this.Ok(result);
         }
 
@@ -73,7 +78,7 @@ namespace Domain.Controllers
         {
             var userId = User.GetAuthUserId();
 
-            this.service.AddItemToOrder(model, userId);
+            this.userOrderService.AddItemToOrder(model, userId);
             return this.Ok();
         }
 
@@ -84,7 +89,7 @@ namespace Domain.Controllers
         {
             var userId = User.GetAuthUserId();
 
-            var result = this.service.GetOrderedItems(userId);
+            var result = this.userOrderService.GetOrderedItems(userId);
             return this.Ok(result);
         }
     }
