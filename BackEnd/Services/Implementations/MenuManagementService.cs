@@ -17,10 +17,10 @@ namespace Services
         private readonly IRepository<Restaurant> restaurant;
 
         public MenuManagementService(IMapper mapper,
-            IRepository<MenuItem> DALModel,
+            IRepository<MenuItem> menuItem,
             IRepository<Restaurant> restaurant,
             UserManager<User> userManager)
-            : base(mapper, DALModel, userManager)
+            : base(mapper, menuItem, userManager)
         {
             this.restaurant = restaurant;
         }
@@ -84,7 +84,7 @@ namespace Services
 
             var result = this.restaurant.All()
                 .Where(r => r.Id.Equals(restaurantId) && r.IsActive)
-                .RestaurantsFilterByUser(user)
+                .Where(Filters.RestaurantsFilterByUserOrAdmin(user))
                 .Any();
 
             return result;

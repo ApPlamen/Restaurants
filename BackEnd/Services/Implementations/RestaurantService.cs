@@ -35,7 +35,7 @@ namespace Services
 
             var result = this.repo.All()
                 .Where(m => m.IsActive)
-                .RestaurantsFilterByUser(user)
+                .Where(Filters.RestaurantsFilterByUserOrAdmin(user))
                 .Select(r => new
                 {
                     Id = r.Id,
