@@ -21,6 +21,10 @@ export class BoardOrderedMenuItemsComponent implements OnInit {
       field: 'tableNumber',
     },
     {
+      header: 'Menu Item',
+      field: 'menuItem',
+    },
+    {
       header: 'Option',
       field: 'option',
     },

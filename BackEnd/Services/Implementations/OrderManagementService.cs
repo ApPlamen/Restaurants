@@ -46,6 +46,7 @@ namespace Services
                 {
                     Id = oi.Id,
                     TableNumber = oi.Order.TableNumber,
+                    MenuItem = oi.MenuItemPrice.MenuItem.Name,
                     Option = oi.MenuItemPrice.Type,
                     DateTime = oi.DateTime,
                 })
