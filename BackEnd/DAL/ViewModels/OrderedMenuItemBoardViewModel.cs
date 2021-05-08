@@ -1,4 +1,6 @@
-﻿namespace DAL.ViewModels
+﻿using System;
+
+namespace DAL.ViewModels
 {
     public class OrderedMenuItemBoardViewModel
     {
@@ -11,5 +13,7 @@
         public string Price { get; set; }
 
         public string UserName { get; set; }
+
+        public DateTime DateTime { get; set; }
     }
 }

@@ -160,6 +160,7 @@ namespace Services
                     Option = m.MenuItemPrice.Type,
                     Price = m.MenuItemPrice.Price.ToString(),
                     UserName = m.User.UserName,
+                    DateTime = m.DateTime,
                 })
                 .ToList();
 

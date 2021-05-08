@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { OrderManagementService } from '../../services/order-management.service';
 import { OrderedMenuItemManagementBoard } from '../../viewmodels/ordered-menu-items-board.viewmodel';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'board-ordered-menu-items',
@@ -22,6 +23,14 @@ export class BoardOrderedMenuItemsComponent implements OnInit {
     {
       header: 'Option',
       field: 'option',
+    },
+    {
+      header: 'Time',
+      field: 'dateTime',
+      pipe: DatePipe,
+      pipeArgs: [
+        'medium'
+      ]
     },
   ];
 

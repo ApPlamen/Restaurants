@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { OrderService } from '../../services/order.service';
@@ -28,6 +29,14 @@ export class OrderedItemsComponent implements OnInit  {
     {
       header: 'User',
       field: 'userName',
+    },
+    {
+      header: 'Time',
+      field: 'dateTime',
+      pipe: DatePipe,
+      pipeArgs: [
+        'medium'
+      ]
     },
   ];
 

@@ -4,4 +4,5 @@ export class OrderedMenuItemViewModel {
   option: string;
   price: string;
   userName: string;
+  dateTime: string;
 }

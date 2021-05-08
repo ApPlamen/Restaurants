@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
@@ -24,6 +24,7 @@ import { BoardOrderedMenuItemsComponent } from './components/board-ordered-menu-
   exports: [
   ],
   providers: [
+    DatePipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
