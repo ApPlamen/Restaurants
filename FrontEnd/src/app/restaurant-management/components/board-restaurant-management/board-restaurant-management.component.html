@@ -12,8 +12,9 @@
 
 <ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
   <div class="table-actions-container btn-group gap-2">
-    <tmc-button design="info"
+    <tmc-button design="primary"
                 label="Open orders"
+                *ngIf="dataItem.canOpenOrders"
                 (clicked)="openOrders(dataItem.id)">
     </tmc-button>
 

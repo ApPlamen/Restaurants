@@ -5,4 +5,5 @@ export class RestaurantViewModel {
   legalId: string;
   canManageRestaurantWorkers = false;
   canManageRestaurantAdmins = false;
+  canOpenOrders = false;
 }
