@@ -36,14 +36,25 @@ namespace Services
             var result = this.repo.All()
                 .Where(m => m.IsActive)
                 .RestaurantsFilterByUser(user)
-                .Select(r => new RestaurantBoardViewModel()
+                .Select(r => new
                 {
                     Id = r.Id,
                     Name = r.Name,
                     CompanyName = r.Company.Name,
                     LegalId = r.LegalId,
-                    CanManageRestaurantWorkers = r.UserRoles.Any(ur => ur.UserId.Equals(userId) && ur.RoleId.Equals(RoleIds.RestaurantAdmin)),
-                    CanManageRestaurantAdmins = r.Company.UserRoles.Any(ur => ur.UserId.Equals(userId)),
+                    HasRestaurantAdminRole = r.UserRoles.Any(ur => ur.UserId.Equals(userId) && ur.RoleId.Equals(RoleIds.RestaurantAdmin)),
+                    HasCompanyAdminRole = r.Company.UserRoles.Any(ur => ur.UserId.Equals(userId)),
+                    HasRestaurantRole = r.UserRoles.Any(ur => ur.UserId.Equals(userId) && ur.RoleId.Equals(RoleIds.Restaurant)),
+                })
+                .Select(r => new RestaurantBoardViewModel()
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    CompanyName = r.CompanyName,
+                    LegalId = r.LegalId,
+                    CanManageRestaurantWorkers = r.HasRestaurantAdminRole,
+                    CanManageRestaurantAdmins = r.HasCompanyAdminRole,
+                    CanOpenOrders = r.HasCompanyAdminRole || r.HasRestaurantAdminRole || r.HasRestaurantRole,
                 })
                 .ToList();
 

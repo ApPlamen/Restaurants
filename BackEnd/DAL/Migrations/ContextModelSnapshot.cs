@@ -96,6 +96,39 @@ namespace DAL.Migrations
                     b.ToTable("Menu");
                 });
 
+            modelBuilder.Entity("DAL.Models.MenuItemOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MenuItemPriceId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("OrderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MenuItemPriceId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("MenuItemOrders");
+                });
+
             modelBuilder.Entity("DAL.Models.MenuItemPrice", b =>
                 {
                     b.Property<string>("Id")
@@ -123,6 +156,27 @@ namespace DAL.Migrations
                     b.HasIndex("MenuItemId");
 
                     b.ToTable("Prices");
+                });
+
+            modelBuilder.Entity("DAL.Models.Order", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RestaurantId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TableNumber")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId", "TableNumber")
+                        .IsUnique()
+                        .HasFilter("[RestaurantId] IS NOT NULL AND [TableNumber] IS NOT NULL");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("DAL.Models.Restaurant", b =>
@@ -252,6 +306,22 @@ namespace DAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("DAL.Models.UserOrder", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("OrderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("UserOrders");
                 });
 
             modelBuilder.Entity("DAL.Models.UserRole", b =>
@@ -402,6 +472,33 @@ namespace DAL.Migrations
                     b.Navigation("Restaurant");
                 });
 
+            modelBuilder.Entity("DAL.Models.MenuItemOrder", b =>
+                {
+                    b.HasOne("DAL.Models.MenuItemPrice", "MenuItemPrice")
+                        .WithMany("MenuItemOrders")
+                        .HasForeignKey("MenuItemPriceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("DAL.Models.Order", "Order")
+                        .WithMany("MenuItemOrders")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAL.Models.User", "User")
+                        .WithMany("MenuItemOrders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MenuItemPrice");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DAL.Models.MenuItemPrice", b =>
                 {
                     b.HasOne("DAL.Models.MenuItem", "MenuItem")
@@ -413,6 +510,17 @@ namespace DAL.Migrations
                     b.Navigation("MenuItem");
                 });
 
+            modelBuilder.Entity("DAL.Models.Order", b =>
+                {
+                    b.HasOne("DAL.Models.Restaurant", "Restaurant")
+                        .WithMany("Orders")
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
+                });
+
             modelBuilder.Entity("DAL.Models.Restaurant", b =>
                 {
                     b.HasOne("DAL.Models.Company", "Company")
@@ -420,6 +528,25 @@ namespace DAL.Migrations
                         .HasForeignKey("CompanyId");
 
                     b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("DAL.Models.UserOrder", b =>
+                {
+                    b.HasOne("DAL.Models.Order", "Order")
+                        .WithMany("UserOrders")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAL.Models.User", "User")
+                        .WithOne("UserOrder")
+                        .HasForeignKey("DAL.Models.UserOrder", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DAL.Models.UserRole", b =>
@@ -502,9 +629,23 @@ namespace DAL.Migrations
                     b.Navigation("MenuItemPrices");
                 });
 
+            modelBuilder.Entity("DAL.Models.MenuItemPrice", b =>
+                {
+                    b.Navigation("MenuItemOrders");
+                });
+
+            modelBuilder.Entity("DAL.Models.Order", b =>
+                {
+                    b.Navigation("MenuItemOrders");
+
+                    b.Navigation("UserOrders");
+                });
+
             modelBuilder.Entity("DAL.Models.Restaurant", b =>
                 {
                     b.Navigation("MenuItems");
+
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("DAL.Models.Role", b =>
@@ -514,6 +655,10 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Models.User", b =>
                 {
+                    b.Navigation("MenuItemOrders");
+
+                    b.Navigation("UserOrder");
+
                     b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618

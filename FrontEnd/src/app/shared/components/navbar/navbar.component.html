@@ -43,6 +43,14 @@
           </a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link active"
+             *ngIf="hasAccessRole([rolesEnum.client])"
+             routerLink="order">
+            Order
+          </a>
+        </li>
+
       </ul>
 
       <ul class="navbar-nav">

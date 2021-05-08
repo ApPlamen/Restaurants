@@ -13,5 +13,7 @@ namespace DAL.Models
         public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
 
         public virtual ICollection<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
+
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }

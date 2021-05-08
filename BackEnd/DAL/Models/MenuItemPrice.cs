@@ -1,4 +1,6 @@
-﻿namespace DAL.Models
+﻿using System.Collections.Generic;
+
+namespace DAL.Models
 {
     public class MenuItemPrice : BaseSoftDeleteDALModel<string>
     {
@@ -8,6 +10,8 @@
 
         public string MenuItemId { get; set; }
 
-        public MenuItem MenuItem { get; set; }
+        public virtual MenuItem MenuItem { get; set; }
+
+        public virtual ICollection<MenuItemOrder> MenuItemOrders { get; set; } = new List<MenuItemOrder>();
     }
 }

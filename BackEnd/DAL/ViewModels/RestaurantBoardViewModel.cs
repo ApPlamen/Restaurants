@@ -11,5 +11,7 @@
         public bool CanManageRestaurantWorkers { get; set; }
 
         public bool CanManageRestaurantAdmins { get; set; }
+
+        public bool CanOpenOrders { get; set; }
     }
 }

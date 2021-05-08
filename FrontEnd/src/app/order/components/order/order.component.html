@@ -1,0 +1,89 @@
+<div class="row justify-content-center m-0 mt-1">
+  <div class="col col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-2" *ngIf="!hasActiveOrder">
+    <div class="card card-container p-3 mt-3">
+
+      <form class="needs-validation"
+            (ngSubmit)="startNewOrder()"
+            [formGroup]="newOrderForm.formGroup"
+            novalidate >
+
+        <tmc-input type="text" label="Restaurant Name" placeholder="Restaurant Name" formControlName="restaurantName"></tmc-input>
+
+        <tmc-input type="text" label="Table Number" placeholder="Table Number" formControlName="tableNumber"></tmc-input>
+
+        <div class="form-group">
+          <tmc-button type='submit'
+                      label="Start order">
+          </tmc-button>
+        </div>
+      </form>
+
+    </div>
+
+    <div class="card card-container p-3 mt-3">
+
+      <form class="needs-validation"
+            (ngSubmit)="joinOrder()"
+            [formGroup]="joinOrderForm.formGroup"
+            novalidate >
+
+        <tmc-input type="text" label="Order ID" placeholder="Order ID" formControlName="code"></tmc-input>
+
+        <div class="form-group">
+          <tmc-button type='submit'
+                      label="Join order">
+          </tmc-button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <div class="col col-12 col-sm-10 mt-3" *ngIf="hasActiveOrder">
+    <div class="alert alert-success">
+      You have active order with Order ID: {{ activeOrderId }}.
+    </div>
+
+    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active"
+                id="menu-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#menu"
+                type="button"
+                role="tab"
+                aria-controls="menu"
+                aria-selected="true">
+          Menu
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link"
+                id="ordered-menu-items-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#ordered-menu-items"
+                type="button"
+                role="tab"
+                aria-controls="ordered-menu-items"
+                aria-selected="false">
+          Ordered menu items
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active"
+           id="menu"
+           role="tabpanel"
+           aria-labelledby="menu-tab">
+        <order-menu></order-menu>
+      </div>
+      <div class="tab-pane fade"
+           id="ordered-menu-items"
+           role="tabpanel"
+           aria-labelledby="ordered-menu-items-tab">
+        <ordered-items></ordered-items>
+      </div>
+    </div>
+  </div>
+</div>
