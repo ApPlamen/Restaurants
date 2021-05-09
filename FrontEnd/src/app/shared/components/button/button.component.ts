@@ -16,27 +16,27 @@ export class ButtonComponent {
     return this._isDisabled;
   }
   set isDisabled(value: boolean) {
-    this._isDisabled = "" + value !== "false";
+    this._isDisabled = '' + value !== 'false';
   }
   @Input()
   get isLoading(): boolean {
     return this._isLoading;
   }
   set isLoading(value: boolean) {
-    this._isLoading = "" + value !== "false";
+    this._isLoading = '' + value !== 'false';
   }
   @Input()
   get hideLabelOnSmall(): boolean {
     return this._hideLabelOnSmall;
   }
   set hideLabelOnSmall(value: boolean) {
-    this._hideLabelOnSmall = "" + value !== "false";
+    this._hideLabelOnSmall = '' + value !== 'false';
   }
 
   @Output() clicked = new EventEmitter<MouseEvent>();
 
   get hideLabelOnSmallClass(): string {
-    return this._hideLabelOnSmall ? "d-none d-md-block" : "";
+    return this._hideLabelOnSmall ? 'd-none d-md-block' : '';
   }
 
   private _isDisabled: boolean;
