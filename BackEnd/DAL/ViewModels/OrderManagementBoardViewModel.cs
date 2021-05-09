@@ -5,5 +5,7 @@
         public string Id { get; set; }
 
         public string TableNumber { get; set; }
+
+        public string Bill { get; set; }
     }
 }

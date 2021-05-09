@@ -19,6 +19,10 @@ export class BoardOrderManagementComponent implements OnInit {
       header: 'Table Number',
       field: 'tableNumber',
     },
+    {
+      header: 'Bill',
+      field: 'bill',
+    },
   ];
 
   private restaurantId: string;
