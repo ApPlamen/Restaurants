@@ -31,6 +31,9 @@ namespace Services
                 {
                     Id = o.Id,
                     TableNumber = o.TableNumber,
+                    Bill = o.MenuItemOrders
+                        .Sum(io => io.MenuItemPrice.Price)
+                        .ToString(),
                 })
                 .ToList();
 

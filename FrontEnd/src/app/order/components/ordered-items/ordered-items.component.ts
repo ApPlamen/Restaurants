@@ -54,6 +54,14 @@ export class OrderedItemsComponent implements OnInit  {
     this.fillData();
   }
 
+  get total(): string {
+    return this.orderedItems
+      .filter(item => true)
+      .reduce((sum: number, current) => sum + parseFloat(current.price), 0)
+      .toFixed(2)
+      .toString();
+  }
+
   private fillData(): void {
     this.orderService.getOrderedItemsBoard()
       .subscribe(orderedItems => this.orderedItems = orderedItems);
