@@ -33,8 +33,8 @@
 <ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
   <div class="table-actions-container btn-group gap-2">
     <tmc-button design="danger"
-                label="Delete"
-                iconName="trash"
+                label="Remove"
+                iconName="person-dash"
                 hideLabelOnSmall
                 (clicked)="delete(dataItem.id)">
     </tmc-button>
