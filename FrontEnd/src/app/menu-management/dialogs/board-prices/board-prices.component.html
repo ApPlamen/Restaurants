@@ -30,12 +30,14 @@
     <tmc-button design="warning"
                 label="Edit"
                 iconName="pencil-square"
+                hideLabelOnSmall
                 (clicked)="openEdit(dataItem.id)">
     </tmc-button>
     
     <tmc-button design="danger"
                 label="Delete"
                 iconName="trash"
+                hideLabelOnSmall
                 (clicked)="delete(dataItem.id)">
     </tmc-button>
   </div>

@@ -16,6 +16,7 @@
     <tmc-button design="warning"
                 label="Edit"
                 iconName="pencil-square"
+                hideLabelOnSmall
                 *ngIf="hasAccessRole([rolesEnum.admin])"
                 (clicked)="openEdit(dataItem.id)">
     </tmc-button>
@@ -23,6 +24,7 @@
     <tmc-button design="warning"
                 label="Manage Owners"
                 iconName="people"
+                hideLabelOnSmall
                 *ngIf="hasAccessRole([rolesEnum.admin])"
                 (clicked)="openManageOwners(dataItem.id)">
     </tmc-button>
@@ -30,6 +32,7 @@
     <tmc-button design="danger"
                 label="Delete"
                 iconName="trash"
+                hideLabelOnSmall
                 *ngIf="hasAccessRole([rolesEnum.admin])"
                 (clicked)="delete(dataItem.id)">
     </tmc-button>

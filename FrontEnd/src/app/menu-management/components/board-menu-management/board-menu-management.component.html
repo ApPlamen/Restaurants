@@ -16,6 +16,7 @@
     <tmc-button design="{{ dataItem.isAvailable ? 'success' : 'danger' }}"
                 label="Available"
                 iconName="check-square"
+                hideLabelOnSmall
                 *ngIf="hasRole(['CompanyOwner','RestaurantAdmin','Restaurant'])"
                 (clicked)="toggleAvailable(dataItem.id, dataItem.isAvailable)">
     </tmc-button>
@@ -23,6 +24,7 @@
     <tmc-button design="warning"
                 label="Edit prices"
                 iconName="pencil-square"
+                hideLabelOnSmall
                 *ngIf="hasRole(['CompanyOwner','RestaurantAdmin'])"
                 (clicked)="openEditPrices(dataItem.id)">
     </tmc-button>
@@ -30,6 +32,7 @@
     <tmc-button design="warning"
                 label="Edit"
                 iconName="pencil-square"
+                hideLabelOnSmall
                 *ngIf="hasRole(['CompanyOwner','RestaurantAdmin'])"
                 (clicked)="openEdit(dataItem.id)">
     </tmc-button>
@@ -37,6 +40,7 @@
     <tmc-button design="danger"
                 label="Delete"
                 iconName="trash"
+                hideLabelOnSmall
                 *ngIf="hasRole(['CompanyOwner','RestaurantAdmin'])"
                 (clicked)="delete(dataItem.id)">
     </tmc-button>

@@ -16,6 +16,7 @@
     <tmc-button design="primary"
                 label="Open orders"
                 iconName="basket2"
+                hideLabelOnSmall
                 *ngIf="dataItem.canOpenOrders"
                 (clicked)="openOrders(dataItem.id)">
     </tmc-button>
@@ -23,12 +24,14 @@
     <tmc-button design="info"
                 label="Open menu"
                 iconName="journal"
+                hideLabelOnSmall
                 (clicked)="openMenu(dataItem.id)">
     </tmc-button>
 
     <tmc-button design="warning"
                 label="Edit"
                 iconName="pencil-square"
+                hideLabelOnSmall
                 *ngIf="hasAccessRole([rolesEnum.admin])"
                 (clicked)="openEdit(dataItem.id)">
     </tmc-button>
@@ -36,6 +39,7 @@
     <tmc-button design="warning"
                 label="Manage admins"
                 iconName="people"
+                hideLabelOnSmall
                 *ngIf="dataItem.canManageRestaurantAdmins"
                 (clicked)="openManageRestaurantAdmins(dataItem.id)">
     </tmc-button>
@@ -43,6 +47,7 @@
     <tmc-button design="warning"
                 label="Manage workers"
                 iconName="people"
+                hideLabelOnSmall
                 *ngIf="dataItem.canManageRestaurantWorkers"
                 (clicked)="openManageRestaurantWorkers(dataItem.id)">
     </tmc-button>
@@ -50,6 +55,7 @@
     <tmc-button design="danger"
                 label="Delete"
                 iconName="trash"
+                hideLabelOnSmall
                 *ngIf="hasAccessRole([rolesEnum.admin])"
                 (clicked)="delete(dataItem.id)">
     </tmc-button>
