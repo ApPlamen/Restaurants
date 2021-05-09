@@ -12,7 +12,8 @@
     <tmc-input type="text" label="Add new user to the role" placeholder="Email" formControlName="userEmail"></tmc-input>
 
     <tmc-button type='submit'
-                label="Save">
+                label="Add"
+                iconName="person-plus">
     </tmc-button>
   </form>
 
@@ -32,7 +33,9 @@
 <ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
   <div class="table-actions-container btn-group gap-2">
     <tmc-button design="danger"
-                label="Delete"
+                label="Remove"
+                iconName="person-dash"
+                hideLabelOnSmall
                 (clicked)="delete(dataItem.id)">
     </tmc-button>
   </div>

@@ -24,6 +24,7 @@
     "@ngrx/store": "^11.1.0",
     "@ngrx/store-devtools": "^11.1.0",
     "bootstrap": "^5.0.0",
+    "bootstrap-icons": "^1.4.1",
     "lodash-es": "^4.17.21",
     "moment": "^2.29.1",
     "ngx-toastr": "^13.2.1",

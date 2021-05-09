@@ -10,13 +10,41 @@ export class ButtonComponent {
   @Input() design = 'primary';
   @Input() class: string;
   @Input() iconName: string;
-  @Input() isDisabled = false;
-  @Input() isLoading = false;
+
+  @Input()
+  get isDisabled(): boolean {
+    return this._isDisabled;
+  }
+  set isDisabled(value: boolean) {
+    this._isDisabled = "" + value !== "false";
+  }
+  @Input()
+  get isLoading(): boolean {
+    return this._isLoading;
+  }
+  set isLoading(value: boolean) {
+    this._isLoading = "" + value !== "false";
+  }
+  @Input()
+  get hideLabelOnSmall(): boolean {
+    return this._hideLabelOnSmall;
+  }
+  set hideLabelOnSmall(value: boolean) {
+    this._hideLabelOnSmall = "" + value !== "false";
+  }
 
   @Output() clicked = new EventEmitter<MouseEvent>();
 
+  get hideLabelOnSmallClass(): string {
+    return this._hideLabelOnSmall ? "d-none d-md-block" : "";
+  }
+
+  private _isDisabled: boolean;
+  private _isLoading: boolean;
+  private _hideLabelOnSmall: boolean;
+
   onButtonClick(event: MouseEvent): void {
-    if (!this.isLoading) {
+    if (!this._isLoading) {
       this.clicked.emit(event);
     }
   }

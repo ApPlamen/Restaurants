@@ -1,6 +1,7 @@
 <div class="row d-grid justify-content-end m-0 mt-1">
   <tmc-button design="success"
               label="Add new Company"
+              iconName="plus-square"
               *ngIf="hasAccessRole([rolesEnum.admin])"
               (clicked)="openCreate()">
   </tmc-button>
@@ -14,18 +15,24 @@
   <div class="table-actions-container btn-group gap-2">
     <tmc-button design="warning"
                 label="Edit"
+                iconName="pencil-square"
+                hideLabelOnSmall
                 *ngIf="hasAccessRole([rolesEnum.admin])"
                 (clicked)="openEdit(dataItem.id)">
     </tmc-button>
 
     <tmc-button design="warning"
                 label="Manage Owners"
+                iconName="people"
+                hideLabelOnSmall
                 *ngIf="hasAccessRole([rolesEnum.admin])"
                 (clicked)="openManageOwners(dataItem.id)">
     </tmc-button>
 
     <tmc-button design="danger"
                 label="Delete"
+                iconName="trash"
+                hideLabelOnSmall
                 *ngIf="hasAccessRole([rolesEnum.admin])"
                 (clicked)="delete(dataItem.id)">
     </tmc-button>
