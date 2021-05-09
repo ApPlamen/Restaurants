@@ -1,6 +1,7 @@
 <div class="row d-grid justify-content-end m-0 mt-1">
   <tmc-button design="success"
               label="Add new Menu Item"
+              iconName="plus-square"
               *ngIf="hasRole(['CompanyOwner','RestaurantAdmin'])"
               (clicked)="openCreate()">
   </tmc-button>
@@ -14,24 +15,28 @@
   <div class="table-actions-container btn-group gap-2">
     <tmc-button design="{{ dataItem.isAvailable ? 'success' : 'danger' }}"
                 label="Available"
+                iconName="check-square"
                 *ngIf="hasRole(['CompanyOwner','RestaurantAdmin','Restaurant'])"
                 (clicked)="toggleAvailable(dataItem.id, dataItem.isAvailable)">
     </tmc-button>
 
     <tmc-button design="warning"
                 label="Edit prices"
+                iconName="pencil-square"
                 *ngIf="hasRole(['CompanyOwner','RestaurantAdmin'])"
                 (clicked)="openEditPrices(dataItem.id)">
     </tmc-button>
 
     <tmc-button design="warning"
                 label="Edit"
+                iconName="pencil-square"
                 *ngIf="hasRole(['CompanyOwner','RestaurantAdmin'])"
                 (clicked)="openEdit(dataItem.id)">
     </tmc-button>
 
     <tmc-button design="danger"
                 label="Delete"
+                iconName="trash"
                 *ngIf="hasRole(['CompanyOwner','RestaurantAdmin'])"
                 (clicked)="delete(dataItem.id)">
     </tmc-button>

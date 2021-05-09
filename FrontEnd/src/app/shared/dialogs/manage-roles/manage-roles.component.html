@@ -12,7 +12,8 @@
     <tmc-input type="text" label="Add new user to the role" placeholder="Email" formControlName="userEmail"></tmc-input>
 
     <tmc-button type='submit'
-                label="Save">
+                label="Add"
+                iconName="person-plus">
     </tmc-button>
   </form>
 
@@ -33,6 +34,7 @@
   <div class="table-actions-container btn-group gap-2">
     <tmc-button design="danger"
                 label="Delete"
+                iconName="trash"
                 (clicked)="delete(dataItem.id)">
     </tmc-button>
   </div>

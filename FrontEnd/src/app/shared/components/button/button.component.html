@@ -4,6 +4,7 @@
   [disabled]="isDisabled"
   (click)="onButtonClick($event)"
 >
-  <svg-icon *ngIf="iconName" [class.invisible]="isLoading" [name]="iconName" class="btn-icon"></svg-icon>
+  <i *ngIf="iconName" class="bi bi-{{ iconName }}"></i>
+  <div *ngIf="iconName && label">&nbsp;</div>
   <div *ngIf="label" [class.invisible]="isLoading" class="btn-label">{{ label | uppercase }}</div>
 </button>

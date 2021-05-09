@@ -7,6 +7,7 @@
   <div class="row d-grid justify-content-end m-0">
     <tmc-button design="success"
                 label="Add new Price"
+                iconName="plus-square"
                 (clicked)="openCreate()">
     </tmc-button>
   </div>
@@ -28,11 +29,13 @@
   <div class="table-actions-container btn-group gap-2">
     <tmc-button design="warning"
                 label="Edit"
+                iconName="pencil-square"
                 (clicked)="openEdit(dataItem.id)">
     </tmc-button>
     
     <tmc-button design="danger"
                 label="Delete"
+                iconName="trash"
                 (clicked)="delete(dataItem.id)">
     </tmc-button>
   </div>

@@ -1,6 +1,7 @@
 <div class="row d-grid justify-content-end m-0 mt-1">
   <tmc-button design="success"
               label="Manage admins"
+              iconName="people"
               (clicked)="openManageAdmins()">
   </tmc-button>
 </div>
@@ -13,6 +14,7 @@
   <div class="table-actions-container btn-group gap-2">
     <tmc-button design="danger"
                 label="Ban"
+                iconName="person-dash"
                 (clicked)="delete(dataItem.id)">
     </tmc-button>
   </div>
