@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OrderManagementService } from '../../services/order-management.service';
 import { OrderedMenuItemManagementBoard } from '../../viewmodels/ordered-menu-items-board.viewmodel';
 import { DatePipe } from '@angular/common';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'board-ordered-menu-items',
@@ -39,6 +40,7 @@ export class BoardOrderedMenuItemsComponent implements OnInit {
   ];
 
   private restaurantId: string;
+  private source = timer(0, 2000);
 
   constructor(private orderManagementService: OrderManagementService,
               private toastr: ToastrService,
@@ -55,7 +57,7 @@ export class BoardOrderedMenuItemsComponent implements OnInit {
       }
     ];
 
-    this.fillData();
+    this.source.subscribe(_ => this.fillData());
   }
 
   private fillData(): void {

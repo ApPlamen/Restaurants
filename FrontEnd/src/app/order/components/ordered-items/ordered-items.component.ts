@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { timer } from 'rxjs';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { OrderService } from '../../services/order.service';
 import { OrderedMenuItemViewModel } from '../../viewmodels/ordered-menu-item.viewmodel copy';
@@ -40,6 +41,8 @@ export class OrderedItemsComponent implements OnInit  {
     },
   ];
 
+  private source = timer(0, 2000);
+
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
@@ -51,10 +54,12 @@ export class OrderedItemsComponent implements OnInit  {
       }
     ];
 
-    this.fillData();
+    this.source.subscribe(_ => this.fillData());
   }
 
   get total(): string {
+    if (!this.orderedItems) return "0.00";
+
     return this.orderedItems
       .filter(item => true)
       .reduce((sum: number, current) => sum + parseFloat(current.price), 0)
