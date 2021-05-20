@@ -7,5 +7,7 @@
         public string TableNumber { get; set; }
 
         public string Bill { get; set; }
+
+        public bool CanClose { get; set; }
     }
 }

@@ -22,6 +22,10 @@ export class OrderManagementService {
     return this.http.get<OrderedMenuItemManagementBoard[]>(BASE_URL + '/restaurant/' + restaurantId + '/ordered-menu-items');
   }
 
+  closeOrder(orderId: string): Observable<void> {
+    return this.http.delete<void>(BASE_URL + '/close-order/' + orderId);
+  }
+
   canActivate(restaurantId: string): Observable<boolean> {
     return this.http.get<boolean>(BASE_URL + '/restaurant/' + restaurantId + '/canActivate');
   }

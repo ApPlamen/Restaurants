@@ -12,8 +12,12 @@ namespace DAL.ViewModels
 
         public string Price { get; set; }
 
+        public string OrderedItemStatus { get; set; }
+
         public string UserName { get; set; }
 
         public DateTime DateTime { get; set; }
+
+        public bool CanAskRemove { get; set; }
     }
 }

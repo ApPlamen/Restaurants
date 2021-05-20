@@ -4,5 +4,12 @@
 
 <ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
   <div class="table-actions-container btn-group gap-2">
+    <select class="form-select" (change)="setStatus(dataItem.id, $event.target.value)">
+      <option value="1" [selected]="dataItem.orderedItemStatus === 1">New</option>
+      <option value="2" [selected]="dataItem.orderedItemStatus === 2">Taken</option>
+      <option value="3" [selected]="dataItem.orderedItemStatus === 3">Served</option>
+      <option value="4" [selected]="dataItem.orderedItemStatus === 4">Asked to be remove</option>
+      <option value="5" [selected]="dataItem.orderedItemStatus === 5">Removed</option>
+   </select>
   </div>
 </ng-template>

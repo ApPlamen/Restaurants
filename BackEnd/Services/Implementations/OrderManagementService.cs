@@ -2,6 +2,7 @@
 using DAL.Models;
 using DAL.Repository;
 using DAL.ViewModels;
+using Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -34,6 +35,9 @@ namespace Services
                     Bill = o.MenuItemOrders
                         .Sum(io => io.MenuItemPrice.Price)
                         .ToString(),
+                    CanClose = o.MenuItemOrders
+                        .All(io => io.OrderedItemStatus == OrderedItemStatusesEnum.Served
+                            || io.OrderedItemStatus == OrderedItemStatusesEnum.Removed),
                 })
                 .ToList();
 
@@ -45,12 +49,15 @@ namespace Services
             var result = this.repo.All()
                 .Where(o => o.RestaurantId.Equals(restaurantId))
                 .SelectMany(o => o.MenuItemOrders)
+                .Where(m => (int)m.OrderedItemStatus != (int)OrderedItemStatusesEnum.Served
+                    && (int)m.OrderedItemStatus != (int)OrderedItemStatusesEnum.Removed)
                 .Select(oi => new OrderedMenuItemManagementBoardViewModel()
                 {
                     Id = oi.Id,
                     TableNumber = oi.Order.TableNumber,
                     MenuItem = oi.MenuItemPrice.MenuItem.Name,
                     Option = oi.MenuItemPrice.Type,
+                    OrderedItemStatus = (int)oi.OrderedItemStatus,
                     DateTime = oi.DateTime,
                 })
                 .OrderByDescending(oi => oi.DateTime)

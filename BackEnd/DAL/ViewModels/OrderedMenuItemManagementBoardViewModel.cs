@@ -12,6 +12,8 @@ namespace DAL.ViewModels
 
         public string Option { get; set; }
 
+        public int OrderedItemStatus { get; set; }
+
         public DateTime DateTime { get; set; }
     }
 }

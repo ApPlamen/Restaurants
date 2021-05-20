@@ -3,6 +3,7 @@ using DAL.InputModels;
 using DAL.Models;
 using DAL.Repository;
 using DAL.ViewModels;
+using Enums;
 using Exceptions;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -80,14 +81,17 @@ namespace Services
             var result = this.repo.All()
                 .Where(uo => uo.UserId.Equals(userId))
                 .SelectMany(uo => uo.Order.MenuItemOrders)
+                .Where(m => (int)m.OrderedItemStatus != (int)OrderedItemStatusesEnum.Removed)
                 .Select(m => new OrderedMenuItemBoardViewModel()
                 {
                     Id = m.Id,
                     ItemName = m.MenuItemPrice.MenuItem.Name,
                     Option = m.MenuItemPrice.Type,
                     Price = m.MenuItemPrice.Price.ToString(),
+                    OrderedItemStatus = m.OrderedItemStatus.ToString(),
                     UserName = m.User.UserName,
                     DateTime = m.DateTime,
+                    CanAskRemove = (int)m.OrderedItemStatus == (int)OrderedItemStatusesEnum.New,
                 })
                 .ToList();
 
