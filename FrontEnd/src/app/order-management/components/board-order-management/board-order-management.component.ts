@@ -1,16 +1,16 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { OrderManagementService } from '../../services/order-management.service';
 import { OrderBoardViewModel } from '../../viewmodels/order-board.viewmodel';
-import { timer } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'board-order-management',
   templateUrl: './board-order-management.component.html',
 })
-export class BoardOrderManagementComponent implements OnInit {
+export class BoardOrderManagementComponent implements OnInit, OnDestroy {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
   public orders: OrderBoardViewModel[];
@@ -27,7 +27,8 @@ export class BoardOrderManagementComponent implements OnInit {
   ];
 
   private restaurantId: string;
-  private source = timer(0, 2000);
+  private source = timer(0, 3000);
+  private subscription: Subscription;
 
   constructor(private orderManagementService: OrderManagementService,
               private toastr: ToastrService,
@@ -44,7 +45,11 @@ export class BoardOrderManagementComponent implements OnInit {
       }
     ];
 
-    this.source.subscribe(_ => this.fillData());
+    this.subscription = this.source.subscribe(_ => this.fillData());
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   closeOrder(itemId: string): void {

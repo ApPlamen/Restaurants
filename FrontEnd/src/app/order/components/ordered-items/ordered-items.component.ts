@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { timer } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { OrderedItemStatusModel } from '../../models/ordered-item-status.model';
 import { ItemOrderManagementService } from '../../services/item-order-management.service';
@@ -12,7 +12,7 @@ import { OrderedMenuItemViewModel } from '../../viewmodels/ordered-menu-item.vie
   selector: 'ordered-items',
   templateUrl: './ordered-items.component.html',
 })
-export class OrderedItemsComponent implements OnInit  {
+export class OrderedItemsComponent implements OnInit, OnDestroy  {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
   public orderedItems: OrderedMenuItemViewModel[];
@@ -48,7 +48,8 @@ export class OrderedItemsComponent implements OnInit  {
     },
   ];
 
-  private source = timer(0, 2000);
+  private source = timer(0, 3000);
+  private subscription: Subscription;
 
   constructor(private orderService: OrderService,
               private itemOrderManagementService: ItemOrderManagementService,
@@ -63,7 +64,11 @@ export class OrderedItemsComponent implements OnInit  {
       }
     ];
 
-    this.source.subscribe(_ => this.fillData());
+    this.subscription = this.source.subscribe(_ => this.fillData());
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   get total(): string {

@@ -1,11 +1,11 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { SimpleTableColumn } from 'src/app/shared/models/simple-table.model';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { OrderManagementService } from '../../services/order-management.service';
 import { OrderedMenuItemManagementBoard } from '../../viewmodels/ordered-menu-items-board.viewmodel';
 import { DatePipe } from '@angular/common';
-import { timer } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { OrderedItemStatusModel } from '../../models/ordered-item-status.model';
 import { ItemOrderManagementService } from '../../services/item-order-management.service';
 
@@ -13,7 +13,7 @@ import { ItemOrderManagementService } from '../../services/item-order-management
   selector: 'board-ordered-menu-items',
   templateUrl: './board-ordered-menu-items.component.html',
 })
-export class BoardOrderedMenuItemsComponent implements OnInit {
+export class BoardOrderedMenuItemsComponent implements OnInit, OnDestroy {
   @ViewChild('tableActionCellTemplate', { static: true }) tableActionCellTemplate: TemplateRef<any>;
 
   public orderedMenuItems: OrderedMenuItemManagementBoard[];
@@ -42,7 +42,8 @@ export class BoardOrderedMenuItemsComponent implements OnInit {
   ];
 
   private restaurantId: string;
-  private source = timer(0, 2000);
+  private source = timer(0, 3000);
+  private subscription: Subscription;
 
   constructor(private orderManagementService: OrderManagementService,
               private itemOrderManagementService: ItemOrderManagementService,
@@ -60,7 +61,11 @@ export class BoardOrderedMenuItemsComponent implements OnInit {
       }
     ];
 
-    this.source.subscribe(_ => this.fillData());
+    this.subscription = this.source.subscribe(_ => this.fillData());
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   setStatus(itemId: number, status?: string): void {
