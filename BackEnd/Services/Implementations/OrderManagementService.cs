@@ -75,8 +75,8 @@ namespace Services
         {
             var order = this.repo.All()
                 .Where(o => o.Id.Equals(orderId))
-                .Include(o => o.UserOrders)
                 .Include(o => o.MenuItemOrders)
+                .ThenInclude(oi => oi.MenuItemPrice)
                 .SingleOrDefault();
 
             var completedOrders = new CompletedOrder()
@@ -84,9 +84,6 @@ namespace Services
                 Id = Guid.NewGuid().ToString(),
                 RestaurantId = order.RestaurantId,
                 TableNumber = order.TableNumber,
-                Users = order.UserOrders
-                    .Select(uo=> uo.UserId)
-                    .ToList(),
                 ItemOrdered = order.MenuItemOrders
                     .Where(o => (int)o.OrderedItemStatus == (int)OrderedItemStatusesEnum.Served)
                     .Select(io => new CompletedOrderedItem()
