@@ -24,7 +24,7 @@ export class OrderManagementService {
   }
 
   setOrderedItemStatus(model: OrderedItemStatusModel): Observable<void> {
-    return this.http.put<void>(BASE_URL + '/ordered-item/set-status', model);
+    return this.http.put<void>(environment.apiUrl + 'ItemOrderManagement/set-status', model);
   }
 
   canActivate(restaurantId: string): Observable<boolean> {
