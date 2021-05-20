@@ -46,8 +46,8 @@ namespace Services
             var result = this.repo.All()
                 .Where(o => o.RestaurantId.Equals(restaurantId))
                 .SelectMany(o => o.MenuItemOrders)
-                .Where(m => m.OrderedItemStatus != OrderedItemStatusesEnum.Served
-                    || m.OrderedItemStatus != OrderedItemStatusesEnum.Removed)
+                .Where(m => (int)m.OrderedItemStatus != (int)OrderedItemStatusesEnum.Served
+                    && (int)m.OrderedItemStatus != (int)OrderedItemStatusesEnum.Removed)
                 .Select(oi => new OrderedMenuItemManagementBoardViewModel()
                 {
                     Id = oi.Id,

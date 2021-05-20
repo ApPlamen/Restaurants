@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { OrderBoardViewModel } from '../viewmodels/order-board.viewmodel';
 import { OrderedMenuItemManagementBoard } from '../viewmodels/ordered-menu-items-board.viewmodel';
-import { OrderedItemStatusModel } from '../models/ordered-item-status.model';
 
 const CONTROLER_URL = 'OrderManagement';
 const BASE_URL = environment.apiUrl + CONTROLER_URL;
@@ -21,10 +20,6 @@ export class OrderManagementService {
 
   getOrderedMenuItems(restaurantId: string): Observable<OrderedMenuItemManagementBoard[]> {
     return this.http.get<OrderedMenuItemManagementBoard[]>(BASE_URL + '/restaurant/' + restaurantId + '/ordered-menu-items');
-  }
-
-  setOrderedItemStatus(model: OrderedItemStatusModel): Observable<void> {
-    return this.http.put<void>(environment.apiUrl + 'ItemOrderManagement/set-status', model);
   }
 
   canActivate(restaurantId: string): Observable<boolean> {

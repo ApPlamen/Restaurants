@@ -81,8 +81,7 @@ namespace Services
             var result = this.repo.All()
                 .Where(uo => uo.UserId.Equals(userId))
                 .SelectMany(uo => uo.Order.MenuItemOrders)
-                .Where(m => m.OrderedItemStatus != OrderedItemStatusesEnum.Served
-                    || m.OrderedItemStatus != OrderedItemStatusesEnum.Removed)
+                .Where(m => (int)m.OrderedItemStatus != (int)OrderedItemStatusesEnum.Removed)
                 .Select(m => new OrderedMenuItemBoardViewModel()
                 {
                     Id = m.Id,
