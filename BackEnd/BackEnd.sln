@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication", "Authentic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{DDB3D398-DD4C-414E-B650-49FC4E02B6A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptions", "Exceptions\Exceptions.csproj", "{23BCC61A-9D30-46EF-940A-ABC87A2A164D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exceptions", "Exceptions\Exceptions.csproj", "{23BCC61A-9D30-46EF-940A-ABC87A2A164D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enums", "Enums\Enums.csproj", "{07A22A88-56E0-4940-8CF5-55D85DD13D12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{23BCC61A-9D30-46EF-940A-ABC87A2A164D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23BCC61A-9D30-46EF-940A-ABC87A2A164D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23BCC61A-9D30-46EF-940A-ABC87A2A164D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07A22A88-56E0-4940-8CF5-55D85DD13D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07A22A88-56E0-4940-8CF5-55D85DD13D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07A22A88-56E0-4940-8CF5-55D85DD13D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07A22A88-56E0-4940-8CF5-55D85DD13D12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{D9BBA679-69EB-4EB7-AE65-B621B233D22F} = {970FF4CC-E04A-4E19-896A-EFAEC856AB64}
 		{DDB3D398-DD4C-414E-B650-49FC4E02B6A2} = {970FF4CC-E04A-4E19-896A-EFAEC856AB64}
 		{23BCC61A-9D30-46EF-940A-ABC87A2A164D} = {970FF4CC-E04A-4E19-896A-EFAEC856AB64}
+		{07A22A88-56E0-4940-8CF5-55D85DD13D12} = {970FF4CC-E04A-4E19-896A-EFAEC856AB64}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A241BF76-5923-4A83-9179-357725DE923E}
