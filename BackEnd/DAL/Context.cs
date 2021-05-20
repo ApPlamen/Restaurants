@@ -1,4 +1,5 @@
 ﻿using DAL.Models;
+using Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -107,6 +108,9 @@ namespace DAL
 
             builder.Entity<MenuItemOrder>(menuItemOrder =>
             {
+                menuItemOrder.Property("OrderedItemStatus")
+                    .HasDefaultValue(OrderedItemStatuses.New);
+
                 menuItemOrder.HasOne(mio => mio.Order)
                     .WithMany(o => o.MenuItemOrders)
                     .HasForeignKey(mio => mio.OrderId)
