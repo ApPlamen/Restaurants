@@ -65,9 +65,9 @@ export class BoardOrderedMenuItemsComponent implements OnInit {
 
   setStatus(itemId: number, status?: string): void {
     const model: OrderedItemStatusModel = {
-      itemId: itemId,
-      status: parseInt(status),
-    }
+      itemId,
+      status: parseInt(status, 10),
+    };
 
     this.itemOrderManagementService.setOrderedItemStatus(model)
       .subscribe(_ => this.toastr.success('Success!'));

@@ -67,7 +67,9 @@ export class OrderedItemsComponent implements OnInit  {
   }
 
   get total(): string {
-    if (!this.orderedItems) return "0.00";
+    if (!this.orderedItems) {
+      return '0.00';
+    }
 
     return this.orderedItems
       .filter(item => true)
@@ -78,10 +80,10 @@ export class OrderedItemsComponent implements OnInit  {
 
   askToRemove(itemId: number): void {
     const model: OrderedItemStatusModel = {
-      itemId: itemId,
-    }
+      itemId,
+    };
 
-    this.itemOrderManagementService.AskToRemove(model)
+    this.itemOrderManagementService.askToRemove(model)
       .subscribe(_ => this.toastr.success('Success!'));
   }
 

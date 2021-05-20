@@ -1,4 +1,4 @@
-import { OrderedItemStatusesEnum } from "../enums/ordered-item-statuses.enum";
+import { OrderedItemStatusesEnum } from '../enums/ordered-item-statuses.enum';
 
 export class OrderedMenuItemManagementBoard {
   id: number;

@@ -13,7 +13,7 @@ const BASE_URL = environment.apiUrl + CONTROLER_URL;
 export class ItemOrderManagementService {
   constructor(private http: HttpClient) { }
 
-  AskToRemove(model: OrderedItemStatusModel): Observable<void> {
+  askToRemove(model: OrderedItemStatusModel): Observable<void> {
     return this.http.put<void>(BASE_URL + '/ask-remove', model);
   }
 }
