@@ -33,7 +33,7 @@ namespace Domain.Controllers
             return this.Ok(result);
         }
 
-        [Route("close-order")]
+        [Route("close-order/{orderId}")]
         [HttpDelete]
         [AuthorizeRoles(RoleIds.CompanyOwner, RoleIds.RestaurantAdmin, RoleIds.Restaurant)]
         public IActionResult CloseOrder(string orderId)

@@ -35,6 +35,9 @@ namespace Services
                     Bill = o.MenuItemOrders
                         .Sum(io => io.MenuItemPrice.Price)
                         .ToString(),
+                    CanClose = o.MenuItemOrders
+                        .All(io => io.OrderedItemStatus == OrderedItemStatusesEnum.Served
+                            || io.OrderedItemStatus == OrderedItemStatusesEnum.Removed),
                 })
                 .ToList();
 

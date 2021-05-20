@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { OrderManagementService } from '../../services/order-management.service';
 import { OrderBoardViewModel } from '../../viewmodels/order-board.viewmodel';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'board-order-management',
@@ -26,6 +27,7 @@ export class BoardOrderManagementComponent implements OnInit {
   ];
 
   private restaurantId: string;
+  private source = timer(0, 2000);
 
   constructor(private orderManagementService: OrderManagementService,
               private toastr: ToastrService,
@@ -42,7 +44,12 @@ export class BoardOrderManagementComponent implements OnInit {
       }
     ];
 
-    this.fillData();
+    this.source.subscribe(_ => this.fillData());
+  }
+
+  closeOrder(itemId: string): void {
+    this.orderManagementService.closeOrder(itemId)
+      .subscribe(_ => this.toastr.success('Success!'));
   }
 
   private fillData(): void {
