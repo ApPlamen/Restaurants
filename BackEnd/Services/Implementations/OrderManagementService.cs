@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using DAL.Models;
+using DAL.Models.Completed;
 using DAL.Repository;
 using DAL.ViewModels;
 using Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,14 +16,17 @@ namespace Services
     public class OrderManagementService : BaseService<Order>, IOrderManagementService
     {
         private readonly IRepository<Restaurant> restaurant;
+        private readonly IRepository<CompletedOrder> completedOrder;
 
         public OrderManagementService(IMapper mapper,
             IRepository<Order> order,
             IRepository<Restaurant> restaurant,
+            IRepository<CompletedOrder> completedOrder,
             UserManager<User> userManager)
             : base(mapper, order, userManager)
         {
             this.restaurant = restaurant;
+            this.completedOrder = completedOrder;
         }
 
         public IEnumerable<OrderManagementBoardViewModel> GetRestaurantOrders(string restaurantId)
@@ -68,7 +73,34 @@ namespace Services
 
         public void CloseOrder(string orderId, string userId)
         {
-            var order = this.repo.GetById(orderId);
+            var order = this.repo.All()
+                .Where(o => o.Id.Equals(orderId))
+                .Include(o => o.UserOrders)
+                .Include(o => o.MenuItemOrders)
+                .SingleOrDefault();
+
+            var completedOrders = new CompletedOrder()
+            {
+                Id = Guid.NewGuid().ToString(),
+                RestaurantId = order.RestaurantId,
+                TableNumber = order.TableNumber,
+                Users = order.UserOrders
+                    .Select(uo=> uo.UserId)
+                    .ToList(),
+                ItemOrdered = order.MenuItemOrders
+                    .Where(o => (int)o.OrderedItemStatus == (int)OrderedItemStatusesEnum.Served)
+                    .Select(io => new CompletedOrderedItem()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        MenuItemPriceId = io.MenuItemPriceId,
+                        UserId = io.UserId,
+                        DateTime = io.DateTime,
+                        Price = io.MenuItemPrice.Price,
+                    })
+                    .ToList(),
+            };
+
+            this.completedOrder.Add(completedOrders);
 
             this.repo.Delete(order);
 
