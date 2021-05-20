@@ -1,5 +1,5 @@
 export class OrderedMenuItemManagementBoard {
-  id: string;
+  id: number;
   tableNumber: string;
   menuItem: string;
   option: string;

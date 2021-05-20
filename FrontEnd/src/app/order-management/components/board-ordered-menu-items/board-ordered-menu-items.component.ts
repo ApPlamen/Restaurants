@@ -6,6 +6,7 @@ import { OrderManagementService } from '../../services/order-management.service'
 import { OrderedMenuItemManagementBoard } from '../../viewmodels/ordered-menu-items-board.viewmodel';
 import { DatePipe } from '@angular/common';
 import { timer } from 'rxjs';
+import { OrderedItemStatusModel } from '../../models/ordered-item-status.model';
 
 @Component({
   selector: 'board-ordered-menu-items',
@@ -58,6 +59,16 @@ export class BoardOrderedMenuItemsComponent implements OnInit {
     ];
 
     this.source.subscribe(_ => this.fillData());
+  }
+
+  setStatus(itemId: number, status?: string): void {
+    const model: OrderedItemStatusModel = {
+      itemId: itemId,
+      status: parseInt(status),
+    }
+
+    this.orderManagementService.setOrderedItemStatus(model)
+      .subscribe();
   }
 
   private fillData(): void {
