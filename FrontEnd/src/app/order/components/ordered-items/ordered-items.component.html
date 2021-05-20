@@ -11,6 +11,7 @@
     <tmc-button design="danger"
                 label="Ask to remove"
                 iconName="bag-x"
+                *ngIf="dataItem.canAskRemove"
                 (clicked)="askToRemove(dataItem.id)">
     </tmc-button>
   </div>

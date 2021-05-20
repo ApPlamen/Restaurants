@@ -91,6 +91,7 @@ namespace Services
                     OrderedItemStatus = m.OrderedItemStatus.ToString(),
                     UserName = m.User.UserName,
                     DateTime = m.DateTime,
+                    CanAskRemove = (int)m.OrderedItemStatus == (int)OrderedItemStatusesEnum.New,
                 })
                 .ToList();
 

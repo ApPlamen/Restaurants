@@ -6,4 +6,5 @@ export class OrderedMenuItemViewModel {
   orderedItemStatus: string;
   userName: string;
   dateTime: string;
+  canAskRemove: boolean;
 }
