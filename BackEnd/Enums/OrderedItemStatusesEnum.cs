@@ -1,6 +1,6 @@
 ﻿namespace Enums
 {
-    public enum OrderedItemStatuses
+    public enum OrderedItemStatusesEnum
     {
         New = 1,
         Taken = 2,

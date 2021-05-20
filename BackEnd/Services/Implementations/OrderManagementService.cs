@@ -2,6 +2,7 @@
 using DAL.Models;
 using DAL.Repository;
 using DAL.ViewModels;
+using Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -45,12 +46,15 @@ namespace Services
             var result = this.repo.All()
                 .Where(o => o.RestaurantId.Equals(restaurantId))
                 .SelectMany(o => o.MenuItemOrders)
+                .Where(m => m.OrderedItemStatus != OrderedItemStatusesEnum.Served
+                    || m.OrderedItemStatus != OrderedItemStatusesEnum.Removed)
                 .Select(oi => new OrderedMenuItemManagementBoardViewModel()
                 {
                     Id = oi.Id,
                     TableNumber = oi.Order.TableNumber,
                     MenuItem = oi.MenuItemPrice.MenuItem.Name,
                     Option = oi.MenuItemPrice.Type,
+                    OrderedItemStatus = (int)oi.OrderedItemStatus,
                     DateTime = oi.DateTime,
                 })
                 .OrderByDescending(oi => oi.DateTime)

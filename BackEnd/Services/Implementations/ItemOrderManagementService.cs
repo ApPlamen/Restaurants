@@ -19,7 +19,7 @@ namespace Services
         {
             var itemOrdered = this.repo.GetById(model.ItemId);
 
-            itemOrdered.OrderedItemStatus = (OrderedItemStatuses)model.Status.Value;
+            itemOrdered.OrderedItemStatus = (OrderedItemStatusesEnum)model.Status.Value;
 
             this.repo.Save();
         }
@@ -28,7 +28,7 @@ namespace Services
         {
             var itemOrdered = this.repo.GetById(model.ItemId);
 
-            itemOrdered.OrderedItemStatus = OrderedItemStatuses.AskedToRemove;
+            itemOrdered.OrderedItemStatus = OrderedItemStatusesEnum.AskedToRemove;
 
             this.repo.Save();
         }

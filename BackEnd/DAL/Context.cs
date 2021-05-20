@@ -109,7 +109,7 @@ namespace DAL
             builder.Entity<MenuItemOrder>(menuItemOrder =>
             {
                 menuItemOrder.Property("OrderedItemStatus")
-                    .HasDefaultValue(OrderedItemStatuses.New);
+                    .HasDefaultValue(OrderedItemStatusesEnum.New);
 
                 menuItemOrder.HasOne(mio => mio.Order)
                     .WithMany(o => o.MenuItemOrders)

@@ -13,7 +13,7 @@ namespace DAL.Models
 
         public DateTime DateTime { get; set; } = DateTime.UtcNow;
 
-        public OrderedItemStatuses OrderedItemStatus { get; set; }
+        public OrderedItemStatusesEnum OrderedItemStatus { get; set; }
 
         public virtual Order Order { get; set; }
 

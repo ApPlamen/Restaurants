@@ -28,6 +28,10 @@ export class OrderedItemsComponent implements OnInit  {
       field: 'price',
     },
     {
+      header: 'Status',
+      field: 'orderedItemStatus',
+    },
+    {
       header: 'User',
       field: 'userName',
     },

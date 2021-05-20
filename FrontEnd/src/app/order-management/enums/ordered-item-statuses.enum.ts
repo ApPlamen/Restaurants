@@ -1,4 +1,4 @@
-export enum OrderedItemStatuses {
+export enum OrderedItemStatusesEnum {
   "new" = 1,
   "taken" = 2,
   "served" = 3,
