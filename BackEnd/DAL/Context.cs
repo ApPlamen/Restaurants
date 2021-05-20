@@ -1,4 +1,5 @@
 ﻿using DAL.Models;
+using DAL.Models.Completed;
 using Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -28,6 +29,10 @@ namespace DAL
         public DbSet<MenuItemOrder> MenuItemOrders { get; set; }
 
         public DbSet<Order> Orders { get; set; }
+
+        public DbSet<CompletedOrder> CompletedOrder { get; set; }
+
+        public DbSet<CompletedOrderedItem> CompletedOrderedItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -143,6 +148,14 @@ namespace DAL
                     .HasForeignKey(uo => uo.OrderId)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            builder.Entity<CompletedOrderedItem>(menuItemOrder =>
+            {
+                menuItemOrder.HasOne(mio => mio.Order)
+                    .WithMany(o => o.ItemOrdered)
+                    .HasForeignKey(mio => mio.OrderId)
+                    .IsRequired();
             });
         }
     }
