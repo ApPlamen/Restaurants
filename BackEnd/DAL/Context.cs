@@ -30,7 +30,7 @@ namespace DAL
 
         public DbSet<Order> Orders { get; set; }
 
-        public DbSet<CompletedOrder> CompletedOrder { get; set; }
+        public DbSet<CompletedOrder> CompletedOrders { get; set; }
 
         public DbSet<CompletedOrderedItem> CompletedOrderedItems { get; set; }
 
