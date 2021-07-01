@@ -1,0 +1,44 @@
+<div class="table-responsive">
+  <table class="simple-table">
+    <caption class="simple-table-title" *ngIf="title !== null">
+      {{
+        title
+      }}
+    </caption>
+    <thead>
+      <tr class="simple-table-header">
+        <th
+          scope="col"
+          class="simple-table-header-cell"
+          [class.header-template]="column.headerCellTemplate"
+          [class.header-title]="!column.headerCellTemplate"
+          [ngClass]="column.customStyle!"
+          *ngFor="let column of columns"
+        >
+          <ng-container
+            [ngTemplateOutlet]="column.headerCellTemplate || defaultHeaderCellTemplate"
+            [ngTemplateOutletContext]="{ column: column, table: this }"
+          ></ng-container>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="simple-table-row" *ngFor="let dataItem of data">
+        <td class="simple-table-cell" *ngFor="let column of columns" [ngClass]="column.customStyle!">
+          <ng-container
+            [ngTemplateOutlet]="column.cellTemplate || defaultCellTemplate"
+            [ngTemplateOutletContext]="{ column: column, dataItem: dataItem, table: this, value: dataItem[column.field] }"
+          ></ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #defaultCellTemplate let-column="column" let-dataItem="dataItem">
+  {{ getFormattedValue(dataItem, column) }}
+</ng-template>
+
+<ng-template #defaultHeaderCellTemplate let-column="column">
+  {{ column.header }}
+</ng-template>

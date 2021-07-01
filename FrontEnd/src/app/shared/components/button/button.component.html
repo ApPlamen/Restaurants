@@ -1,0 +1,10 @@
+<button
+  [type]="type"
+  class="d-flex align-items-center btn btn-{{ design }} {{ class }}"
+  [disabled]="isDisabled"
+  (click)="onButtonClick($event)"
+>
+  <i *ngIf="iconName" class="bi bi-{{ iconName }}"></i>
+  <div *ngIf="iconName && label" class="{{ hideLabelOnSmallClass }}">&nbsp;</div>
+  <div *ngIf="label" [class.invisible]="isLoading" class="btn-label {{ hideLabelOnSmallClass }}">{{ label | uppercase }}</div>
+</button>

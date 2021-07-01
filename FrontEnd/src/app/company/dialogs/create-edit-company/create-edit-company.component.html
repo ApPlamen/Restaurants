@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h3>{{ isNew ? 'Create' : 'Edit'}} company</h3>
+</div>
+
+<div class="modal-body">
+
+  <form class="needs-validation"
+        (ngSubmit)="onSubmit()"
+        [formGroup]="companyForm.formGroup"
+        novalidate >
+
+    <tmc-input type="text" label="Name" placeholder="Name" formControlName="name"></tmc-input>
+
+    <tmc-input type="text" label="Legal ID" placeholder="Legal ID" formControlName="legalId"></tmc-input>
+  </form>
+
+</div>
+
+<div class="modal-footer">
+  <tmc-button type='submit'
+              label="Save"
+              (clicked)="onSubmit()">
+  </tmc-button>
+</div>

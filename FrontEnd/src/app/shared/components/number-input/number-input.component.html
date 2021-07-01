@@ -1,0 +1,21 @@
+<div class="form-floating mb-3">
+  <input [type]="type"
+         [(ngModel)]="value"
+         [id]="id"
+         [placeholder]="placeholder"
+         [disabled]="disabled"
+         [step]="step"
+         [min]="min"
+         [max]="max"
+         (blur)="onBlur($event)"
+         class="form-control {{ displayError && getErrorMessage() ? 'is-invalid' : '' }}" />
+  <label [for]="id"
+         [hidden]="!label"
+         class="form-label">
+    {{ label }}
+  </label>
+  <div class="invalid-feedback"
+       [class.d-none]="">
+    {{ getErrorMessage() }}
+  </div>
+</div>

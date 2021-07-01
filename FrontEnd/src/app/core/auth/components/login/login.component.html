@@ -1,0 +1,29 @@
+<div class="row justify-content-center m-0 mt-1">
+  <div class="col col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-2">
+    <div class="card card-container p-3">
+
+      <form *ngIf="!isLoggedIn"
+            class="needs-validation"
+            (ngSubmit)="onSubmit()"
+            [formGroup]="logInForm.formGroup"
+            novalidate >
+
+        <tmc-input type="email" label="Email" placeholder="name@example.com" formControlName="email"></tmc-input>
+
+        <tmc-input type="password" label="Password" placeholder="Password" formControlName="password"></tmc-input>
+
+        <div class="form-group">
+          <tmc-button type='submit'
+                      label="Login"
+                      iconName="box-arrow-in-right">
+          </tmc-button>
+        </div>
+      </form>
+
+      <div class="alert alert-success" *ngIf="isLoggedIn">
+        Logged in as {{ roles }}.
+      </div>
+
+    </div>
+  </div>
+</div>

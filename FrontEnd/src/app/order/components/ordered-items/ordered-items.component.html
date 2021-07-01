@@ -1,0 +1,18 @@
+<div class="row d-grid justify-content-end m-0 mt-3">
+  <h3>Total: {{total}}</h3>
+</div>
+
+<div class="row m-0 mt-1">
+  <tmc-simple-table [columns]="columns" [data]="orderedItems"></tmc-simple-table>
+</div>
+
+<ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
+  <div class="table-actions-container btn-group gap-2">
+    <tmc-button design="danger"
+                label="Ask to remove"
+                iconName="bag-x"
+                *ngIf="dataItem.canAskRemove"
+                (clicked)="askToRemove(dataItem.id)">
+    </tmc-button>
+  </div>
+</ng-template>

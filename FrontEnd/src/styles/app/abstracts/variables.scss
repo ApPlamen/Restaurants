@@ -1,0 +1,11 @@
+// stylelint-disable
+$spacer: 1rem;
+
+// CUSTOM SPACING
+$spacing-0: 0;
+$spacing-xxs: $spacer / 2; // 0.5rem
+$spacing-xs: $spacer; // 1rem
+$spacing-s: $spacer * 1.5; // 1.5rem
+$spacing-m: $spacer * 2; // 2rem
+$spacing-l: $spacer * 2.5; // 2.5rem
+$spacing-xxl: $spacer * 3; // 3rem

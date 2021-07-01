@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <h3>Manage role</h3>
+</div>
+
+<div class="modal-body">
+
+  <form class="needs-validation"
+        (ngSubmit)="onSubmit()"
+        [formGroup]="assignUserRoleForm.formGroup"
+        novalidate >
+
+    <tmc-input type="text" label="Add new user to the role" placeholder="Email" formControlName="userEmail"></tmc-input>
+
+    <tmc-button type='submit'
+                label="Add"
+                iconName="person-plus">
+    </tmc-button>
+  </form>
+
+  <div class="row m-0 mt-1">
+    <tmc-simple-table [columns]="columns" [data]="users"></tmc-simple-table>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <tmc-button design="secondary"
+              label="Close"
+              (clicked)="close()">
+  </tmc-button>
+</div>
+
+<ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
+  <div class="table-actions-container btn-group gap-2">
+    <tmc-button design="danger"
+                label="Remove"
+                iconName="person-dash"
+                hideLabelOnSmall
+                (clicked)="delete(dataItem.id)">
+    </tmc-button>
+  </div>
+</ng-template>

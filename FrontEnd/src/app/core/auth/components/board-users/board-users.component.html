@@ -1,0 +1,21 @@
+<div class="row d-grid justify-content-end m-0 mt-1">
+  <tmc-button design="success"
+              label="Manage admins"
+              iconName="people"
+              (clicked)="openManageAdmins()">
+  </tmc-button>
+</div>
+
+<div class="row m-0 mt-1">
+  <tmc-simple-table [columns]="columns" [data]="users"></tmc-simple-table>
+</div>
+
+<ng-template #tableActionCellTemplate let-column="column" let-dataItem="dataItem">
+  <div class="table-actions-container btn-group gap-2">
+    <tmc-button design="danger"
+                label="Ban"
+                iconName="person-dash"
+                (clicked)="delete(dataItem.id)">
+    </tmc-button>
+  </div>
+</ng-template>
